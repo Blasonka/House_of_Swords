@@ -1,0 +1,2 @@
+# gameszko
+Vizsgaremekes project
