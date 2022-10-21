@@ -1,0 +1,904 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DatabaseLogicalModel VersionId="1.0">
+    <Description></Description>
+    <Counter Value="250"/>
+    <Properties>
+        <Property>
+            <Name>pdf-printer-paper-size</Name>
+            <Value>A4</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-margin-top</Name>
+            <Value>10</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-margin-bottom</Name>
+            <Value>10</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-margin-left</Name>
+            <Value>10</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-margin-right</Name>
+            <Value>10</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-page-orientation</Name>
+            <Value>landscape</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-show-pages</Name>
+            <Value>false</Value>
+        </Property>
+        <Property>
+            <Name>pdf-printer-include-footer</Name>
+            <Value>true</Value>
+        </Property>
+        <Property>
+            <Name>reference-notation</Name>
+            <Value>crows-foot</Value>
+        </Property>
+        <Property>
+            <Name>pages-line-color</Name>
+            <Value>#CC0000</Value>
+        </Property>
+        <Property>
+            <Name>show-grid</Name>
+            <Value>false</Value>
+        </Property>
+        <Property>
+            <Name>grid-color</Name>
+            <Value>#D9D9D9</Value>
+        </Property>
+        <Property>
+            <Name>grid-style</Name>
+            <Value>solid</Value>
+        </Property>
+        <Property>
+            <Name>grid-spacing</Name>
+            <Value>2</Value>
+        </Property>
+        <Property>
+            <Name>grid-spacing-units</Name>
+            <Value>cm</Value>
+        </Property>
+        <Property>
+            <Name>grid-subdivisions</Name>
+            <Value>1</Value>
+        </Property>
+    </Properties>
+    <Entities>
+        <Entity Id="entity_0">
+            <Name>Users</Name>
+            <Description></Description>
+            <PrimaryIdentifier>
+                <Name>entity_1_PI</Name>
+                <Attributes>
+                    <Attribute>attribute_2</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="attribute_2">
+                    <Name>UID</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_4">
+                    <Name>Username</Name>
+                    <Datatype>Varchar(22)</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_5">
+                    <Name>EmailAddress</Name>
+                    <Datatype>Varchar(255)</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_6">
+                    <Name>PwdHash</Name>
+                    <Datatype>Text(1024)</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_7">
+                    <Name>LastLoginDate</Name>
+                    <Datatype>DateTime</Datatype>
+                    <Mandatory>false</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType>Integer</DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="entity_8">
+            <Name>Towns</Name>
+            <Description></Description>
+            <PrimaryIdentifier>
+                <Name>entity_1_PI</Name>
+                <Attributes>
+                    <Attribute>attribute_10</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="attribute_10">
+                    <Name>TownID</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_163">
+                    <Name>UID</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_43">
+                    <Name>HappinessValue</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_44">
+                    <Name>Wood</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_45">
+                    <Name>Stone</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_46">
+                    <Name>Metal</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_47">
+                    <Name>Gold</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_48">
+                    <Name>CampaignLevel</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_164">
+                    <Name>Coordinates</Name>
+                    <Datatype>Varchar(22)</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType>Integer</DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="entity_64">
+            <Name>UnitStats</Name>
+            <Description></Description>
+            <PrimaryIdentifier>
+                <Name>entity_1_PI</Name>
+                <Attributes/>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="attribute_69">
+                    <Name>UnitName</Name>
+                    <Datatype>Varchar(20)</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_70">
+                    <Name>AttackValue</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_71">
+                    <Name>DefenseValue</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_72">
+                    <Name>MobiltyValue</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_187">
+                    <Name>TrainingTimePerUnit</Name>
+                    <Datatype>Time</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_188">
+                    <Name>TrainingCostInGold</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_220">
+                    <Name>TrainingCostInFallen</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>A meggyógyított katonákból mennyiért lehet képezni egy egységet.</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType>Integer</DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="entity_142">
+            <Name>FriendsList</Name>
+            <Description></Description>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="attribute_144">
+                    <Name>UID</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_145">
+                    <Name>FriendID</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType>Integer</DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="entity_148">
+            <Name>Buildings</Name>
+            <Description></Description>
+            <PrimaryIdentifier>
+                <Name>entity_1_PI</Name>
+                <Attributes>
+                    <Attribute>attribute_213</Attribute>
+                </Attributes>
+            </PrimaryIdentifier>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="attribute_213">
+                    <Name>BuildingID</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_150">
+                    <Name>BuildingType</Name>
+                    <Datatype>Varchar(22)</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_149">
+                    <Name>TownID</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>foreign key</Comment>
+                </Attribute>
+                <Attribute Id="attribute_158">
+                    <Name>BuildingLvl</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_159">
+                    <Name>Params</Name>
+                    <Datatype>Varchar(512)</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType>Integer</DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="entity_174">
+            <Name>MaxBuildingLevels</Name>
+            <Description></Description>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="attribute_176">
+                    <Name>MaxBarracksLvl</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_177">
+                    <Name>MaxDiplomacyLvl</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_178">
+                    <Name>MaxHospitalLvl</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_179">
+                    <Name>MaxWarehouseLvl</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_180">
+                    <Name>MaxResearchLvl</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_181">
+                    <Name>MaxMarketLvl</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_182">
+                    <Name>MaxChurchLvl</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType>Integer</DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="entity_190">
+            <Name>Campaign</Name>
+            <Description></Description>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="attribute_192">
+                    <Name>LevelNum</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_193">
+                    <Name>Enemies</Name>
+                    <Datatype>Varchar(514)</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>A pályán legyőzendő ellenséges egységek nevei pontosvesszővel elválasztva.</Comment>
+                </Attribute>
+                <Attribute Id="attribute_194">
+                    <Name>EnemiesCount</Name>
+                    <Datatype>Varchar(514)</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>A fent felsorolt egységekből hány darab van; a számok a fent felsorolt sorrendben tartoznak az egységekhez, pontosvesszővel elválasztva.</Comment>
+                </Attribute>
+                <Attribute Id="attribute_195">
+                    <Name>RewardString</Name>
+                    <Datatype>Varchar(102)</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType>Integer</DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="entity_199">
+            <Name>BarrackStats</Name>
+            <Description></Description>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="attribute_201">
+                    <Name>Lvl</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_202">
+                    <Name>MaxUnitCount</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_203">
+                    <Name>MaxTrainingAmount</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_204">
+                    <Name>MaxAttackRange</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>A világtérképen a városok támadásához használt távolságegység, idáig tud támadni a user.</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType>Integer</DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="entity_205">
+            <Name>DiplomacyStats</Name>
+            <Description></Description>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="attribute_206">
+                    <Name>Lvl</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_207">
+                    <Name>MaxAllyCount</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_211">
+                    <Name>MaxAllyRange</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType>Integer</DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="entity_214">
+            <Name>HospitalStats</Name>
+            <Description></Description>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="attribute_215">
+                    <Name>Lvl</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_216">
+                    <Name>HealingTime</Name>
+                    <Datatype>Time</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>A gyógyítás időtartama.</Comment>
+                </Attribute>
+                <Attribute Id="attribute_217">
+                    <Name>MaxHealingCount</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Ahány elesett katonát gyógyíthat egyszerre.</Comment>
+                </Attribute>
+                <Attribute Id="attribute_219">
+                    <Name>Effectivity</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Hány százalékát tudja meggyógyítani a kórház az elesetteknek.</Comment>
+                </Attribute>
+                <Attribute Id="attribute_221">
+                    <Name>MaxHealedUnits</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType>Integer</DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="entity_222">
+            <Name>WarehouseStats</Name>
+            <Description></Description>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="attribute_223">
+                    <Name>Lvl</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_229">
+                    <Name>MaxBrigadeCount</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_230">
+                    <Name>TrainingCostWood</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_231">
+                    <Name>TrainingCostStone</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_232">
+                    <Name>TrainingCostMetal</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_233">
+                    <Name>TrainingCostGold</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_234">
+                    <Name>WoodCollectionPM</Name>
+                    <Datatype>Float(2)</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_235">
+                    <Name>StoneCollectionPM</Name>
+                    <Datatype>Float(2)</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_236">
+                    <Name>MetalCollectionPM</Name>
+                    <Datatype>Float(2)</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_237">
+                    <Name>GoldCollectionPM</Name>
+                    <Datatype>Float(2)</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType>Integer</DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+        <Entity Id="entity_238">
+            <Name>ResearchStats</Name>
+            <Description></Description>
+            <EntityIdentifiers/>
+            <Attributes>
+                <Attribute Id="attribute_239">
+                    <Name>Lvl</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_245">
+                    <Name>SciencePM</Name>
+                    <Datatype>Float(2)</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_246">
+                    <Name>MaxScience</Name>
+                    <Datatype>Integer</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment></Comment>
+                </Attribute>
+                <Attribute Id="attribute_248">
+                    <Name>ResearcableUnits</Name>
+                    <Datatype>Varchar(514)</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>Az összes kikutatható egységtípus, pontosvesszőkkel elválasztva.</Comment>
+                </Attribute>
+                <Attribute Id="attribute_249">
+                    <Name>ResearchCostPerUnit</Name>
+                    <Datatype>Varchar(514)</Datatype>
+                    <Mandatory>true</Mandatory>
+                    <Comment>A fent felsorolt egységekhez tartozó kutatási költségek rendre egymás után, pontosvesszővel elválasztva.</Comment>
+                </Attribute>
+            </Attributes>
+            <InheritanceDetails>
+                <ExclusiveChildren>false</ExclusiveChildren>
+                <Complete>false</Complete>
+                <GenerationStrategy>OneTablePerWholeHierarchy</GenerationStrategy>
+                <DiscriminatorName></DiscriminatorName>
+                <DiscriminatorType>Integer</DiscriminatorType>
+            </InheritanceDetails>
+        </Entity>
+    </Entities>
+    <Associations/>
+    <Inheritances/>
+    <EntityRelationships>
+        <EntityRelationship Id="reference_41">
+            <Name>Towns_Users</Name>
+            <Comment></Comment>
+            <Cardinality>1..*</Cardinality>
+            <Entity_1>entity_0</Entity_1>
+            <Entity_2>entity_8</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>true</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="reference_146">
+            <Name>FriendsList_Users</Name>
+            <Comment></Comment>
+            <Cardinality>1..*</Cardinality>
+            <Entity_1>entity_0</Entity_1>
+            <Entity_2>entity_142</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>true</Entity_1_Mandatory>
+            <Entity_2_Mandatory>false</Entity_2_Mandatory>
+        </EntityRelationship>
+        <EntityRelationship Id="reference_161">
+            <Name>Buildings_Towns</Name>
+            <Comment></Comment>
+            <Cardinality>1..*</Cardinality>
+            <Entity_1>entity_8</Entity_1>
+            <Entity_2>entity_148</Entity_2>
+            <Entity_1_Role></Entity_1_Role>
+            <Entity_2_Role></Entity_2_Role>
+            <Entity_1_Dependant>false</Entity_1_Dependant>
+            <Entity_2_Dependant>false</Entity_2_Dependant>
+            <Entity_1_Mandatory>true</Entity_1_Mandatory>
+            <Entity_2_Mandatory>true</Entity_2_Mandatory>
+        </EntityRelationship>
+    </EntityRelationships>
+    <AssociationRelationships/>
+    <Notes/>
+    <Areas>
+        <Area Id="area_185">
+            <Name>Game Constants</Name>
+        </Area>
+    </Areas>
+    <EntityDisplays>
+        <EntityDisplay Id="entityDisplay_1">
+            <X>6890.5</X>
+            <Y>6899.5</Y>
+            <Width>200.0</Width>
+            <Height>116.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FFFFFF</FillColor>
+            <Entity>entity_0</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="entityDisplay_9">
+            <X>7177.5</X>
+            <Y>6886.5</Y>
+            <Width>200.0</Width>
+            <Height>217.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FFFFFF</FillColor>
+            <Entity>entity_8</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="entityDisplay_65">
+            <X>6848.5</X>
+            <Y>6198.5</Y>
+            <Width>206.0</Width>
+            <Height>130.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FFFFFF</FillColor>
+            <Entity>entity_64</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="entityDisplay_143">
+            <X>6611.5</X>
+            <Y>6897.5</Y>
+            <Width>200.0</Width>
+            <Height>60.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FFFFFF</FillColor>
+            <Entity>entity_142</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="entityDisplay_157">
+            <X>7472.5</X>
+            <Y>6858.5</Y>
+            <Width>200.0</Width>
+            <Height>145.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FFFFFF</FillColor>
+            <Entity>entity_148</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="entityDisplay_175">
+            <X>6624.5</X>
+            <Y>6199.5</Y>
+            <Width>200.0</Width>
+            <Height>159.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FFFFFF</FillColor>
+            <Entity>entity_174</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="entityDisplay_191">
+            <X>7075.5</X>
+            <Y>6198.5</Y>
+            <Width>200.0</Width>
+            <Height>130.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FFFFFF</FillColor>
+            <Entity>entity_190</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="entityDisplay_200">
+            <X>7297.5</X>
+            <Y>6197.5</Y>
+            <Width>200.0</Width>
+            <Height>87.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FFFFFF</FillColor>
+            <Entity>entity_199</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="entityDisplay_210">
+            <X>6626.5</X>
+            <Y>6381.5</Y>
+            <Width>200.0</Width>
+            <Height>87.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FFFFFF</FillColor>
+            <Entity>entity_205</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="entityDisplay_218">
+            <X>6849.5</X>
+            <Y>6380.5</Y>
+            <Width>200.0</Width>
+            <Height>102.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FFFFFF</FillColor>
+            <Entity>entity_214</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="entityDisplay_228">
+            <X>7073.5</X>
+            <Y>6378.5</Y>
+            <Width>200.0</Width>
+            <Height>174.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FFFFFF</FillColor>
+            <Entity>entity_222</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+        <EntityDisplay Id="entityDisplay_244">
+            <X>7297.5</X>
+            <Y>6378.5</Y>
+            <Width>200.0</Width>
+            <Height>116.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FFFFFF</FillColor>
+            <Entity>entity_238</Entity>
+            <FixedSize>false</FixedSize>
+        </EntityDisplay>
+    </EntityDisplays>
+    <AssociationDisplays/>
+    <InheritanceDisplays/>
+    <EntityRelationshipsDisplays>
+        <EntityRelationshipDisplay Id="referenceDisplay_42">
+            <Color>#000000</Color>
+            <Type>Horizontal_2CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>7062.5</X>
+                    <Y>6928.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7292.5</X>
+                    <Y>6928.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>entityDisplay_1</Entity_1_Display>
+            <Entity_2_Display>entityDisplay_9</Entity_2_Display>
+            <Reference>reference_41</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="referenceDisplay_147">
+            <Color>#000000</Color>
+            <Type>Horizontal_2CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>6910.5</X>
+                    <Y>6927.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>6775.5</X>
+                    <Y>6927.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>entityDisplay_1</Entity_1_Display>
+            <Entity_2_Display>entityDisplay_143</Entity_2_Display>
+            <Reference>reference_146</Reference>
+        </EntityRelationshipDisplay>
+        <EntityRelationshipDisplay Id="referenceDisplay_162">
+            <Color>#000000</Color>
+            <Type>Horizontal_2CP</Type>
+            <ControlPoints>
+                <ControlPoint>
+                    <X>7354.5</X>
+                    <Y>6917.5</Y>
+                </ControlPoint>
+                <ControlPoint>
+                    <X>7494.5</X>
+                    <Y>6917.5</Y>
+                </ControlPoint>
+            </ControlPoints>
+            <Entity_1_Display>entityDisplay_9</Entity_1_Display>
+            <Entity_2_Display>entityDisplay_157</Entity_2_Display>
+            <Reference>reference_161</Reference>
+        </EntityRelationshipDisplay>
+    </EntityRelationshipsDisplays>
+    <AssociationRelationshipsDisplays/>
+    <NoteDisplays/>
+    <AreaDisplays>
+        <AreaDisplay>
+            <X>6608.5</X>
+            <Y>6181.5</Y>
+            <Width>1062.0</Width>
+            <Height>630.0</Height>
+            <LineColor>#000000</LineColor>
+            <FillColor>#FFFFFF</FillColor>
+            <DashArray>[5,5]</DashArray>
+            <NameX>922.8056640625</NameX>
+            <NameY>595.0</NameY>
+            <NameColor>#000000</NameColor>
+            <ZIndex>1</ZIndex>
+            <Area>area_185</Area>
+        </AreaDisplay>
+    </AreaDisplays>
+</DatabaseLogicalModel>
