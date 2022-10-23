@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2022-10-21 16:41:48.197
+-- Last modification date: 2022-10-23 20:56:26.83
 
 -- tables
 -- Table: BarrackStats
@@ -14,10 +14,9 @@ CREATE TABLE BarrackStats (
 CREATE TABLE Buildings (
     BuildingID int NOT NULL COMMENT 'épület azonosító',
     BuildingType varchar(20) NOT NULL COMMENT 'épület típusának megnevezése',
-    TownID int NOT NULL COMMENT 'melyik városban van az épület',
+    Towns_TownID int NOT NULL COMMENT 'a város azonosítója',
     BuildingLvl int NOT NULL COMMENT 'épület szintje',
     Params varchar(512) NOT NULL COMMENT 'épület által használt paraméterek, pontosvesszővel elválasztva',
-    Towns_TownID int NOT NULL COMMENT 'a város azonosítója',
     CONSTRAINT Buildings_pk PRIMARY KEY (BuildingID)
 );
 
@@ -48,9 +47,8 @@ CREATE TABLE DiplomacyStats (
 -- Table: FriendList
 CREATE TABLE FriendList (
     RelationID int NOT NULL,
-    UID int NOT NULL,
-    FriendID int NOT NULL,
     Users_UID int NOT NULL,
+    FriendID int NOT NULL,
     CONSTRAINT FriendList_pk PRIMARY KEY (RelationID)
 );
 
@@ -86,7 +84,7 @@ CREATE TABLE ResearchStats (
 -- Table: Towns
 CREATE TABLE Towns (
     TownID int NOT NULL COMMENT 'a város azonosítója',
-    UID int NOT NULL COMMENT 'a felhasználó azonosítója',
+    Users_UID int NOT NULL,
     HappinessValue int NOT NULL,
     Wood int NOT NULL,
     Stone int NOT NULL,
@@ -94,7 +92,6 @@ CREATE TABLE Towns (
     Gold int NOT NULL,
     CampaignLvl int NOT NULL,
     Coordinates varchar(20) NOT NULL COMMENT 'a város koordinátája a világtérkép síkján',
-    Users_UID int NOT NULL,
     CONSTRAINT Towns_pk PRIMARY KEY (TownID)
 );
 
