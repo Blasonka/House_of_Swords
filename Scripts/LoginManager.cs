@@ -18,8 +18,8 @@ public class LoginManager : MonoBehaviour
 {
     public string usersAPIRoute = "https://houseofswords.hu/api/users";
 
-    public TMP_Text usernameText;
-    public TMP_Text pwdText;
+    public TMP_InputField usernameText;
+    public TMP_InputField pwdText;
 
     public TMP_Text errorText;
 
@@ -46,7 +46,7 @@ public class LoginManager : MonoBehaviour
         return JsonUtility.FromJson<Users>("{\"requestedUsers\":" + json + "}").requestedUsers;
 
         //Users userArray = JsonUtility.FromJson<Users>("{\"requestedUsers\":" + json + "}");
-        
+
         //foreach (UserClass user in userArray.requestedUsers)
         //{
         //    Debug.Log($"{user.UID}: {user.Username} - {user.EmailAddress} | {user.PwdHash} | {user.LastLoginDate}");
@@ -74,7 +74,8 @@ public class LoginManager : MonoBehaviour
             Debug.Log(user.Username);
             Debug.Log(username);
 
-            // HIBA: A "user.Username" és a sima "username" valamiért nem egyezik, függetlenül a beírt értékt?l.
+            // HIBA: A "user.Username" és a sima "username" valamiért nem egyezik, függetlenül a beírt értéktõl.
+            // MEGOLDÁS: A "usernameText" és a "pwdText" változók típusát TMP_InputField-re kellett átírni, TMP_Text helyett.
             if (user.Username == username)
             {
                 Debug.Log("ANYÁDKURVAVOLTKISKORÁTÓLKEZDVEBAZDMEG");
@@ -101,14 +102,28 @@ public class LoginManager : MonoBehaviour
 
     public bool isPwdRight(string pwd, string hash)
     {
-        // HIBA: A "result" változóban helytelen hash jön létre.
-        byte[] bytes = System.Text.Encoding.ASCII.GetBytes(pwd);
-        SHA512 sha = SHA512.Create();
-        byte[] newHash = sha.ComputeHash(bytes);
-        string result = System.Text.Encoding.ASCII.GetString(newHash);
+        // A titkosító osztály elõkészítése
+        SHA512 hasher = SHA512.Create();
+        hasher.Initialize();
 
-        Debug.Log(result);
+        // A beírt jelszót egy hexadecimális byte tömbbé alakítjuk, majd ezt a tömböt a titkosító osztály segítségével kódoljuk
+        byte[] data = hasher.ComputeHash(Encoding.Default.GetBytes(pwd));
 
-        return result == hash;
+        // Az eredményt byte tömbbõl visszaalakítjuk karakterekké
+        string result = BitConverter.ToString(data);
+
+        // Debug.Log("Before: " + result);
+
+        // A karakterlánc formázása, hogy az adatbázisban lévõvel egyezõ legyen
+        // (nincsenek benne kötõjelek, és kisbetûs)
+        string reductedResult = "";
+        for (int i = 0; i < result.Length; i++)
+            if (result[i] != '-') reductedResult += result[i];
+        reductedResult = reductedResult.ToLower();
+
+        // Debug.Log("After: " + reductedResult);
+
+        // Ha a frissen titkosított hash egyezik az adatbázisban lévõvel, akkor jó a jelszó
+        return reductedResult == hash;
     }
 }
