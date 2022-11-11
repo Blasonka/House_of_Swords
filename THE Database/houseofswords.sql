@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Gép: 127.0.0.1
--- Létrehozás ideje: 2022. Nov 05. 11:51
--- Kiszolgáló verziója: 10.4.22-MariaDB
--- PHP verzió: 8.1.2
+-- Gép: localhost
+-- Létrehozás ideje: 2022. Nov 10. 08:53
+-- Kiszolgáló verziója: 10.3.32-MariaDB
+-- PHP verzió: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -20,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `houseofswords`
 --
-CREATE DATABASE IF NOT EXISTS `houseofswords` DEFAULT CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
-USE `houseofswords`;
 
 -- --------------------------------------------------------
 
@@ -183,7 +182,9 @@ CREATE TABLE `towns` (
 --
 
 INSERT INTO `towns` (`TownID`, `HappinessValue`, `Wood`, `Stone`, `Metal`, `Gold`, `CampaignLvl`, `Coordinates`, `Users_UID`) VALUES
-(1, 15, 100, 200, 300, 450, 5, '45;83', 1);
+(1, 15, 100, 200, 300, 450, 5, '45;83', 1),
+(2, 100, 200, 300, 150, 50, 1, '255;255', 2),
+(3, 50, 400, 600, 300, 100, 2, '150;47', 2);
 
 -- --------------------------------------------------------
 
@@ -213,6 +214,7 @@ CREATE TABLE `users` (
   `Username` varchar(20) COLLATE utf8_hungarian_ci NOT NULL,
   `EmailAddress` varchar(256) COLLATE utf8_hungarian_ci NOT NULL,
   `PwdHash` longtext COLLATE utf8_hungarian_ci NOT NULL COMMENT 'a felhasználó által beírt jelszó sha-512-es titkosítással tárolva',
+  `PwdSalt` varchar(20) COLLATE utf8_hungarian_ci NOT NULL,
   `LastLoginDate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
@@ -220,10 +222,10 @@ CREATE TABLE `users` (
 -- A tábla adatainak kiíratása `users`
 --
 
-INSERT INTO `users` (`UID`, `Username`, `EmailAddress`, `PwdHash`, `LastLoginDate`) VALUES
-(1, 'admin', 'blasek.balazs@gmail.com', '5c657e44b23a375fb86ab8b8bb96d46b11d74059e96d23990dded9d559772fa05ce94220c673887042ce2d55a3ac89621c24fed1bd865dcd10962b298efe2d7d', '2022-10-22 14:17:41'),
-(2, 'admin2', 'venteralex1@gmail.com', '012004ea25914b5b15584fda757a1cfd62763e3aaf149b25e7fb719b5b09fa2cb02357ddd0ee9b9b56c9ea713e3e973c6fc30f757bbee1e357b30e7135109744', '2022-10-22 14:37:03'),
-(3, 'admin3', 'laura.luksa03@gmail.com', 'e0f541858711cdb80f379d541eb37c9a55268ab6b1dcee49a672cd99ec4430badea8aa358f194c757e53087286c89389337557bd214098fdd964ace217d0ab4e', '2022-10-22 14:37:54');
+INSERT INTO `users` (`UID`, `Username`, `EmailAddress`, `PwdHash`, `PwdSalt`, `LastLoginDate`) VALUES
+(1, 'admin', 'blasek.balazs@gmail.com', 'f6f809cb210d98022cd466631bf95190b965b9f7885bb48bf1f716a89cba49583b0ee50e29b3d741e8797a0d1035dc0889356385de903faddd22a8fcdca50fbb', 'xbSVinazxDnPAqNco0qe', '2022-10-22 14:17:41'),
+(2, 'admin2', 'venteralex1@gmail.com', 'c6d8d9bb045f9da8d3e0f73356c8e6a31990bae59022216642f4d645325c6a7ad54a90312e503ce4ec8e7b974a1f337afb9f70af0db153887f7f93acdbf0be9e', 't2V7ZtEY8hWYeDYwRiJA', '2022-10-22 14:37:03'),
+(3, 'admin3', 'laura.luksa03@gmail.com', 'fc61a1a372095cadfd3ac9d96e63c07d03a6dfddf0a22040524a88d478e860f24f1927e458b736e135d94ce4982adbdce4ff94f3c327c7047697984549379244', 'eVhEHxtt6Ygi9h649z3n', '2022-10-22 14:37:54');
 
 -- --------------------------------------------------------
 
@@ -296,7 +298,7 @@ ALTER TABLE `friendlist`
 -- AUTO_INCREMENT a táblához `towns`
 --
 ALTER TABLE `towns`
-  MODIFY `TownID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'a város azonosítója', AUTO_INCREMENT=2;
+  MODIFY `TownID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'a város azonosítója', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT a táblához `users`
