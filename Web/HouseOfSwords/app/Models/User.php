@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Model
 {
@@ -16,8 +17,8 @@ class User extends Model
 
     protected $fillable = ['Username', 'EmailAddress', 'PwdHash', 'PwdSalt'];
 
-    public function setPwdHashAttribute($value){
-        $randomChar = chr(random_int(0, 25)+65);
-        $this->attributes["PwdHash"] = hash('sha512', $value.$this->PwdSalt.$randomChar);
-    }
+    // public function setPwdHashAttribute($value){
+    //     $randomChar = chr(random_int(0, 25)+65);
+    //     $this->attributes["PwdHash"] = hash('sha512', $value.$this->PwdHash.$value.$this->PwdSalt.$randomChar);
+    // }
 }

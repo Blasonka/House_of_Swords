@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserValidationRequest;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -37,11 +38,13 @@ class UserController extends Controller
     public function store(UserValidationRequest $request)
     {
         $request->validated();
+        $randomChar = chr(random_int(0, 25)+65);
+        $PwdSalt = Str::random(20);
         User::create([
             'Username' => $request->input('Username'),
             'EmailAddress' => $request->input('EmailAddress'),
-            'PwdHash' => $request->input('PwdHash'),
-            'PwdSalt' => 'asdasdasd'
+            'PwdHash' => hash('sha512', $request->input('PwdHash') . $PwdSalt . $randomChar),
+            'PwdSalt' => $PwdSalt
         ]);
         return redirect('/');
     }
