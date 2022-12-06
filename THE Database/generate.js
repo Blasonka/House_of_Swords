@@ -141,6 +141,24 @@ db.barrackstats.insertMany([
         MaxUnitCount: 30,
         MaxTrainingAmount: 12,
         MaxAttackRange: 60
+    },
+    {
+        _id: 3,
+        MaxUnitCount: 40,
+        MaxTrainingAmount: 15,
+        MaxAttackRange: 70
+    },
+    {
+        _id: 4,
+        MaxUnitCount: 50,
+        MaxTrainingAmount: 20,
+        MaxAttackRange: 90
+    },
+    {
+        _id: 5,
+        MaxUnitCount: 60,
+        MaxTrainingAmount: 25,
+        MaxAttackRange: 100
     }
 ]);
 
@@ -173,6 +191,42 @@ db.warehousestats.insertMany([
         StoneCollectionPM: 15,
         MetalCollectionPM: 1.5,
         GoldCollectionPM: 1/30
+    },
+    {
+        _id: 3,
+        MaxBrigadeCount: 6,
+        TrainingCostWood: 17,
+        TrainingCostStone: 20,
+        TrainingCostMetal: 7,
+        TrainingCostGold: 1,
+        WoodCollectionPM: 30,
+        StoneCollectionPM: 25,
+        MetalCollectionPM: 2,
+        GoldCollectionPM: 1/30
+    },
+    {
+        _id: 4,
+        MaxBrigadeCount: 8,
+        TrainingCostWood: 15,
+        TrainingCostStone: 18,
+        TrainingCostMetal: 6,
+        TrainingCostGold: 1,
+        WoodCollectionPM: 50,
+        StoneCollectionPM: 25,
+        MetalCollectionPM: 2.5,
+        GoldCollectionPM: 1/15
+    },
+    {
+        _id: 5,
+        MaxBrigadeCount: 10,
+        TrainingCostWood: 8,
+        TrainingCostStone: 14,
+        TrainingCostMetal: 1,
+        TrainingCostGold: 2,
+        WoodCollectionPM: 60,
+        StoneCollectionPM: 25,
+        MetalCollectionPM: 2.5,
+        GoldCollectionPM: 1/10
     }
 ]);
 
@@ -198,12 +252,42 @@ db.churchstats.insertMany([
     },
     {
         _id: 2,
-        MassLength: 12,
+        MassLength: 15,
         HappinessBoost: 2,
         ProductivityMultiplier: {
-            Min: 1,
+            Min: 2,
             Max: 10,
             Multiplier: 2
+        }
+    },
+    {
+        _id: 3,
+        MassLength: 15,
+        HappinessBoost: 3,
+        ProductivityMultiplier: {
+            Min: 2,
+            Max: 10,
+            Multiplier: 2.2
+        }
+    },
+    {
+        _id: 4,
+        MassLength: 20,
+        HappinessBoost: 6,
+        ProductivityMultiplier: {
+            Min: 3,
+            Max: 10,
+            Multiplier: 2.5
+        }
+    },
+    {
+        _id: 5,
+        MassLength: 25,
+        HappinessBoost: 8,
+        ProductivityMultiplier: {
+            Min: 5,
+            Max: 10,
+            Multiplier: 2.8
         }
     }
 ]);
@@ -216,12 +300,27 @@ db.diplomacystats.insertMany([
     {
         _id: 1,
         MaxAllyCount: 2,
-        MaxAllyRange: 5
+        MaxAllyRange: 70
     },
     {
         _id: 2,
         MaxAllyCount: 4,
-        MaxAllyRange: 10
+        MaxAllyRange: 100
+    },
+    {
+        _id: 3,
+        MaxAllyCount: 5,
+        MaxAllyRange: 120
+    },
+    {
+        _id: 4,
+        MaxAllyCount: 8,
+        MaxAllyRange: 150
+    },
+    {
+        _id: 5,
+        MaxAllyCount: 10,
+        MaxAllyRange: 180
     }
 ]);
 
@@ -246,6 +345,27 @@ db.hospitalstats.insertMany([
         MaxHealingCount: 8,
         Effectivity: 25,
         MaxHealedUnits: 20
+    },
+    {
+        _id: 3,
+        HealingTime: 40,
+        MaxHealingCount: 14,
+        Effectivity: 30,
+        MaxHealedUnits: 30
+    },
+    {
+        _id: 4,
+        HealingTime: 45,
+        MaxHealingCount: 18,
+        Effectivity: 40,
+        MaxHealedUnits: 40
+    },
+    {
+        _id: 5,
+        HealingTime: 50,
+        MaxHealingCount: 20,
+        Effectivity: 45,
+        MaxHealedUnits: 50
     }
 ]);
 
@@ -269,9 +389,39 @@ db.researchstats.insertMany([
         SciencePM: 1/5,
         MaxScience: 150,
         ResearchableUnits: {
-            Footman: 1,
-            Archer: 80,
+            Footman: 5,
+            Archer: 110,
             Knight: 150                
+        }
+    },
+    {
+        _id: 3,
+        SciencePM: 1/5,
+        MaxScience: 200,
+        ResearchableUnits: {
+            Footman: 15,
+            Archer: 120,
+            Knight: 180                
+        }
+    },
+    {
+        _id: 4,
+        SciencePM: 1/2,
+        MaxScience: 200,
+        ResearchableUnits: {
+            Footman: 30,
+            Archer: 150,
+            Knight: 260                
+        }
+    },
+    {
+        _id: 5,
+        SciencePM: 1/2,
+        MaxScience: 220,
+        ResearchableUnits: {
+            Footman: 50,
+            Archer: 200,
+            Knight: 300                
         }
     }
 ]);
@@ -298,28 +448,48 @@ db.unitstats.insertMany([
     },
     {
         _id: "Archer",
-        UnitSize: 2,
+        UnitSize: 1,
         AttackValue: 8,
         DefenseValue: 2,
-        MobilityValue: 8,
+        MobilityValue: 10,
         TrainingTime: 30,
         TrainingCostGold: 2,
-        TrainingCostFallen: 2
+        TrainingCostFallen: 5
     },
     {
         _id: "Knight",
-        UnitSize: 5,
-        AttackValue: 15,
+        UnitSize: 2,
+        AttackValue: 10,
         DefenseValue: 7,
         MobilityValue: 15,
         TrainingTime: 50,
         TrainingCostGold: 3,
+        TrainingCostFallen: 5
+    },
+    {
+        _id: "Cavalry",
+        UnitSize: 3,
+        AttackValue: 15,
+        DefenseValue: 10,
+        MobilityValue: 5,
+        TrainingTime: 70,
+        TrainingCostGold: 5,
+        TrainingCostFallen: 4
+    },
+    {
+        _id: "Catapult",
+        UnitSize: 5,
+        AttackValue: 25,
+        DefenseValue: 5,
+        MobilityValue: 1,
+        TrainingTime: 90,
+        TrainingCostGold: 10,
         TrainingCostFallen: 3
     }
 ]);
 
 db.maxbuildinglevels.insertOne(
-    // Az egyes épületek maximum szintje
+    // Az egyes épületek maximum szintje, nincs szinthez kötve, ezért egy documentumban tároljuk
     {
         _id: 1,
         MaxBarracksLvl: 10,
@@ -344,7 +514,7 @@ db.campaign.insertMany([
             Footman: 5,        
         },
         Reward:{
-            Wood:20,
+            Wood: 22,
             Stone: 15,
             Metal: 5,
             Gold: 5
@@ -357,10 +527,53 @@ db.campaign.insertMany([
             Archer: 2
         },
         Reward:{
-            Wood:40,
+            Wood: 40,
             Stone: 25,
-            Metal: 15,
+            Metal: 16,
             Gold: 10
+        }
+    },
+    {
+        _id: 3,
+        Enemies: {
+            Footman: 11,        
+            Archer: 6,
+            Knight: 3
+        },
+        Reward:{
+            Wood: 43,
+            Stone: 32,
+            Metal: 30,
+            Gold: 15
+        }
+    },
+    {
+        _id: 4,
+        Enemies: {
+            Footman: 17,
+            Knight: 5,
+            Cavalry: 3
+        },
+        Reward:{
+            Wood: 60,
+            Stone: 25,
+            Metal: 18,
+            Gold: 25
+        }
+    },
+    {
+        _id: 5,
+        Enemies: {
+            Footman: 20,
+            Knight: 9,
+            Cavalry: 5,
+            Catapult: 1
+        },
+        Reward:{
+            Wood: 52,
+            Stone: 16,
+            Metal: 20,
+            Gold: 30
         }
     }
 ]);
