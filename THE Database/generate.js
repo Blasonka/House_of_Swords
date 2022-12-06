@@ -161,5 +161,206 @@ db.warehousestats.insertMany([
         StoneCollectionPM: 10,
         MetalCollectionPM: 1,
         GoldCollectionPM: 1/30
+    },
+    {
+        _id: 2,
+        MaxBrigadeCount: 4,
+        TrainingCostWood: 15,
+        TrainingCostStone: 18,
+        TrainingCostMetal: 6,
+        TrainingCostGold: 1,
+        WoodCollectionPM: 20,
+        StoneCollectionPM: 15,
+        MetalCollectionPM: 1.5,
+        GoldCollectionPM: 1/30
+    }
+]);
+
+db.churchstats.insertMany([
+    // A templom épület tulajdonságai szintenként változnak
+    // _id: az épület szintje
+    // MassLength: a mise hosszúsága
+    // HappinessBoost: a mise által adott boldogság mennyisége
+    // ProductivityMultiplier: a boldogság hatása a termelékenységre, 
+    //    Min: alsó határ
+    //    Max: felső határ
+    //    Multiplier: az a szorzó, amivel a termelékenységet be kell 
+    //    szorozni a Warehouseban, ha a boldogságszint a két határ között van
+    {
+        _id: 1,
+        MassLength: 10,
+        HappinessBoost: 1,
+        ProductivityMultiplier: {
+            Min: 1,
+            Max: 10,
+            Multiplier: 1.5
+        }
+    },
+    {
+        _id: 2,
+        MassLength: 12,
+        HappinessBoost: 2,
+        ProductivityMultiplier: {
+            Min: 1,
+            Max: 10,
+            Multiplier: 2
+        }
+    }
+]);
+
+db.diplomacystats.insertMany([
+    // A diplomácia épület tulajdonságai szintenként változnak
+    // _id: az épület szintje
+    // MaxAllyCount: a maximum szövetségesek száma
+    // MaxAllyRange: a térképen milyen messze lévő városokkal lehet szövetkezni
+    {
+        _id: 1,
+        MaxAllyCount: 2,
+        MaxAllyRange: 5
+    },
+    {
+        _id: 2,
+        MaxAllyCount: 4,
+        MaxAllyRange: 10
+    }
+]);
+
+db.hospitalstats.insertMany([
+    // A kórház épület tulajdonságai szintenként változnak
+    // _id: az épület szintje
+    // HealingTime: egy gyógyítási ciklus hossza (perc)
+    // MaxHealingCount: hány elesettet tud egyszerre megpróbálni meggyógyítani
+    // Effectivity: a gyógyítás hatékonysága 
+    //    (pl ha 60, akkor az elesettek 60%át sikerül meggyógyítani, a maradék 40 meghal)
+    // MaxHealedUnits: a maximum meggyógyított katonák férőhelye a kórházban
+    {
+        _id: 1,
+        HealingTime: 40,
+        MaxHealingCount: 5,
+        Effectivity: 20,
+        MaxHealedUnits: 10
+    },
+    {
+        _id: 2,
+        HealingTime: 40,
+        MaxHealingCount: 8,
+        Effectivity: 25,
+        MaxHealedUnits: 20
+    }
+]);
+
+db.researchstats.insertMany([
+    // A kutatóközpont épület tulajdonságai szintenként változnak
+    // _id: az épület szintje
+    // SciencePM: gyűjtött tudás percenként
+    // MaxScience: maximálisan szedhető tudás
+    // ResearchableUnits: a kikutatható egységek nevei (a változó neve), mennyi tudásba kerülnek (érték)
+    {
+        _id: 1,
+        SciencePM: 1/5,
+        MaxScience: 100,
+        ResearchableUnits: {
+            Footman: 1,
+            Archer: 100             
+        }
+    },
+    {
+        _id: 2,
+        SciencePM: 1/5,
+        MaxScience: 150,
+        ResearchableUnits: {
+            Footman: 1,
+            Archer: 80,
+            Knight: 150                
+        }
+    }
+]);
+
+db.unitstats.insertMany([
+    // Az egységek tulajdonságai
+    // _id: az egységek neve
+    // UnitSize: hány egységnyi helyet foglal el a barakkban
+    // AttackValue: támadás értéke
+    // DefenseValue: védelem értéke
+    // MobilityValue: mozgás értéke
+    // TrainingTime: A képzés ideje (perc)
+    // TrainingCostGold: Aranyköltség a képzéshez
+    // TrainingCostFallen: A meggyógyított katonákból mennyi kell egy ilyen egység létrehozásához.
+    {
+        _id: "Footman",
+        UnitSize: 1,
+        AttackValue: 5,
+        DefenseValue: 3,
+        MobilityValue: 10,
+        TrainingTime: 10,
+        TrainingCostGold: 1,
+        TrainingCostFallen: 10
+    },
+    {
+        _id: "Archer",
+        UnitSize: 2,
+        AttackValue: 8,
+        DefenseValue: 2,
+        MobilityValue: 8,
+        TrainingTime: 30,
+        TrainingCostGold: 2,
+        TrainingCostFallen: 2
+    },
+    {
+        _id: "Knight",
+        UnitSize: 5,
+        AttackValue: 15,
+        DefenseValue: 7,
+        MobilityValue: 15,
+        TrainingTime: 50,
+        TrainingCostGold: 3,
+        TrainingCostFallen: 3
+    }
+]);
+
+db.maxbuildinglevels.insertOne(
+    // Az egyes épületek maximum szintje
+    {
+        _id: 1,
+        MaxBarracksLvl: 10,
+        MaxDiplomacyLvl: 5,
+        MaxHospitalLvl: 10,
+        MaxWarehouseLvl: 15,
+        MaxResearchLvl: 10,
+        MaxMarketLvl: 8,
+        MaxChurchLvl: 8
+    }
+);
+
+db.campaign.insertMany([
+    // A kapány több szintre osztható, ha egy játékos legyőzött egy szintet továbbjut a következőre,
+    // ez a towns táblában el van mentve (CampaignLvl)
+    // _id: az kamány szintje
+    // Enemies: A szinten legyőzendő ellenségek nevei (a változó neve), darabszám (érték)
+    // Reward: A szinten legyőzéséért járó nyersanyagok nevei (a változó neve), darabszám (érték)
+    {
+        _id: 1,
+        Enemies: {
+            Footman: 5,        
+        },
+        Reward:{
+            Wood:20,
+            Stone: 15,
+            Metal: 5,
+            Gold: 5
+        }
+    },
+    {
+        _id: 2,
+        Enemies: {
+            Footman: 8,        
+            Archer: 2
+        },
+        Reward:{
+            Wood:40,
+            Stone: 25,
+            Metal: 15,
+            Gold: 10
+        }
     }
 ]);
