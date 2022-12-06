@@ -27,6 +27,22 @@ db.users.insertMany([
         PwdHash: "fc61a1a372095cadfd3ac9d96e63c07d03a6dfddf0a22040524a88d478e860f24f1927e458b736e135d94ce4982adbdce4ff94f3c327c7047697984549379244",
         PwdSalt: "eVhEHxtt6Ygi9h649z3n",
         LastLoginDate: "2022-10-22 14:17:41"
+    },
+    {
+        _id: 4,
+        UserName: "User1_",
+        EmailAddress: "user@gmail.com",
+        PwdHash: "ecf318ab1c83416ebbd0a2e6508906ef28d62d363f2e504aff1b7f9ea2e3308b118d2bb04612e0a678be95702991bbafac15bd8577231017aa87f4b489f49ed4",
+        PwdSalt: "inwZnzInHzvJ0sZGr4Ts",
+        LastLoginDate: "2022-12-06 21:51:06"
+    },
+    {
+        _id: 5,
+        UserName: "Ádám__",
+        EmailAddress: "adam@gmail.com",
+        PwdHash: "2799fd02af5d9591be1ce18a5ae3d23cbb3b7aab45678f8b903a0ac8925baeac669fefd97d99b54baf22bdd7c5a21ed542545da14fd135dc5c62d22051911c43",
+        PwdSalt: "OYoFRi6MdVJu2X7B4nNh",
+        LastLoginDate: "2022-12-06 21:52:42"
     }
 ]);
 
@@ -72,6 +88,32 @@ db.towns.insertMany([
         CampaignLvl: 5,
         XCords: 132,
         YCords: 144
+    },
+    {
+        _id: 4,
+        users_id: 4,
+        TownName: "User1",
+        HappinessValue: 10,
+        Wood: 200,
+        Stone: 150,
+        Metal: 90,
+        Gold: 80,
+        CampaignLvl: 2,
+        XCords: 135,
+        YCords: 186
+    },
+    {
+        _id: 5,
+        users_id: 5,
+        TownName: "Adam1",
+        HappinessValue: 30,
+        Wood: 50,
+        Stone: 80,
+        Metal: 150,
+        Gold: 20,
+        CampaignLvl: 6,
+        XCords: 65,
+        YCords: 20
     }
 ]);
 
@@ -100,6 +142,37 @@ db.buildings.insertMany([
             DivisionOfLabor: [2, 1, 0, 0],
             // ...
         }
+    },
+    {
+        _id: 3,
+        town_id: 2,
+        BuildingType: "Warehouse",
+        BuildingLvl: 1,
+        Params: {
+            Builders: 6,
+            DivisionOfLabor: [0, 1, 2, 6],
+            // ...
+        }
+    },
+    {
+        _id: 4,
+        town_id: 2,
+        BuildingType: "Barracks",
+        BuildingLvl: 2,
+        Params: {
+            TrainingUnits: true,
+            // ...
+        }
+    },
+    {
+        _id: 5,
+        town_id: 2,
+        BuildingType: "Hospital",
+        BuildingLvl: 4,
+        Params: {
+            HealingCount: 15,
+            // ...
+        }
     }
 ]);
 
@@ -118,6 +191,26 @@ db.friendlist.insertMany([
         _id: 2,
         users_id: 1,
         friend_id: 2
+    },
+    {
+        _id: 3,
+        users_id: 2,
+        friend_id: 3
+    },
+    {
+        _id: 4,
+        users_id: 3,
+        friend_id: 2
+    },
+    {
+        _id: 5,
+        users_id: 4,
+        friend_id: 3
+    },
+    {
+        _id: 6,
+        users_id: 3,
+        friend_id: 4
     }
 ]);
 
