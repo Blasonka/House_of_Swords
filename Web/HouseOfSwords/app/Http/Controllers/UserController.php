@@ -14,9 +14,44 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $r)
     {
-        return User::all();
+        $users = User::all();
+
+        if ($r->query('fields') != null){
+            if (str_contains($r->query('fields'), ','))
+                $users = User::all(explode(',', $r->query('fields')));
+            else
+                $users = User::all($r->query('fields'));
+        }
+
+        if ($r->query('UID') != null){
+            $users = $users->where('UID', '=', $r->query('UID'));
+        }
+
+        if ($r->query('Username') != null){
+            $users = $users->where('Username', 'LIKE', $r->query('Username'));
+        }
+
+        if ($r->query('EmailAddress') != null){
+            $users = $users->where('EmailAddress', 'LIKE', $r->query('EmailAddress'));
+        }
+
+        if ($r->query('PwdHash') != null){
+            $users = $users->where('PwdHash', 'LIKE', $r->query('PwdHash'));
+        }
+
+        if ($r->query('PwdSalt') != null){
+            $users = $users->where('PwdSalt', 'LIKE', $r->query('PwdSalt'));
+        }
+
+        if ($r->query('LastLoginDate') != null){
+            $users = $users->where('LastLoginDate', 'LIKE', $r->query('LastLoginDate'));
+        }
+
+        $users = QueryController::useRestParamsEnd($r, $users);
+
+        return $users;
     }
 
     /**
@@ -40,6 +75,7 @@ class UserController extends Controller
         $request->validated();
         $randomChar = chr(random_int(0, 25)+65);
         $PwdSalt = Str::random(20);
+
         User::create([
             'Username' => $request->input('Username'),
             'EmailAddress' => $request->input('EmailAddress'),
@@ -55,14 +91,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($params)
+    public function show($id)
     {
-        if ((int)$params) {
-            return User::where('UID', '=', $params)->get();
-        }
-        else{
-            return User::where('Username', '=', $params)->get();
-        }
+        //
     }
 
     /**
