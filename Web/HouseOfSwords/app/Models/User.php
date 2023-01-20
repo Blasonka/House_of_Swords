@@ -15,7 +15,12 @@ class User extends Model
     protected $primaryKey = 'UID';
     public $timestamps = false;
 
-    protected $fillable = ['Username', 'EmailAddress', 'PwdHash', 'PwdSalt'];
+    protected $fillable = [
+        'Username',
+        'EmailAddress',
+        'PwdHash',
+        'PwdSalt'
+    ];
 
     // public function setPwdHashAttribute($value){
     //     $randomChar = chr(random_int(0, 25)+65);

@@ -13,24 +13,33 @@
                         <li class="nav-item align-self-center">
                             {{-- EZEK A REQUEST-ES SOROK NÉZIK MEG, HOGY MELYIK OLDALON VAN A USER, ÉS ÚGY TESZIK AKTÍVVÁ A NAVBAR ELEMEIT --}}
                             <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" aria-current="page"
-                                href="/">Főoldal</a>
+                                href="{{ route('index') }}">Főoldal</a>
                         </li>
                         <li class="nav-item align-self-center">
-                            <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">A
+                            <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="{{ route('about') }}">A
                                 játékról</a>
                         </li>
                     </ul>
 
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item align-self-center">
-                            <a class="nav-link {{ request()->is('register') ? 'active' : '' }}"
-                                href="/register">Regisztráció</a>
-                        </li>
 
-                        <li class="nav-item align-self-center">
-                            <a class="nav-link {{ request()->is('login') ? 'active' : '' }}" href="/login">Belépés</a>
-                        </li>
+                        @guest
+                            <li class="nav-item align-self-center">
+                                <a class="nav-link {{ request()->is('register') ? 'active' : '' }}"
+                                    href="{{ route('register.show') }}">Regisztráció</a>
+                            </li>
 
+                            <li class="nav-item align-self-center">
+                                <a class="nav-link {{ request()->is('login') ? 'active' : '' }}"
+                                    href="{{ route('login.show') }}">Belépés</a>
+                            </li>
+                        @endguest
+
+                        @auth
+                            <li class="nav-item align-self-center">
+                                <a class="nav-link" href="#">Ok</a>
+                            </li>
+                        @endauth
                     </ul>
 
                 </div>

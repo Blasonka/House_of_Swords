@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TownController;
+use App\Http\Controllers\FriendlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,13 +30,18 @@ Route::get('/', function(){
         'isItCool' => 'HELL YES'
     ];
 });
-
+// users table get method (all & with parameters)
 Route::get('/users', [UserController::class, 'index']);
-Route::get('/users/{params}', [UserController::class, 'show']);
 
+// towns table get method (all & with parameters)
 Route::get('/towns', [TownController::class, 'index']);
-Route::get('/towns/{id}', [TownController::class, 'show']);
+// towns table post method with parameters
+Route::post('/towns/create/{Users_UID}', [TownController::class, 'store']);
 
+// friendlist table get method (all & with parameters)
+Route::get('/friendlist', [FriendlistController::class, 'index']);
+
+// any unknown methods
 Route::any('{params}', function ($params) {
     return 'Error 404: Requested content does not exist → '.$params.'.';
 });
