@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Town;
 use App\Http\Requests\TownCreationRequest;
+use App\Models\Building;
 
 class TownController extends Controller
 {
@@ -91,7 +92,17 @@ class TownController extends Controller
             }
         }
 
-        return $towns;
+        // HA TÖBB MINT EGY TALÁLAT: TÖMBÖT ADJON VISSZA
+        // HA CSAK EGY TALÁLAT: A KAPOTT INDEX-ÉRTÉK PÁRBÓL CSAK AZ ÉRTÉKET ADJA VISSZA
+        // Ez egy furcsa "feature" miatt szükséges, ahol a tömbök Laravelben
+        // automatikusan kulcs-érték párként jönnek létre, ahol a kulcs az érték indexe.
+        $result = [];
+        foreach ($towns as $key => $value) {
+            array_push($result, $value);
+        }
+
+        if (count($result) == 1) return $result[0];
+        else return $result;
     }
 
     /**
@@ -164,8 +175,18 @@ class TownController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($Town_ID)
     {
-        //
+        $town = Town::find($Town_ID);
+        $buildings = Building::where('Towns_TownID', $Town_ID)->get();
+
+        if($town && $buildings) {
+            $town->delete();
+            $buildings->delete();
+            return response()->json([ 'Town and their buildings has been deleted' ], 200);
+        }
+        else {
+            return response()->json([ 'Error, bas id: '.$Town_ID. 'or town has no buildings, pls contact the support' ], 404);
+        }
     }
 }

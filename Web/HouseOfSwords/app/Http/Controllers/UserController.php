@@ -51,7 +51,18 @@ class UserController extends Controller
 
         $users = QueryController::useRestParamsEnd($r, $users);
 
-        return $users;
+
+        // HA TÖBB MINT EGY TALÁLAT: TÖMBÖT ADJON VISSZA
+        // HA CSAK EGY TALÁLAT: A KAPOTT INDEX-ÉRTÉK PÁRBÓL CSAK AZ ÉRTÉKET ADJA VISSZA
+        // Ez egy furcsa "feature" miatt szükséges, ahol a tömbök Laravelben
+        // automatikusan kulcs-érték párként jönnek létre, ahol a kulcs az érték indexe.
+        $result = [];
+        foreach ($users as $key => $value) {
+            array_push($result, $value);
+        }
+
+        if (count($result) == 1) return $result[0];
+        else return $result;
     }
 
     /**
@@ -81,7 +92,7 @@ class UserController extends Controller
             'EmailAddress' => $request->input('EmailAddress'),
             'PwdHash' => hash('sha512', $request->input('PwdHash') . $PwdSalt . $randomChar),
             'PwdSalt' => $PwdSalt
-        ]);
+        ])->sendEmailVerificationNotification();
         return redirect('/');
     }
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
@@ -25,11 +27,12 @@ class PageController extends Controller
     }
 
     function login(LoginRequest $request){
-        //$PwdSalt =
+        $PwdSalt =  DB::table('users')->where('Username', $request->Username)->value('PwdSalt');
+        $randomChar = chr(random_int(0, 25)+65);
         $credentials = Auth::attempt([
             'Username' => $request->Username,
-            'PwdHash' => $request->PwdHash,
-            //'PwdHash' => hash('sha512', $request->input('PwdHash') . $PwdSalt . $randomChar)
+            //'PwdHash' => $request->PwdHash,
+            'PwdHash' => hash('sha512', $request->PwdHash . $PwdSalt . $randomChar)
         ]);
         // error_log($request->PwdHash);
         if($credentials){

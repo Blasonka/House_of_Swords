@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +18,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
+Auth::routes(['verify' => true]);
 
 //mindig látszik
 Route::get('/', [PageController::class, 'index'])->name('index');
@@ -39,9 +43,13 @@ Route::group(['middleware' => ['auth']], function (){
 
 });
 
+//Emailek routingja (csak tesztnek van, később ki lesz szedve)
+Route::get('/send', [MailController::class, 'index']);
+Route::post('/send', [MailController::class, 'mail']);
 
 //védett oldalak (user jogtól függ) - (admin oldalak)
 //
 
 // 404 hiba kezelés
 Route::any('{params}', [PageController::class, 'notFound']);
+

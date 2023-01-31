@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//API működésének tesztje
 Route::get('/', function(){
     return [
         'creator' => 'Wauboi',
@@ -30,13 +31,18 @@ Route::get('/', function(){
         'isItCool' => 'HELL YES'
     ];
 });
+
 // users table get method (all & with parameters)
 Route::get('/users', [UserController::class, 'index']);
 
 // towns table get method (all & with parameters)
 Route::get('/towns', [TownController::class, 'index']);
+
 // towns table post method with parameters
 Route::post('/towns/create/{Users_UID}', [TownController::class, 'store']);
+
+// towns table delete method by id
+Route::delete('/towns/{Town_ID}', [TownController::class, 'destroy']);
 
 // friendlist table get method (all & with parameters)
 Route::get('/friendlist', [FriendlistController::class, 'index']);
