@@ -178,15 +178,14 @@ class TownController extends Controller
     public function destroy($Town_ID)
     {
         $town = Town::find($Town_ID);
-        $buildings = Building::where('Towns_TownID', $Town_ID)->get();
 
-        if($town && $buildings) {
+        if($town) {
+            Building::where('Towns_TownID', $Town_ID)->delete();
             $town->delete();
-            $buildings->delete();
             return response()->json([ 'Town and their buildings has been deleted' ], 200);
         }
         else {
-            return response()->json([ 'Error, bas id: '.$Town_ID. 'or town has no buildings, pls contact the support' ], 404);
+            return response()->json([ 'Error, bad id: '.$Town_ID ], 404);
         }
     }
 }
