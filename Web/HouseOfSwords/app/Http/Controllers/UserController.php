@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequests\UserPatchRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserValidationRequest;
@@ -14,65 +15,23 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $r)
+    public function index()
     {
-        $users = User::all();
-
-        if ($r->query('fields') != null){
-            if (str_contains($r->query('fields'), ','))
-                $users = User::all(explode(',', $r->query('fields')));
-            else
-                $users = User::all($r->query('fields'));
-        }
-
-        if ($r->query('UID') != null){
-            $users = $users->where('UID', '=', $r->query('UID'));
-        }
-
-        if ($r->query('Username') != null){
-            $users = $users->where('Username', 'LIKE', $r->query('Username'));
-        }
-
-        if ($r->query('EmailAddress') != null){
-            $users = $users->where('EmailAddress', 'LIKE', $r->query('EmailAddress'));
-        }
-
-        if ($r->query('PwdHash') != null){
-            $users = $users->where('PwdHash', 'LIKE', $r->query('PwdHash'));
-        }
-
-        if ($r->query('PwdSalt') != null){
-            $users = $users->where('PwdSalt', 'LIKE', $r->query('PwdSalt'));
-        }
-
-        if ($r->query('LastLoginDate') != null){
-            $users = $users->where('LastLoginDate', 'LIKE', $r->query('LastLoginDate'));
-        }
-
-        $users = QueryController::useRestParamsEnd($r, $users);
+        return User::all();
 
 
         // HA TÖBB MINT EGY TALÁLAT: TÖMBÖT ADJON VISSZA
         // HA CSAK EGY TALÁLAT: A KAPOTT INDEX-ÉRTÉK PÁRBÓL CSAK AZ ÉRTÉKET ADJA VISSZA
         // Ez egy furcsa "feature" miatt szükséges, ahol a tömbök Laravelben
         // automatikusan kulcs-érték párként jönnek létre, ahol a kulcs az érték indexe.
-        $result = [];
-        foreach ($users as $key => $value) {
-            array_push($result, $value);
-        }
 
-        if (count($result) == 1) return $result[0];
-        else return $result;
-    }
+        // $result = [];
+        // foreach ($users as $key => $value) {
+        //     array_push($result, $value);
+        // }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        // if (count($result) == 1) return $result[0];
+        // else return $result;
     }
 
     /**
@@ -92,7 +51,7 @@ class UserController extends Controller
             'EmailAddress' => $request->input('EmailAddress'),
             'PwdHash' => hash('sha512', $request->input('PwdHash') . $PwdSalt . $randomChar),
             'PwdSalt' => $PwdSalt
-        ])->sendEmailVerificationNotification();
+        ]);
         return redirect('/');
     }
 
@@ -104,18 +63,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return User::find($id);
     }
 
     /**
@@ -125,9 +73,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserPatchRequest $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->update($request->all());
+        return $user;
     }
 
     /**
@@ -138,6 +88,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return `User no. $id destroyed.`;
     }
 }

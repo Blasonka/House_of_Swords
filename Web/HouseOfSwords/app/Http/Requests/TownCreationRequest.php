@@ -24,7 +24,7 @@ class TownCreationRequest extends FormRequest
     public function rules()
     {
         return [
-            'TownName' => 'string|required|min:5|max:20' //,
+            'TownName' => 'required|string|min:5|max:20' //,
             // 'HappinessValue' => 'integer',
             // 'Wood' => 'integer|min:0',
             // 'Stone' => 'integer|min:0',
@@ -35,4 +35,17 @@ class TownCreationRequest extends FormRequest
             // 'YCords' => 'integer'
         ];
     }
+
+    /**
+ * Get the error messages for the defined validation rules.
+ *
+ * @return array
+ */
+public function messages()
+{
+    return [
+        'TownName.required' => 'A title is required',
+        'TownName.string' => 'TownName must be a string'
+    ];
+}
 }

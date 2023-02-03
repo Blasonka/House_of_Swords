@@ -15,6 +15,7 @@ class Building extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'Towns_TownID',
         'BuildingType',
         'BuildingLvl',
         'Params'

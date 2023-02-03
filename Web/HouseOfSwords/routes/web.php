@@ -18,7 +18,7 @@ use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 |
 */
 
-Auth::routes(['verify' => true]);
+//Auth::routes(['verify' => true]);
 
 //mindig látszik
 Route::get('/', [PageController::class, 'index'])->name('index');
