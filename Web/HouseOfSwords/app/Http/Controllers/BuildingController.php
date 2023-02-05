@@ -2,21 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BuildingRequests\BuildingPatchRequest;
-use App\Http\Requests\BuildingRequests\BuildingCreationRequest;
+use App\Http\Requests\BuildingRequests\BuildingPatchRequest as PatchRequest;
+use App\Http\Requests\BuildingRequests\BuildingCreationRequest as CreationRequest;
 use App\Models\Building;
 use Illuminate\Http\Request;
 use Psy\Readline\Hoa\Console;
 
 class BuildingController extends Controller
 {
-    private $buildingFields = [
-        'Towns_TownID',
-        'BuildingType',
-        'BuildingLvl',
-        'Params'
-    ];
-
     /**
      * Display a listing of the resource.
      *
@@ -33,18 +26,9 @@ class BuildingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BuildingCreationRequest $request)
+    public function store(CreationRequest $request)
     {
-        $request->validated();
-
-        $building = new Building();
-
-        foreach ($this->buildingFields as $key => $value) {
-            $building->$value = $request->$value;
-        }
-
-        $building->save();
-        return $building;
+        return Building::create($request->all());
     }
 
     /**
@@ -55,7 +39,10 @@ class BuildingController extends Controller
      */
     public function show($id)
     {
-        return Building::find($id);
+        $building = Building::find($id);
+
+        if($building) { return $building; }
+        else { return response()->json('Error, bad id: '.$id, 404); }
     }
 
     /**
@@ -76,11 +63,9 @@ class BuildingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BuildingPatchRequest $request, $id)
+    public function update(PatchRequest $request, $id)
     {
-        $building = Building::find($id);
-        $building->update($request->all());
-        return $building;
+        return Building::find($id)->update($request->all());
     }
 
     /**
@@ -91,7 +76,12 @@ class BuildingController extends Controller
      */
     public function destroy($id)
     {
-        Building::destroy($id);
+        // Building::destroy($id);
+        // return `Building no. $id destroyed.`;
+
+
+        $building = Building::findOrFail($id);
+        $building->delete();
         return `Building no. $id destroyed.`;
     }
 }

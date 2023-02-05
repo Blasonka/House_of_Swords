@@ -19,7 +19,6 @@ class UserController extends Controller
     {
         return User::all();
 
-
         // HA TÖBB MINT EGY TALÁLAT: TÖMBÖT ADJON VISSZA
         // HA CSAK EGY TALÁLAT: A KAPOTT INDEX-ÉRTÉK PÁRBÓL CSAK AZ ÉRTÉKET ADJA VISSZA
         // Ez egy furcsa "feature" miatt szükséges, ahol a tömbök Laravelben
@@ -42,7 +41,6 @@ class UserController extends Controller
      */
     public function store(UserValidationRequest $request)
     {
-        $request->validated();
         $randomChar = chr(random_int(0, 25)+65);
         $PwdSalt = Str::random(20);
 
@@ -52,7 +50,7 @@ class UserController extends Controller
             'PwdHash' => hash('sha512', $request->input('PwdHash') . $PwdSalt . $randomChar),
             'PwdSalt' => $PwdSalt
         ]);
-        return redirect('/');
+        return('pog');
     }
 
     /**

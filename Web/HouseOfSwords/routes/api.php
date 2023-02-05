@@ -44,14 +44,14 @@ Route::get('/', function(){
 
 // towns table delete method by id
 //Route::delete('/towns/{Town_ID}', [TownController::class, 'destroy']);
-//Route::get('/towns/{Town_ID}/buildings', [BuildingController::class, 'showSpecial']);
 
 // friendlist table get method (all & with parameters)
-Route::get('/friendlist', [FriendlistController::class, 'index']);
+//Route::get('/friendlist', [FriendlistController::class, 'index']);
 
 
 // TOWNS
 Route::resource('towns', TownController::class);
+Route::get('/towns/{Town_ID}/buildings', [BuildingController::class, 'showSpecial']);
 
 
 // USERS
@@ -65,7 +65,7 @@ Route::resource('users', UserController::class);
 
 
 // BUILDINGS
-Route::resource('buildings', UserController::class);
+Route::resource('buildings', BuildingController::class);
 // Route::get('/buildings', [BuildingController::class, 'index']);
 // Route::post('/buildings', [BuildingController::class, 'store']);
 
