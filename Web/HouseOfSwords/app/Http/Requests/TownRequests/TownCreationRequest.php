@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Requests\UserRequests;
-
-use Illuminate\Http\Exceptions\HttpResponseException;
+namespace App\Http\Requests\TownRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-class UserCreationRequest extends FormRequest
+class TownCreationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,10 +26,15 @@ class UserCreationRequest extends FormRequest
     public function rules()
     {
         return [
-            'Username' => 'required|unique:users|min:6|max:20|alpha_dash',
-            'EmailAddress' => 'required|unique:users|email',
-            'PwdHash' => 'required|min:8|max:24|confirmed',
-            'PwdHash_confirmation' => 'required'
+            'TownName' => 'required|string|min:5|max:20' //,
+            // 'HappinessValue' => 'integer',
+            // 'Wood' => 'integer|min:0',
+            // 'Stone' => 'integer|min:0',
+            // 'Metal' => 'integer|min:0',
+            // 'Gold' => 'integer|min:0',
+            // 'CampaignLvl' => 'integer|min:0',
+            // 'XCords' => 'integer',
+            // 'YCords' => 'integer'
         ];
     }
 
@@ -43,7 +46,7 @@ class UserCreationRequest extends FormRequest
     public function messages()
     {
         return [
-            //'Username.required' => 'A username is required',
+            //'TownName.required' => 'A TownName is required',
         ];
     }
 

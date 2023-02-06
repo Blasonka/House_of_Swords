@@ -3,9 +3,7 @@
 namespace App\Http\Requests\UserRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
 use Illuminate\Http\Exceptions\HttpResponseException;
-
 use Illuminate\Contracts\Validation\Validator;
 
 class UserPatchRequest extends FormRequest

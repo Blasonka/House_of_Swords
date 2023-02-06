@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\TownRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 
-class TownCreationRequest extends FormRequest
+class TownPatchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +26,7 @@ class TownCreationRequest extends FormRequest
     public function rules()
     {
         return [
-            'TownName' => 'required|string|min:5|max:20' //,
+            'TownName' => 'string|min:5|max:20' //,
             // 'HappinessValue' => 'integer',
             // 'Wood' => 'integer|min:0',
             // 'Stone' => 'integer|min:0',
@@ -37,15 +39,19 @@ class TownCreationRequest extends FormRequest
     }
 
     /**
- * Get the error messages for the defined validation rules.
- *
- * @return array
- */
-public function messages()
-{
-    return [
-        'TownName.required' => 'A title is required',
-        'TownName.string' => 'TownName must be a string'
-    ];
-}
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            //'TownName.string' => 'TownName must be a string',
+        ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json($validator->errors(), 422));
+    }
 }

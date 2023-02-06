@@ -58,7 +58,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return User::find($id);
+        $user = User::find($id);
+
+        if($user) { return $user; }
+        else { return response()->json([ 'Error, bad id: '.$id ], 404); }
     }
 
     /**
