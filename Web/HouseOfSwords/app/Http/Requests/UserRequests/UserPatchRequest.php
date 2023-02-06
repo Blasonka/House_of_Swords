@@ -4,6 +4,10 @@ namespace App\Http\Requests\UserRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use Illuminate\Http\Exceptions\HttpResponseException;
+
+use Illuminate\Contracts\Validation\Validator;
+
 class UserPatchRequest extends FormRequest
 {
     /**
@@ -30,5 +34,22 @@ class UserPatchRequest extends FormRequest
             'PwdHash' => 'min:8|max:24',
             'LastLoginDate' => 'date'
         ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            //'Username.required' => 'A username is required',
+        ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json($validator->errors(), 422));
     }
 }

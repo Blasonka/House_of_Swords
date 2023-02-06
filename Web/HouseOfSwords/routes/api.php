@@ -18,9 +18,9 @@ use App\Http\Controllers\BuildingController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 //API működésének tesztje
 Route::get('/', function(){
@@ -33,45 +33,21 @@ Route::get('/', function(){
     ];
 });
 
-// users table get method (all & with parameters)
-//Route::get('/users', [UserController::class, 'index']);
-
-// towns table get method (all & with parameters)
-//Route::get('/towns', [TownController::class, 'index']);
-
-// towns table post method with parameters
-//Route::post('/towns/create/{Users_UID}', [TownController::class, 'store']);
-
-// towns table delete method by id
-//Route::delete('/towns/{Town_ID}', [TownController::class, 'destroy']);
 
 // friendlist table get method (all & with parameters)
 //Route::get('/friendlist', [FriendlistController::class, 'index']);
 
 
+// USERS
+Route::resource('users', UserController::class)->except([ 'create', 'edit']);
+
 // TOWNS
-Route::resource('towns', TownController::class);
+Route::resource('towns', TownController::class)->except([ 'create', 'edit']);
 Route::get('/towns/{Town_ID}/buildings', [BuildingController::class, 'showSpecial']);
 
 
-// USERS
-Route::resource('users', UserController::class);
-// Route::get('/users', [UserController::class, 'index']);
-// Route::post('/users', [UserController::class, 'store']);
-
-// Route::get('/users/{id}', [UserController::class, 'show']);
-// Route::patch('/users/{id}', [UserController::class, 'update']);
-// Route::delete('/users/{id}', [UserController::class, 'destroy']);
-
-
 // BUILDINGS
-Route::resource('buildings', BuildingController::class);
-// Route::get('/buildings', [BuildingController::class, 'index']);
-// Route::post('/buildings', [BuildingController::class, 'store']);
-
-// Route::get('/buildings/{id}', [BuildingController::class, 'show']);
-// Route::patch('/buildings/{id}', [BuildingController::class, 'update']);
-// Route::delete('/buildings/{id}', [BuildingController::class, 'destroy']);
+Route::resource('buildings', BuildingController::class)->except([ 'create', 'edit']);
 
 
 // any unknown methods

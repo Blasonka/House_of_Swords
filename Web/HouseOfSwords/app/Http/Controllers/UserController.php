@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequests\UserPatchRequest;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Http\Requests\UserValidationRequest;
 use Illuminate\Support\Str;
+use App\Models\User;
+use App\Http\Requests\UserRequests\UserCreationRequest as CreationRequest;
+use App\Http\Requests\UserRequests\UserPatchRequest as PatchRequest;
 
 class UserController extends Controller
 {
@@ -18,20 +18,18 @@ class UserController extends Controller
     public function index()
     {
         return User::all();
-
-        // HA TÖBB MINT EGY TALÁLAT: TÖMBÖT ADJON VISSZA
-        // HA CSAK EGY TALÁLAT: A KAPOTT INDEX-ÉRTÉK PÁRBÓL CSAK AZ ÉRTÉKET ADJA VISSZA
-        // Ez egy furcsa "feature" miatt szükséges, ahol a tömbök Laravelben
-        // automatikusan kulcs-érték párként jönnek létre, ahol a kulcs az érték indexe.
-
-        // $result = [];
-        // foreach ($users as $key => $value) {
-        //     array_push($result, $value);
-        // }
-
-        // if (count($result) == 1) return $result[0];
-        // else return $result;
     }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -39,18 +37,17 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserValidationRequest $request)
+    public function store(CreationRequest $request)
     {
         $randomChar = chr(random_int(0, 25)+65);
         $PwdSalt = Str::random(20);
 
-        User::create([
+        return User::create([
             'Username' => $request->input('Username'),
             'EmailAddress' => $request->input('EmailAddress'),
             'PwdHash' => hash('sha512', $request->input('PwdHash') . $PwdSalt . $randomChar),
             'PwdSalt' => $PwdSalt
         ]);
-        return('pog');
     }
 
     /**
@@ -65,13 +62,24 @@ class UserController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserPatchRequest $request, $id)
+    public function update(PatchRequest $request, $id)
     {
         $user = User::find($id);
         $user->update($request->all());
@@ -86,7 +94,14 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
-        return `User no. $id destroyed.`;
+        $user = User::find($id);
+
+        if($user) {
+            $user->delete();
+            return response()->json([ 'User has been deleted' ], 200);
+        }
+        else {
+            return response()->json([ 'Error, bad id: '.$id ], 404);
+        }
     }
 }

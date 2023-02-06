@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\UserRequests;
+
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserValidationRequest extends FormRequest
+use Illuminate\Contracts\Validation\Validator;
+
+class UserCreationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,5 +33,22 @@ class UserValidationRequest extends FormRequest
             'PwdHash' => 'required|min:8|max:24|confirmed',
             'PwdHash_confirmation' => 'required'
         ];
+    }
+
+        /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            //'Username.required' => 'A username is required',
+        ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json($validator->errors(), 422));
     }
 }
