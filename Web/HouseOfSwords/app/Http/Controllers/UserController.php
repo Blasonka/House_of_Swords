@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use App\Models\User;
 use App\Http\Requests\UserRequests\UserCreationRequest as CreationRequest;
 use App\Http\Requests\UserRequests\UserPatchRequest as PatchRequest;
+use Illuminate\Support\Str;
+use Exception;
 
 class UserController extends Controller
 {
@@ -21,17 +22,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -42,12 +32,17 @@ class UserController extends Controller
         $randomChar = chr(random_int(0, 25)+65);
         $PwdSalt = Str::random(20);
 
-        return User::create([
-            'Username' => $request->input('Username'),
-            'EmailAddress' => $request->input('EmailAddress'),
-            'PwdHash' => hash('sha512', $request->input('PwdHash') . $PwdSalt . $randomChar),
-            'PwdSalt' => $PwdSalt
-        ]);
+        try {
+            return User::create([
+                'Username' => $request->input('Username'),
+                'EmailAddress' => $request->input('EmailAddress'),
+                'PwdHash' => hash('sha512', $request->input('PwdHash') . $PwdSalt . $randomChar),
+                'PwdSalt' => $PwdSalt
+            ]);
+        }
+        catch(Exception $e) {
+            return response()->json(['message'=>'Database error'],400);
+        }
     }
 
     /**
@@ -58,21 +53,18 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-
-        if($user) { return $user; }
-        else { return response()->json([ 'Error, bad id: '.$id ], 404); }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        try {
+            $user = User::find($id);
+            if (!empty($user)) {
+                return response()->json($user);
+            }
+            else {
+                return response()->json(['message'=>'Item not found, id: '.$id],404);
+            }
+        }
+        catch (Exception $e) {
+            return response()->json(['message'=>'Database error'],400);
+        }
     }
 
     /**
@@ -84,9 +76,19 @@ class UserController extends Controller
      */
     public function update(PatchRequest $request, $id)
     {
-        $user = User::find($id);
-        $user->update($request->all());
-        return $user;
+        try {
+            if (User::find($id)->exists()) {
+                $user = User::find($id);
+                $user->update($request->all());
+                return response()->json(['message'=>'Item was updated, id: '.$id],200);
+            }
+            else {
+                return response()->json(['message'=>'Item not found, id: '.$id],404);
+            }
+        }
+        catch(Exception $e) {
+            return response()->json(['message'=>'Database error'],400);
+        }
     }
 
     /**
@@ -97,14 +99,17 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-
-        if($user) {
-            $user->delete();
-            return response()->json([ 'User has been deleted' ], 200);
+        try {
+            if (User::find($id)->exists()) {
+                User::find($id)->delete();
+                return response()->json(['message'=>'Item was deleted, id: '.$id],200);
+            }
+            else {
+                return response()->json(['message'=>'Item not found, id: '.$id],404);
+            }
         }
-        else {
-            return response()->json([ 'Error, bad id: '.$id ], 404);
+        catch(Exception $e) {
+            return response()->json(['message'=>'Database error.'],400);
         }
     }
 }

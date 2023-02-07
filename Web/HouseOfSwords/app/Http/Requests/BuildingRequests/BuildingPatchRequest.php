@@ -3,6 +3,8 @@
 namespace App\Http\Requests\BuildingRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 
 class BuildingPatchRequest extends FormRequest
 {
@@ -35,5 +37,22 @@ class BuildingPatchRequest extends FormRequest
             'BuildingLvl' => 'integer|min:1',
             'Params' => 'json'
         ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            //'TownName.required' => 'A TownName is required',
+        ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json($validator->errors(), 422));
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Models\Building;
 use App\Http\Requests\BuildingRequests\BuildingPatchRequest as PatchRequest;
 use App\Http\Requests\BuildingRequests\BuildingCreationRequest as CreationRequest;
-use App\Models\Building;
-use Illuminate\Http\Request;
-use Psy\Readline\Hoa\Console;
+use Exception;
 
 class BuildingController extends Controller
 {
@@ -28,7 +28,12 @@ class BuildingController extends Controller
      */
     public function store(CreationRequest $request)
     {
-        return Building::create($request->all());
+        try {
+            return Building::create($request->all());
+        }
+        catch(Exception $e) {
+            return response()->json(['message'=>'Database error'],400);
+        }
     }
 
     /**
@@ -39,10 +44,18 @@ class BuildingController extends Controller
      */
     public function show($id)
     {
-        $building = Building::find($id);
-
-        if($building) { return $building; }
-        else { return response()->json('Error, bad id: '.$id, 404); }
+        try {
+            $building = Building::find($id);
+            if (!empty($building)) {
+                return response()->json($building);
+            }
+            else {
+                return response()->json(['message'=>'Item not found, id: '.$id],404);
+            }
+        }
+        catch (Exception $e) {
+            return response()->json(['message'=>'Database error'],400);
+        }
     }
 
     /**
@@ -53,7 +66,12 @@ class BuildingController extends Controller
      */
     public function showSpecial($Town_ID)
     {
-        return Building::all()->where('Towns_TownID', '=', $Town_ID)->toArray();
+        try {
+            return Building::all()->where('Towns_TownID', '=', $Town_ID)->toArray();
+        }
+        catch (Exception $e) {
+            return response()->json(['message'=>'Database error.'],400);
+        }
     }
 
     /**
@@ -65,7 +83,19 @@ class BuildingController extends Controller
      */
     public function update(PatchRequest $request, $id)
     {
-        return Building::find($id)->update($request->all());
+        try {
+            if (Building::find($id)->exists()) {
+                $building = Building::find($id);
+                $building->update($request->all());
+                return response()->json(['message'=>'Item was updated, id: '.$id],200);
+            }
+            else {
+                return response()->json(['message'=>'Item not found, id: '.$id],404);
+            }
+        }
+        catch(Exception $e) {
+            return response()->json(['message'=>'Database error'],400);
+        }
     }
 
     /**
@@ -76,12 +106,17 @@ class BuildingController extends Controller
      */
     public function destroy($id)
     {
-        // Building::destroy($id);
-        // return `Building no. $id destroyed.`;
-
-
-        $building = Building::findOrFail($id);
-        $building->delete();
-        return `Building no. $id destroyed.`;
+        try {
+            if (Building::find($id)->exists()) {
+                Building::find($id)->delete();
+                return response()->json(['message'=>'Item was deleted, id: '.$id],200);
+            }
+            else {
+                return response()->json(['message'=>'Item not found, id: '.$id],404);
+            }
+        }
+        catch(Exception $e) {
+            return response()->json(['message'=>'Database error.'],400);
+        }
     }
 }

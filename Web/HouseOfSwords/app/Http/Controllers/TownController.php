@@ -7,6 +7,7 @@ use App\Models\Town;
 use App\Http\Requests\TownRequests\TownCreationRequest as CreationRequest;
 use App\Http\Requests\TownRequests\TownPatchRequest as PatchRequest;
 use App\Models\Building;
+use Exception;
 
 class TownController extends Controller
 {
@@ -21,16 +22,6 @@ class TownController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -38,14 +29,19 @@ class TownController extends Controller
      */
     public function store(CreationRequest $request)
     {
-        $town = Town::create([
-            'TownName' => $request->TownName,
-            'XCords' => random_int(-200, 200),
-            'YCords' => random_int(-200, 200),
-            'Users_UID' => $request->Users_UID
-        ]);
+        try {
+            $town = Town::create([
+                'TownName' => $request->TownName,
+                'XCords' => random_int(-200, 200),
+                'YCords' => random_int(-200, 200),
+                'Users_UID' => $request->Users_UID
+            ]);
 
-        return Town::find($town->TownID);
+            return Town::find($town->TownID);
+        }
+        catch(Exception $e) {
+            return response()->json(['message'=>'Database error'],400);
+        }
     }
 
     /**
@@ -56,21 +52,18 @@ class TownController extends Controller
      */
     public function show($id)
     {
-        $town = Town::find($id);
-
-        if($town) { return $town; }
-        else { return response()->json([ 'Error, bad id: '.$id ], 404); }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        try {
+            $town = Town::find($id);
+            if (!empty($town)) {
+                return response()->json($town);
+            }
+            else {
+                return response()->json(['message'=>'Item not found, id: '.$id],404);
+            }
+        }
+        catch (Exception $e) {
+            return response()->json(['message'=>'Database error'],400);
+        }
     }
 
     /**
@@ -82,9 +75,19 @@ class TownController extends Controller
      */
     public function update(PatchRequest $request, $id)
     {
-        $town = Town::find($id);
-        $town->update($request->all());
-        return $town;
+        try {
+            if (Town::find($id)->exists()) {
+                $town = Town::find($id);
+                $town->update($request->all());
+                return response()->json(['message'=>'Item was updated, id: '.$id],200);
+            }
+            else {
+                return response()->json(['message'=>'Item not found, id: '.$id],404);
+            }
+        }
+        catch(Exception $e) {
+            return response()->json(['message'=>'Database error'],400);
+        }
     }
 
     /**
@@ -95,15 +98,17 @@ class TownController extends Controller
      */
     public function destroy($id)
     {
-        $town = Town::find($id);
-
-        if($town) {
-            Building::where('Towns_TownID', $id)->delete();
-            $town->delete();
-            return response()->json([ 'Town and their buildings has been deleted' ], 200);
+        try {
+            if (Building::find($id)->exists()) {
+                Building::find($id)->delete();
+                return response()->json(['message'=>'Item was deleted, id: '.$id],200);
+            }
+            else {
+                return response()->json(['message'=>'Item not found, id: '.$id],404);
+            }
         }
-        else {
-            return response()->json([ 'Error, bad id: '.$id ], 404);
+        catch(Exception $e) {
+            return response()->json(['message'=>'Database error.'],400);
         }
     }
 }

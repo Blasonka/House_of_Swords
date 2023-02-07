@@ -34,23 +34,24 @@ Route::get('/', function(){
 });
 
 
-// friendlist table get method (all & with parameters)
-//Route::get('/friendlist', [FriendlistController::class, 'index']);
-
-
 // USERS
-Route::resource('users', UserController::class)->except([ 'create', 'edit']);
+Route::apiResource('user', UserController::class);
+
 
 // TOWNS
-Route::resource('towns', TownController::class)->except([ 'create', 'edit']);
-Route::get('/towns/{Town_ID}/buildings', [BuildingController::class, 'showSpecial']);
+Route::apiResource('town', TownController::class);
+Route::get('/town/{Town_ID}/building', [BuildingController::class, 'showSpecial']);
 
 
 // BUILDINGS
-Route::resource('buildings', BuildingController::class)->except([ 'create', 'edit']);
+Route::apiResource('building', BuildingController::class);
 
 
-// any unknown methods
+// FRIENDLIST
+Route::apiResource('friendlist', FriendlistController::class);
+
+
+// ANY UNKNOWN METHODS
 Route::any('{params}', function ($params) {
     return 'Error 404: Requested content does not exist → '.$params.'.';
 });

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Friendlist;
+use App\Http\Requests\FriendlistRequests\FriendlistCreationRequest as CreationRequest;
+use App\Http\Requests\FriendlistRequests\FriendlistPatchRequest as PatchRequest;
+use Exception;
 
 class FriendlistController extends Controller
 {
@@ -12,42 +15,9 @@ class FriendlistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $r)
+    public function index()
     {
-        $friends = Friendlist::all();
-
-        if ($r->query('fields') != null){
-            if (str_contains($r->query('fields'), ','))
-                $friends = Friendlist::all(explode(',', $r->query('fields')));
-            else
-                $friends = Friendlist::all($r->query('fields'));
-        }
-
-        if ($r->query('RelationID') != null){
-            $friends = $friends->where('RelationID', '=', $r->query('RelationID'));
-        }
-
-        if ($r->query('FriendID') != null){
-            $friends = $friends->where('FriendID', '=', $r->query('FriendID'));
-        }
-
-        if ($r->query('Users_UID') != null){
-            $friends = $friends->where('Users_UID', '=', $r->query('Users_UID'));
-        }
-
-        $friends = QueryController::useRestParamsEnd($r, $friends);
-
-        return $friends;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Friendlist::all();
     }
 
     /**
@@ -56,9 +26,14 @@ class FriendlistController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreationRequest $request)
     {
-        //
+        try {
+            return Friendlist::create($request->all());
+        }
+        catch(Exception $e) {
+            return response()->json(['message'=>'Database error'],400);
+        }
     }
 
     /**
@@ -69,18 +44,18 @@ class FriendlistController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        try {
+            $friend = Friendlist::find($id);
+            if (!empty($friend)) {
+                return response()->json($friend);
+            }
+            else {
+                return response()->json(['message'=>'Item not found, id: '.$id],404);
+            }
+        }
+        catch (Exception $e) {
+            return response()->json(['message'=>'Database error'],400);
+        }
     }
 
     /**
@@ -90,9 +65,21 @@ class FriendlistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PatchRequest $request, $id)
     {
-        //
+        try {
+            if (Friendlist::find($id)->exists()) {
+                $friend = Friendlist::find($id);
+                $friend->update($request->all());
+                return response()->json(['message'=>'Item was updated, id: '.$id],200);
+            }
+            else {
+                return response()->json(['message'=>'Item not found, id: '.$id],404);
+            }
+        }
+        catch(Exception $e) {
+            return response()->json(['message'=>'Database error'],400);
+        }
     }
 
     /**
@@ -103,6 +90,17 @@ class FriendlistController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            if (Friendlist::find($id)->exists()) {
+                Friendlist::find($id)->delete();
+                return response()->json(['message'=>'Item was deleted, id: '.$id],200);
+            }
+            else {
+                return response()->json(['message'=>'Item not found, id: '.$id],404);
+            }
+        }
+        catch(Exception $e) {
+            return response()->json(['message'=>'Database error.'],400);
+        }
     }
 }

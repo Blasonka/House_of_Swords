@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\BuildingRequests;
+namespace App\Http\Requests\FriendlistRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-class BuildingCreationRequest extends FormRequest
+class FriendlistCreationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,15 +25,8 @@ class BuildingCreationRequest extends FormRequest
      */
     public function rules()
     {
-        $this->merge([
-            'Params' => json_encode($this->Params)
-        ]);
-
         return [
-            'Towns_TownID' => 'integer|required|min:1',
-            'BuildingType' => 'alpha|required|in:Barracks,Warehouse,Research,Infirmary,Market,Diplomacy,Church',
-            'BuildingLvl' => 'integer|required|min:1',
-            'Params' => 'json|required'
+            //
         ];
     }
 
