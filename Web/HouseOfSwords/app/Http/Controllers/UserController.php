@@ -68,6 +68,22 @@ class UserController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showByName($username)
+    {
+        try {
+            return User::all()->where('Username', $username);
+        }
+        catch (Exception $e) {
+            return response()->json(['message'=>'Database error.'],400);
+        }
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

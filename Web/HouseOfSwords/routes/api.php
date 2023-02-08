@@ -36,6 +36,7 @@ Route::get('/', function(){
 
 // USERS
 Route::apiResource('users', UserController::class);
+Route::get('/users/username/{username}', [UserController::class, 'showByName']);
 
 
 // TOWNS

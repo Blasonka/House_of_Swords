@@ -74,8 +74,14 @@ class TownController extends Controller
      */
     public function showSpecial($UID)
     {
-        try { 
-            return response()->json(Town::all()->where('Users_UID', '=', $UID));
+        try {
+            $towns = [];
+
+            foreach (Town::all()->where('Users_UID', '=', $UID)->toArray() as $key => $value) {
+                array_push($towns, $value);
+            }
+
+            return response()->json($towns, 200);
         }
         catch (Exception $e) {
             return response()->json(['message'=>'Database error.'],400);
