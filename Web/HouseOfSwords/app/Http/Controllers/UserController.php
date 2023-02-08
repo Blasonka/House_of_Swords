@@ -76,7 +76,13 @@ class UserController extends Controller
     public function showByName($username)
     {
         try {
-            return User::all()->where('Username', $username);
+            $users = [];
+
+            foreach (User::all()->where('Username', 'LIKE', $username)->toArray() as $key => $value) {
+                array_push($users, $value);
+            }
+
+            return response()->json($users, 200);
         }
         catch (Exception $e) {
             return response()->json(['message'=>'Database error.'],400);
