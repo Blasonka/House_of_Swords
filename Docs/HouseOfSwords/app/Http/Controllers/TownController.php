@@ -67,22 +67,6 @@ class TownController extends Controller
     }
 
     /**
-     * Display the specified resource that belongs to the given Town.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function showSpecial($UID)
-    {
-        try {
-            return Town::all()->where('Users_UID', '=', $UID)->toArray();
-        }
-        catch (Exception $e) {
-            return response()->json(['message'=>'Database error.'],400);
-        }
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Town;
-use App\Http\Requests\TownRequests\TownCreationRequest as CreationRequest;
-use App\Http\Requests\TownRequests\TownPatchRequest as PatchRequest;
 use App\Models\Building;
+use App\Http\Requests\BuildingRequests\BuildingPatchRequest as PatchRequest;
+use App\Http\Requests\BuildingRequests\BuildingCreationRequest as CreationRequest;
 use Exception;
 
-class TownController extends Controller
+class BuildingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +17,7 @@ class TownController extends Controller
      */
     public function index()
     {
-        return Town::all();
+        return Building::all();
     }
 
     /**
@@ -30,14 +29,7 @@ class TownController extends Controller
     public function store(CreationRequest $request)
     {
         try {
-            $town = Town::create([
-                'TownName' => $request->TownName,
-                'XCords' => random_int(-200, 200),
-                'YCords' => random_int(-200, 200),
-                'Users_UID' => $request->Users_UID
-            ]);
-
-            return Town::find($town->TownID);
+            return Building::create($request->all());
         }
         catch(Exception $e) {
             return response()->json(['message'=>'Database error'],400);
@@ -53,9 +45,9 @@ class TownController extends Controller
     public function show($id)
     {
         try {
-            $town = Town::find($id);
-            if (!empty($town)) {
-                return response()->json($town);
+            $building = Building::find($id);
+            if (!empty($building)) {
+                return response()->json($building);
             }
             else {
                 return response()->json(['message'=>'Item not found, id: '.$id],404);
@@ -72,10 +64,10 @@ class TownController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showSpecial($UID)
+    public function showSpecial($Town_ID)
     {
         try {
-            return Town::all()->where('Users_UID', '=', $UID)->toArray();
+            return Building::all()->where('Towns_TownID', '=', $Town_ID)->toArray();
         }
         catch (Exception $e) {
             return response()->json(['message'=>'Database error.'],400);
@@ -92,9 +84,9 @@ class TownController extends Controller
     public function update(PatchRequest $request, $id)
     {
         try {
-            if (Town::find($id)->exists()) {
-                $town = Town::find($id);
-                $town->update($request->all());
+            if (Building::find($id)->exists()) {
+                $building = Building::find($id);
+                $building->update($request->all());
                 return response()->json(['message'=>'Item was updated, id: '.$id],200);
             }
             else {

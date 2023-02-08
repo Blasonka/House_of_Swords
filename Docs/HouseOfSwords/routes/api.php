@@ -35,21 +35,20 @@ Route::get('/', function(){
 
 
 // USERS
-Route::apiResource('users', UserController::class);
+Route::apiResource('user', UserController::class);
 
 
 // TOWNS
-Route::apiResource('towns', TownController::class);
-Route::get('/users/{UID}/towns', [TownController::class, 'showSpecial']);
+Route::apiResource('town', TownController::class);
+Route::get('/town/{Town_ID}/building', [BuildingController::class, 'showSpecial']);
 
 
 // BUILDINGS
-Route::apiResource('buildings', BuildingController::class);
-Route::get('/towns/{Town_ID}/buildings', [BuildingController::class, 'showSpecial']);
+Route::apiResource('building', BuildingController::class);
 
 
 // FRIENDLIST
-Route::apiResource('friendlists', FriendlistController::class);
+Route::apiResource('friendlist', FriendlistController::class);
 
 
 // ANY UNKNOWN METHODS

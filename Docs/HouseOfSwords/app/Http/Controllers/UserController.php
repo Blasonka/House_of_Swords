@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Town;
-use App\Http\Requests\TownRequests\TownCreationRequest as CreationRequest;
-use App\Http\Requests\TownRequests\TownPatchRequest as PatchRequest;
-use App\Models\Building;
+use App\Models\User;
+use App\Http\Requests\UserRequests\UserCreationRequest as CreationRequest;
+use App\Http\Requests\UserRequests\UserPatchRequest as PatchRequest;
+use Illuminate\Support\Str;
 use Exception;
 
-class TownController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class TownController extends Controller
      */
     public function index()
     {
-        return Town::all();
+        return User::all();
     }
 
     /**
@@ -29,15 +29,16 @@ class TownController extends Controller
      */
     public function store(CreationRequest $request)
     {
-        try {
-            $town = Town::create([
-                'TownName' => $request->TownName,
-                'XCords' => random_int(-200, 200),
-                'YCords' => random_int(-200, 200),
-                'Users_UID' => $request->Users_UID
-            ]);
+        $randomChar = chr(random_int(0, 25)+65);
+        $PwdSalt = Str::random(20);
 
-            return Town::find($town->TownID);
+        try {
+            return User::create([
+                'Username' => $request->input('Username'),
+                'EmailAddress' => $request->input('EmailAddress'),
+                'PwdHash' => hash('sha512', $request->input('PwdHash') . $PwdSalt . $randomChar),
+                'PwdSalt' => $PwdSalt
+            ]);
         }
         catch(Exception $e) {
             return response()->json(['message'=>'Database error'],400);
@@ -53,9 +54,9 @@ class TownController extends Controller
     public function show($id)
     {
         try {
-            $town = Town::find($id);
-            if (!empty($town)) {
-                return response()->json($town);
+            $user = User::find($id);
+            if (!empty($user)) {
+                return response()->json($user);
             }
             else {
                 return response()->json(['message'=>'Item not found, id: '.$id],404);
@@ -63,22 +64,6 @@ class TownController extends Controller
         }
         catch (Exception $e) {
             return response()->json(['message'=>'Database error'],400);
-        }
-    }
-
-    /**
-     * Display the specified resource that belongs to the given Town.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function showSpecial($UID)
-    {
-        try {
-            return Town::all()->where('Users_UID', '=', $UID)->toArray();
-        }
-        catch (Exception $e) {
-            return response()->json(['message'=>'Database error.'],400);
         }
     }
 
@@ -92,9 +77,9 @@ class TownController extends Controller
     public function update(PatchRequest $request, $id)
     {
         try {
-            if (Town::find($id)->exists()) {
-                $town = Town::find($id);
-                $town->update($request->all());
+            if (User::find($id)->exists()) {
+                $user = User::find($id);
+                $user->update($request->all());
                 return response()->json(['message'=>'Item was updated, id: '.$id],200);
             }
             else {
@@ -115,8 +100,8 @@ class TownController extends Controller
     public function destroy($id)
     {
         try {
-            if (Building::find($id)->exists()) {
-                Building::find($id)->delete();
+            if (User::find($id)->exists()) {
+                User::find($id)->delete();
                 return response()->json(['message'=>'Item was deleted, id: '.$id],200);
             }
             else {
