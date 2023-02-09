@@ -40,6 +40,7 @@ Route::group(['middleware' => ['guest']], function() {
 //nincs benne a groupba, mert még nem jó a login
 Route::get('/profil', [PageController::class, 'profil'])->name('user.profil');
 Route::group(['middleware' => ['auth']], function (){
+    Route::post('/logout',[PageController::class, 'logout'])->name('login.logout');
 
 });
 

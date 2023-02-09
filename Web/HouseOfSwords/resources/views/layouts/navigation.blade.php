@@ -37,7 +37,7 @@
 
                         @auth
                             <li class="nav-item align-self-center">
-                                <a class="nav-link" href="#">Ok</a>
+                                <a class="nav-link" href="/logout">Logout</a>
                             </li>
                         @endauth
                     </ul>

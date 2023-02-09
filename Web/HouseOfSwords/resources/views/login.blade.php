@@ -7,6 +7,7 @@
 
             <h2>Bejelentkezés</h2>
             <div class="form">
+                {{-- @csrf --}}
                 <input name="Usename" type="text" placeholder="Felhasználónév">
                 <input name="PwdHash" type="password" placeholder="Jelszó">
                 <button class="register-login-btn" type="submit">Belépés</button>
