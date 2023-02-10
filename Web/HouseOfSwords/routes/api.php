@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TownController;
 use App\Http\Controllers\FriendlistController;
 use App\Http\Controllers\BuildingController;
+use App\Http\Controllers\BuildingControllers\ChurchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +74,8 @@ Route::resource('buildings', UserController::class);
 // Route::patch('/buildings/{id}', [BuildingController::class, 'update']);
 // Route::delete('/buildings/{id}', [BuildingController::class, 'destroy']);
 
+// BUILDING STATS
+Route::apiResource('stats/church', ChurchController::class);
 
 // any unknown methods
 Route::any('{params}', function ($params) {
