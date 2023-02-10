@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class PageController extends Controller
 {
@@ -38,9 +39,10 @@ class PageController extends Controller
         $randomChar = [];
         for ($i = 0; $i <= 25; $i++) {
             array_push($randomChar, chr($i + 65));
+            array_push($randomChar, chr($i + 97));
         };
 
-        for ($i = 0; $i <= 25; $i++) {
+        for ($i = 0; $i <= 50; $i++) {
             $Password = hash('sha512', $request->PwdHash . $PwdSalt . $randomChar[$i]);
             $user = User::where('Username', $request->Username)->where('PwdHash', $Password)->first();
             if ($user) {
@@ -53,11 +55,11 @@ class PageController extends Controller
         }
     }
 
-    function logout(LoginRequest $request)
+    function logout()
     {
-        $request->session()->flush();
+        Session::flush();
         Auth::logout();
-        return redirect('index');
+        return redirect()->route('index');
     }
 
     function loginshow()

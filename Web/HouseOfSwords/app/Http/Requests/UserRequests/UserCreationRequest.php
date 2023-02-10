@@ -29,7 +29,8 @@ class UserCreationRequest extends FormRequest
             'Username' => 'required|unique:users|min:6|max:20|alpha_dash',
             'EmailAddress' => 'required|unique:users|email',
             'PwdHash' => 'required|min:8|max:24|confirmed',
-            'PwdHash_confirmation' => 'required'
+            'PwdHash_confirmation' => 'required',
+            'Role' => 'integer|min:0|max:2'
         ];
     }
 

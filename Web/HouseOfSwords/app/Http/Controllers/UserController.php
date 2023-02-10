@@ -37,7 +37,8 @@ class UserController extends Controller
                 'Username' => $request->input('Username'),
                 'EmailAddress' => $request->input('EmailAddress'),
                 'PwdHash' => hash('sha512', $request->input('PwdHash') . $PwdSalt . $randomChar),
-                'PwdSalt' => $PwdSalt
+                'PwdSalt' => $PwdSalt,
+                'Role' => 0
             ]);
         }
         catch(Exception $e) {

@@ -19,7 +19,8 @@ class User extends Authenticatable
         'Username',
         'EmailAddress',
         'PwdHash',
-        'PwdSalt'
+        'PwdSalt',
+        'Role'
     ];
 
     public function getAuthPassword() {

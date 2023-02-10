@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=MedievalSharp');
 body{
     overflow-x: hidden;
+    font-family: 'MedievalSharp';
 }
 
 *{
@@ -24,4 +26,16 @@ body{
     -o-filter: blur(3px) grayscale(100%);
     -ms-filter: blur(3px) grayscale(100%);
     filter: blur(3px) grayscale(100%);
+}
+
+.navbar_icons{
+    max-width: 1.5rem;
+}
+
+#navbar_logo{
+    max-width: 3rem;
+}
+
+#header_logo{
+    max-width: 10rem;
 }

@@ -6,7 +6,7 @@
     <meta name="keywords" content="house, House, of, Of, Swords, swords, hu, HU, strategia, stratégia, játék, jatek, online">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>House of Swords</title>
-
+    <link rel="icon" type="image/x-icon" href="/img/logo.png">
     @include('layouts.styles')
 </head>
 <body>

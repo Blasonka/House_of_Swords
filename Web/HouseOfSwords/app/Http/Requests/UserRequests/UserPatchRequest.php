@@ -30,6 +30,7 @@ class UserPatchRequest extends FormRequest
             'Username' => 'unique:users|min:6|max:20|alpha_dash',
             'EmailAddress' => 'unique:users|email',
             'PwdHash' => 'min:8|max:24',
+            'Role' => 'integer|min:0|max:2',
             'LastLoginDate' => 'date'
         ];
     }

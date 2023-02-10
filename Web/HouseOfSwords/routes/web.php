@@ -38,11 +38,17 @@ Route::group(['middleware' => ['guest']], function() {
 
 //védett oldalak (belépés után látszik csak)
 //nincs benne a groupba, mert még nem jó a login
-Route::get('/profil', [PageController::class, 'profil'])->name('user.profil');
+Route::get('/logout',[PageController::class, 'logout'])->name('logout');
 Route::group(['middleware' => ['auth']], function (){
-    Route::post('/logout',[PageController::class, 'logout'])->name('login.logout');
-
+    Route::get('/profil', [PageController::class, 'profil'])->name('user.profil');
 });
+
+
+//admin oldalak
+Route::group(['middleware' => ['auth', 'admin']], function (){
+    Route::get('/profil', [PageController::class, 'profil'])->name('user.profil');
+});
+
 
 //Emailek routingja (csak tesztnek van, később ki lesz szedve)
 Route::get('/send', [MailController::class, 'index']);
