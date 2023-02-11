@@ -46,10 +46,6 @@ Route::get('/users/{UID}/towns', [TownController::class, 'showSpecial']);
 
 
 // BUILDINGS
-
-Route::resource('buildings', BuildingController::class);
-
-
 Route::apiResource('buildings', BuildingController::class);
 Route::get('/towns/{Town_ID}/buildings', [BuildingController::class, 'showSpecial']);
 
