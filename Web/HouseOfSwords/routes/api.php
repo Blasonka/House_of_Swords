@@ -53,6 +53,20 @@ Route::get('/towns/{Town_ID}/buildings', [BuildingController::class, 'showSpecia
 Route::apiResource('friendlists', FriendlistController::class);
 
 
+// BUILDING STATS
+Route::apiResource('stats/church', ChurchController::class);
+
+
+// BUILDING ACTIONS
+Route::prefix('actions')->group(function () {
+    // CHURCH ACTIONS
+    Route::post('startMass', [ChurchController::class, 'startMass']);
+
+    // OTHER BUILDINGS' ACTIONS
+    // ...
+});
+
+
 // ANY UNKNOWN METHODS
 Route::any('{params}', function ($params) {
     return 'Error 404: Requested content does not exist → '.$params.'.';

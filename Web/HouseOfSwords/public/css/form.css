@@ -6,7 +6,6 @@ p{
 
 h2{
     height: 1.8em;
-    font-family: sans-serif;
     text-align: center;
     color: #A6876E;
     font-size: 22px;
@@ -16,7 +15,6 @@ h2{
     padding: 8px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-
 }
 
 .form{
@@ -28,6 +26,7 @@ h2{
     padding-top: 0px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    margin-top: 0rem;
 }
 
 .form input{
@@ -42,7 +41,6 @@ h2{
     font-size: 15px;
     letter-spacing: 1px;
     margin-top: 30px;
-    font-family: sans-serif;
 }
 
 .form input:focus{
@@ -50,7 +48,6 @@ h2{
 }
 
 .form .link{
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
     padding-top: 20px;
     text-align: center;
