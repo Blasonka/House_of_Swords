@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-12">
-        <nav class="navbar navbar-expand-lg bg-light navbar-dark bg-dark mb-5">
+        <nav class="navbar navbar-expand-lg bg-light navbar-dark bg-dark mb-5 rounded-bottom">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/"><img id="navbar_logo" src="/img/logo.png" alt=""></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
