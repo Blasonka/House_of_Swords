@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TownController;
 use App\Http\Controllers\FriendlistController;
 use App\Http\Controllers\BuildingController;
+use App\Http\Controllers\BuildingControllers\ChurchController;
 
 /*
 |--------------------------------------------------------------------------
