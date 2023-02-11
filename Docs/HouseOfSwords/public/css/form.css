@@ -1,0 +1,126 @@
+/* Regisztráció és belépés formázása */
+/* Regisztráció és belépés formázása */
+p{
+    color: #fff;
+}
+
+h2{
+    height: 1.8em;
+    font-family: sans-serif;
+    text-align: center;
+    color: #A6876E;
+    font-size: 22px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 0px;
+    padding: 8px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+}
+
+.form{
+    background: linear-gradient(to top, rgba(0,0,0,0.8)50%,rgba(0,0,0,0.8)50%);
+    align-self: center;
+    transform: translate(0%,-2%);
+    border-radius: 10px;
+    padding: 25px;
+    padding-top: 0px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.form input{
+    width: 100%;
+    height: 35px;
+    background: transparent;
+    border-bottom: 1px solid #A6876E;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    color: #fff;
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-top: 30px;
+    font-family: sans-serif;
+}
+
+.form input:focus{
+    outline: none;
+}
+
+.form .link{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    padding-top: 20px;
+    text-align: center;
+}
+.form .link a{
+    text-decoration: none;
+    color: #A6876E;
+}
+
+
+/*gomb*/
+
+.register-login-btn{
+    width: 100%;
+    height: 40px;
+    background: #A6876E;
+    border: none;
+    margin-top: 30px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #fff;
+    transition: 0.4s ease;
+}
+.register-login-btn:hover{
+    background: #fff;
+    color: #A6876E;
+}
+
+
+/*Log In With*/
+
+.liw{
+    padding-top: 15px;
+    text-align: center;
+}
+
+
+/*Icons*/
+.icons{
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.icons a{
+    text-decoration: none;
+    color: #fff;
+}
+.icons ion-icon{
+    color: #fff;
+    font-size: 28px;
+    padding-left: 14px;
+    padding-right: 14px;
+    transition: 0.3s ease;
+}
+.icons ion-icon:hover{
+    color: #A6876E;
+}
+
+
+/* profil szerkesztése */
+label{
+    color:#D7D7D3;
+}
+
+.img-account-profile{
+    max-width:100%;
+}
+
+.profil-picture{
+    display: flex;
+    align-items: center;
+}

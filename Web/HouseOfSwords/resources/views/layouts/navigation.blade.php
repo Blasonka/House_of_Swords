@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-12">
-        <nav class="navbar navbar-expand-lg bg-light navbar-dark bg-dark mb-5 opacity-75">
+        <nav class="navbar navbar-expand-lg bg-light navbar-dark bg-dark mb-5 rounded-bottom">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">House of Swords</a>
+                <a class="navbar-brand" href="/"><img id="navbar_logo" src="/img/logo.png" alt=""></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -16,7 +16,8 @@
                                 href="{{ route('index') }}">Főoldal</a>
                         </li>
                         <li class="nav-item align-self-center">
-                            <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="{{ route('about') }}">A
+                            <a class="nav-link {{ request()->is('about') ? 'active' : '' }}"
+                                href="{{ route('about') }}">A
                                 játékról</a>
                         </li>
                     </ul>
@@ -36,8 +37,18 @@
                         @endguest
 
                         @auth
+                            @if (isset(Auth::user()->Role) && Auth::user()->Role >= 1)
+                                <li class="nav-item align-self-center">
+                                    @csrf
+                                    <a class="nav-link" href="{{ route('index') }}">Admin page</a>
+                                </li>
+                            @endif
+
                             <li class="nav-item align-self-center">
-                                <a class="nav-link" href="#">Ok</a>
+                                @csrf
+                                <a class="nav-link" href="{{ route('logout') }}">
+                                    <img class="navbar_icons" src="/img/exit.png" alt="">
+                                </a>
                             </li>
                         @endauth
                     </ul>

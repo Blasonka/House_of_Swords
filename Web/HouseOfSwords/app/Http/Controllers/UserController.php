@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequests\UserPatchRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Http\Requests\UserValidationRequest;
+use App\Http\Requests\UserRequests\UserCreationRequest as CreationRequest;
+use App\Http\Requests\UserRequests\UserPatchRequest as PatchRequest;
 use Illuminate\Support\Str;
+use Exception;
 
 class UserController extends Controller
 {
@@ -18,20 +19,6 @@ class UserController extends Controller
     public function index()
     {
         return User::all();
-
-
-        // HA TÖBB MINT EGY TALÁLAT: TÖMBÖT ADJON VISSZA
-        // HA CSAK EGY TALÁLAT: A KAPOTT INDEX-ÉRTÉK PÁRBÓL CSAK AZ ÉRTÉKET ADJA VISSZA
-        // Ez egy furcsa "feature" miatt szükséges, ahol a tömbök Laravelben
-        // automatikusan kulcs-érték párként jönnek létre, ahol a kulcs az érték indexe.
-
-        // $result = [];
-        // foreach ($users as $key => $value) {
-        //     array_push($result, $value);
-        // }
-
-        // if (count($result) == 1) return $result[0];
-        // else return $result;
     }
 
     /**
@@ -40,19 +27,23 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserValidationRequest $request)
+    public function store(CreationRequest $request)
     {
-        $request->validated();
         $randomChar = chr(random_int(0, 25)+65);
         $PwdSalt = Str::random(20);
 
-        User::create([
-            'Username' => $request->input('Username'),
-            'EmailAddress' => $request->input('EmailAddress'),
-            'PwdHash' => hash('sha512', $request->input('PwdHash') . $PwdSalt . $randomChar),
-            'PwdSalt' => $PwdSalt
-        ]);
-        return redirect('/');
+        try {
+            return User::create([
+                'Username' => $request->input('Username'),
+                'EmailAddress' => $request->input('EmailAddress'),
+                'PwdHash' => hash('sha512', $request->input('PwdHash') . $PwdSalt . $randomChar),
+                'PwdSalt' => $PwdSalt,
+                'Role' => 0
+            ]);
+        }
+        catch(Exception $e) {
+            return response()->json(['message'=>'Database error'],400);
+        }
     }
 
     /**
@@ -63,7 +54,40 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return User::find($id);
+        try {
+            $user = User::find($id);
+            if (!empty($user)) {
+                return response()->json($user);
+            }
+            else {
+                return response()->json(['message'=>'Item not found, id: '.$id],404);
+            }
+        }
+        catch (Exception $e) {
+            return response()->json(['message'=>'Database error'],400);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showByName($username)
+    {
+        try {
+            $users = [];
+
+            foreach (User::all()->where('Username', 'LIKE', $username)->toArray() as $key => $value) {
+                array_push($users, $value);
+            }
+
+            return response()->json($users, 200);
+        }
+        catch (Exception $e) {
+            return response()->json(['message'=>'Database error.'],400);
+        }
     }
 
     /**
@@ -73,11 +97,21 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserPatchRequest $request, $id)
+    public function update(PatchRequest $request, $id)
     {
-        $user = User::find($id);
-        $user->update($request->all());
-        return $user;
+        try {
+            if (User::find($id)->exists()) {
+                $user = User::find($id);
+                $user->update($request->all());
+                return response()->json(['message'=>'Item was updated, id: '.$id],200);
+            }
+            else {
+                return response()->json(['message'=>'Item not found, id: '.$id],404);
+            }
+        }
+        catch(Exception $e) {
+            return response()->json(['message'=>'Database error'],400);
+        }
     }
 
     /**
@@ -88,7 +122,17 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
-        return `User no. $id destroyed.`;
+        try {
+            if (User::find($id)->exists()) {
+                User::find($id)->delete();
+                return response()->json(['message'=>'Item was deleted, id: '.$id],200);
+            }
+            else {
+                return response()->json(['message'=>'Item not found, id: '.$id],404);
+            }
+        }
+        catch(Exception $e) {
+            return response()->json(['message'=>'Database error.'],400);
+        }
     }
 }

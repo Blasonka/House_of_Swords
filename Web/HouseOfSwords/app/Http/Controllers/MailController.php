@@ -31,7 +31,7 @@ class MailController extends Controller
         }
         catch (Exception $th)
         {
-            return response()->json(['Sorry, something went wrong']);
+            return response()->json(['Sorry, something went wrong', $th]);
         }
     }
 }

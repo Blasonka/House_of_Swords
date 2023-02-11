@@ -6,9 +6,8 @@ p{
 
 h2{
     height: 1.8em;
-    font-family: sans-serif;
     text-align: center;
-    color: #A6876E;
+    color: #6C3B25;
     font-size: 22px;
     background-color: #fff;
     border-radius: 10px;
@@ -16,7 +15,6 @@ h2{
     padding: 8px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-
 }
 
 .form{
@@ -28,13 +26,14 @@ h2{
     padding-top: 0px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    margin-top: 0rem;
 }
 
 .form input{
     width: 100%;
     height: 35px;
     background: transparent;
-    border-bottom: 1px solid #A6876E;
+    border-bottom: 1px solid #6C3B25;
     border-top: none;
     border-right: none;
     border-left: none;
@@ -42,7 +41,6 @@ h2{
     font-size: 15px;
     letter-spacing: 1px;
     margin-top: 30px;
-    font-family: sans-serif;
 }
 
 .form input:focus{
@@ -50,14 +48,13 @@ h2{
 }
 
 .form .link{
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
     padding-top: 20px;
     text-align: center;
 }
 .form .link a{
     text-decoration: none;
-    color: #A6876E;
+    color: #6C3B25;
 }
 
 
@@ -66,7 +63,7 @@ h2{
 .register-login-btn{
     width: 100%;
     height: 40px;
-    background: #A6876E;
+    background: #6C3B25;
     border: none;
     margin-top: 30px;
     font-size: 18px;
@@ -77,7 +74,7 @@ h2{
 }
 .register-login-btn:hover{
     background: #fff;
-    color: #A6876E;
+    color: #6C3B25;
 }
 
 
@@ -107,7 +104,7 @@ h2{
     transition: 0.3s ease;
 }
 .icons ion-icon:hover{
-    color: #A6876E;
+    color: #6C3B25;
 }
 
 
