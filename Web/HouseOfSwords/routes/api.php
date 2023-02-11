@@ -66,7 +66,7 @@ Route::resource('users', UserController::class);
 
 
 // BUILDINGS
-Route::resource('buildings', UserController::class);
+Route::resource('buildings', BuildingController::class);
 // Route::get('/buildings', [BuildingController::class, 'index']);
 // Route::post('/buildings', [BuildingController::class, 'store']);
 
@@ -76,6 +76,15 @@ Route::resource('buildings', UserController::class);
 
 // BUILDING STATS
 Route::apiResource('stats/church', ChurchController::class);
+
+// BUILDING ACTIONS
+Route::prefix('actions')->group(function () {
+    // CHURCH ACTIONS
+    Route::post('startMass', [ChurchController::class, 'startMass']);
+
+    // OTHER BUILDINGS' ACTIONS
+    // ...
+});
 
 // any unknown methods
 Route::any('{params}', function ($params) {

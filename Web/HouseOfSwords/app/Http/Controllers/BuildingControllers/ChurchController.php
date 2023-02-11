@@ -4,7 +4,14 @@ namespace App\Http\Controllers\BuildingControllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Building;
 use App\Models\Buildings\Church;
+use App\Models\Town;
+use DateInterval;
+use DateTime;
+use Exception;
+
+use function PHPSTORM_META\type;
 
 class ChurchController extends Controller
 {
@@ -62,5 +69,47 @@ class ChurchController extends Controller
     {
         Church::destroy($id);
         return response()->json([ 'success' => true ], 200);
+    }
+
+    // EGY ISTENTISZTELET INDÍTÁSA
+    public function startMass(Request $request)
+    {
+        try {
+            $church = Building::find($request->BuildingID);
+
+            if ($church->BuildingType != 'Church'){
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The requested building is not of type Church.'
+                ], 400);
+            }
+
+            $churchStats = Church::find($church->BuildingLvl);
+            $params = json_decode($church->Params);
+
+            // CHECK IF ENOUGH TIME HAS PASSED SINCE LAST MASS
+            // $massLengthUnix = $churchStats->MassLength;
+            // $currentDateUnix = date_create()->format('Y-m-d H:i:s');
+            // $lastMassDateUnix = $params->lastMassDate;
+
+            // return response()->json($lastMassDateUnix);
+
+            $params->lastMassDate = date('Y-m-d H:i:s');
+            $church->Params = json_encode($params);
+            $church->save();
+
+            $town = Town::find($church->Towns_TownID);
+            $town->HappinessValue += $churchStats->HappinessBoost;
+            $town->save();
+
+            return response()->json($church, 200);
+        }
+        catch (Exception $err) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An unknown server error has occured.',
+                'details' => $err->getMessage()
+            ], 500);
+        }
     }
 }
