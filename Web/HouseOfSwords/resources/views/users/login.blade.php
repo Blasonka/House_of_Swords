@@ -20,7 +20,7 @@
                     <p class="link">Nincs fiókod?<br>
                         <a href="/register">Regisztrálj</a> itt</a>
                     </p>
-                    <p class="liw">Lépj be ezzeeeel:</p>
+                    <p class="liw">Lépj be ezzel:</p>
 
                     <div class="icons text-center">
                         <a href="#">
