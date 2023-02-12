@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Models\Town;
 
 class TownResourcesUpdate extends Command
 {
@@ -27,9 +28,15 @@ class TownResourcesUpdate extends Command
      */
     public function handle()
     {
-        $towns = DB::table('towns');
+        $towns = Town::all();
 
-
+        foreach ($towns as $key => $value) {
+            $value->Wood += 1;
+            $value->Stone += 1;
+            $value->Metal += 1;
+            $value->Gold += 1;
+            $value->save();
+        }
 
         return Command::SUCCESS;
     }
