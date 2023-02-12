@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-12 col-md-5 col-lg-4 mx-auto">
+        <div class="col-12 col-md-5 col-lg-4 mx-auto mt-3">
             <form action="/register" method="post">
                 @csrf
                 <h2>Regisztráció</h2>
