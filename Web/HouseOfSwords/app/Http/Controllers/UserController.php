@@ -8,6 +8,7 @@ use App\Http\Requests\UserRequests\UserCreationRequest as CreationRequest;
 use App\Http\Requests\UserRequests\UserPatchRequest as PatchRequest;
 use Illuminate\Support\Str;
 use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -33,13 +34,18 @@ class UserController extends Controller
         $PwdSalt = Str::random(20);
 
         try {
-            return User::create([
+            $user =  User::create([
                 'Username' => $request->input('Username'),
                 'EmailAddress' => $request->input('EmailAddress'),
+                'email_verification_token' => Str::random(32),
                 'PwdHash' => hash('sha512', $request->input('PwdHash') . $PwdSalt . $randomChar),
                 'PwdSalt' => $PwdSalt,
                 'Role' => 0
             ]);
+
+            Mail::to($user->EmailAddress)->send(new VerificationEmail($user));
+            session()->flash('message', 'Please check your email to activate your account');
+            return redirect()->back();
         }
         catch(Exception $e) {
             return response()->json(['message'=>'Database error'],400);
