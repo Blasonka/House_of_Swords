@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserRequests\UserCreationRequest as CreationRequest;
 use App\Http\Requests\UserRequests\UserPatchRequest as PatchRequest;
+use App\Mail\VerificationEmail;
 use Illuminate\Support\Str;
 use Exception;
 use Illuminate\Support\Facades\Mail;
@@ -30,25 +31,23 @@ class UserController extends Controller
      */
     public function store(CreationRequest $request)
     {
-        $randomChar = chr(random_int(0, 25)+65);
+        $randomChar = chr(random_int(0, 25) + 65);
         $PwdSalt = Str::random(20);
 
         try {
             $user =  User::create([
                 'Username' => $request->input('Username'),
                 'EmailAddress' => $request->input('EmailAddress'),
-                'email_verification_token' => Str::random(32),
+                'EmailVerificationToken' => Str::random(32),
                 'PwdHash' => hash('sha512', $request->input('PwdHash') . $PwdSalt . $randomChar),
                 'PwdSalt' => $PwdSalt,
                 'Role' => 0
             ]);
 
             Mail::to($user->EmailAddress)->send(new VerificationEmail($user));
-            session()->flash('message', 'Please check your email to activate your account');
             return redirect()->back();
-        }
-        catch(Exception $e) {
-            return response()->json(['message'=>'Database error'],400);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'Database error'], 400);
         }
     }
 
@@ -64,13 +63,11 @@ class UserController extends Controller
             $user = User::find($id);
             if (!empty($user)) {
                 return response()->json($user);
+            } else {
+                return response()->json(['message' => 'Item not found, id: ' . $id], 404);
             }
-            else {
-                return response()->json(['message'=>'Item not found, id: '.$id],404);
-            }
-        }
-        catch (Exception $e) {
-            return response()->json(['message'=>'Database error'],400);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'Database error'], 400);
         }
     }
 
@@ -90,9 +87,8 @@ class UserController extends Controller
             }
 
             return response()->json($users, 200);
-        }
-        catch (Exception $e) {
-            return response()->json(['message'=>'Database error.'],400);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'Database error.'], 400);
         }
     }
 
@@ -109,14 +105,12 @@ class UserController extends Controller
             if (User::find($id)->exists()) {
                 $user = User::find($id);
                 $user->update($request->all());
-                return response()->json(['message'=>'Item was updated, id: '.$id],200);
+                return response()->json(['message' => 'Item was updated, id: ' . $id], 200);
+            } else {
+                return response()->json(['message' => 'Item not found, id: ' . $id], 404);
             }
-            else {
-                return response()->json(['message'=>'Item not found, id: '.$id],404);
-            }
-        }
-        catch(Exception $e) {
-            return response()->json(['message'=>'Database error'],400);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'Database error'], 400);
         }
     }
 
@@ -131,14 +125,12 @@ class UserController extends Controller
         try {
             if (User::find($id)->exists()) {
                 User::find($id)->delete();
-                return response()->json(['message'=>'Item was deleted, id: '.$id],200);
+                return response()->json(['message' => 'Item was deleted, id: ' . $id], 200);
+            } else {
+                return response()->json(['message' => 'Item not found, id: ' . $id], 404);
             }
-            else {
-                return response()->json(['message'=>'Item not found, id: '.$id],404);
-            }
-        }
-        catch(Exception $e) {
-            return response()->json(['message'=>'Database error.'],400);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'Database error.'], 400);
         }
     }
 }

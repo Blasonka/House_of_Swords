@@ -18,6 +18,7 @@ use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 |
 */
 
+
 //Auth::routes(['verify' => true]);
 
 //mindig látszik
@@ -53,6 +54,7 @@ Route::group(['middleware' => ['auth', 'admin']], function (){
 //Emailek routingja (csak tesztnek van, később ki lesz szedve)
 Route::get('/send', [MailController::class, 'index']);
 Route::post('/send', [MailController::class, 'mail']);
+Route::get('/verify/{token}', [MailController::class, 'emailVerification'])->name('emailVerification');
 
 //védett oldalak (user jogtól függ) - (admin oldalak)
 //

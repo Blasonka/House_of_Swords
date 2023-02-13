@@ -8,19 +8,21 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
 
 class VerificationEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $user;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -31,6 +33,7 @@ class VerificationEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
+            // from: new Addres('blasekb@houseofswords.hu', 'House of Swords'),
             subject: 'Verification Email',
         );
     }
@@ -43,7 +46,8 @@ class VerificationEmail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'mail.verify',
+            with: [ 'user' => $this->user ],
         );
     }
 
