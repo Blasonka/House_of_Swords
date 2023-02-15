@@ -7,6 +7,7 @@ use App\Http\Controllers\TownController;
 use App\Http\Controllers\FriendlistController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\BuildingControllers\ChurchController;
+use App\Http\Controllers\BuildingControllers\InfirmaryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,12 +53,13 @@ Route::get('/towns/{Town_ID}/buildings', [BuildingController::class, 'showSpecia
 
 // BUILDING STATS
 Route::apiResource('stats/church', ChurchController::class);
+Route::apiResource('stats/infirmary', InfirmaryController::class);
 
 // BUILDING ACTIONS
 Route::prefix('actions')->group(function () {
     // CHURCH ACTIONS
     Route::post('startMass', [ChurchController::class, 'startMass']);
-
+    Route::post('startCure', [InfirmaryController::class, 'StartCure']);
     // OTHER BUILDINGS' ACTIONS
     // ...
 });
