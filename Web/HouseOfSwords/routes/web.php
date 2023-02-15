@@ -42,7 +42,6 @@ Route::group(['middleware' => ['auth']], function (){
 
 // Csak bejelentkezve látszanak (sima user joggal)
 Route::group(['middleware' => ['auth', 'verified.email']], function (){
-    Route::get('/', [PageController::class, 'index'])->name('index');
     Route::get('/logout',[PageController::class, 'logout'])->name('logout');
     Route::get('/profil', [PageController::class, 'profil'])->name('user.profil');
 });
