@@ -9,11 +9,12 @@
                 @csrf
                 <div class="form">
                     <input name="Username" type="text" placeholder="Felhasználónév">
+                    @if ($errors->has('Username'))
+                        <span class="text-danger text-left">{{ $errors->first('Username') }}</span>
+                    @endif
                     <input name="PwdHash" type="password" placeholder="Jelszó" class="mb-3">
-                    @if ($errors->any())
-                        @foreach ($errors->all() as $error)
-                            <span class="text-danger text-left">{{ $error }}</span>
-                        @endforeach
+                    @if ($errors->has('PwdHash'))
+                        <span class="text-danger text-left">{{ $errors->first('PwdHash') }}</span>
                     @endif
                     <button class="register-login-btn" type="submit">Belépés</button>
 
@@ -47,9 +48,4 @@
         </div>
     </div>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-
-
-
-
-
 @endsection

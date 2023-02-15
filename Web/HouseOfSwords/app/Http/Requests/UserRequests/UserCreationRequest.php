@@ -42,12 +42,12 @@ class UserCreationRequest extends FormRequest
     public function messages()
     {
         return [
-            //'Username.required' => 'A username is required',
+            // 'Username.required' => 'A felhasználónév mező kitöltése kötelező',
         ];
     }
 
-    public function failedValidation(Validator $validator)
+    /*public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json($validator->errors(), 422));
-    }
+    }*/
 }
