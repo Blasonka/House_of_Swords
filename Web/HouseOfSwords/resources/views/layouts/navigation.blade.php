@@ -4,8 +4,8 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="/"><img id="navbar_logo" src="/img/logo.png" alt=""></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -19,6 +19,10 @@
                             <a class="nav-link {{ request()->is('about') ? 'active' : '' }}"
                                 href="{{ route('about') }}">A
                                 játékról</a>
+                        </li>
+                        <li class="nav-item align-self-center">
+                            <a class="nav-link {{ request()->is('download') ? 'active' : '' }}"
+                                href="{{ route('download') }}">Letöltés</a>
                         </li>
                     </ul>
 
@@ -37,10 +41,17 @@
                         @endguest
 
                         @auth
+                            @if (isset(Auth::user()->Role) && Auth::user()->Role >= 2)
+                                <li class="nav-item align-self-center">
+                                    @csrf
+                                    <a class="nav-link" href="{{ route('owner') }}">Owner page</a>
+                                </li>
+                            @endif
+
                             @if (isset(Auth::user()->Role) && Auth::user()->Role >= 1)
                                 <li class="nav-item align-self-center">
                                     @csrf
-                                    <a class="nav-link" href="{{ route('index') }}">Admin page</a>
+                                    <a class="nav-link" href="{{ route('admin') }}">Admin page</a>
                                 </li>
                             @endif
 

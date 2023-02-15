@@ -23,6 +23,11 @@ class PageController extends Controller
         return view('about');
     }
 
+    function download()
+    {
+        return view('download');
+    }
+
     function register()
     {
         return view('users.register');
@@ -33,9 +38,24 @@ class PageController extends Controller
         return view('users.profil');
     }
 
+    function verify()
+    {
+        return view('users.verify');
+    }
+
+    function admin()
+    {
+        return view('admin.index');
+    }
+
+    function owner()
+    {
+        return view('owner.index');
+    }
+
     function login(LoginRequest $request)
     {
-        $PwdSalt =  DB::table('users')->where('Username', $request->Username)->value('PwdSalt');
+        $PwdSalt =  User::where('Username', $request->Username)->value('PwdSalt');
         $randomChar = [];
         for ($i = 0; $i <= 25; $i++) {
             array_push($randomChar, chr($i + 65));

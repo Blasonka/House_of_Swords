@@ -57,6 +57,14 @@ body{
     color: #2487ce;
 }
 
+.card:hover .card-title-green{
+    color: #99cc00;
+}
+
+.card:hover .card-text-green{
+    color: #99cc00;
+}
+
 .card{
     padding: 50px 30px;
     position: relative;

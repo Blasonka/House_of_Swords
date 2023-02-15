@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Owner
+class IsVerifyEmail
 {
     /**
      * Handle an incoming request.
@@ -17,12 +17,11 @@ class Owner
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check()) {
-            return redirect()->route('login.show');
+        if (Auth::user()->IsEmailVerified == 0) {
+            auth()->logout();
+            return redirect()->route('verify');
         }
-        if (auth()->user()->Role >= 2) {
-            return $next($request);
-        }
-        return redirect()->route('index')->withErrors(['error' => 'Nincs hozzáférése az oldalhoz :(']);
+
+        return $next($request);
     }
 }
