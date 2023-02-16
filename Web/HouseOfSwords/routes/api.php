@@ -60,6 +60,7 @@ Route::prefix('actions')->group(function () {
     // CHURCH ACTIONS
     Route::post('startMass', [ChurchController::class, 'startMass']);
     Route::post('startCure', [InfirmaryController::class, 'StartCure']);
+    Route::post('finishCure', [InfirmaryController::class, 'FinishCure']);
     // OTHER BUILDINGS' ACTIONS
     // ...
 });
