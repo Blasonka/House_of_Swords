@@ -53,7 +53,7 @@ class MailController extends Controller
         ];
         try {
             Bugreport::create(["Text" => $request->Text]);
-            Mail::to('blasek.balazs@gmail.com')->send(new BugReportEmail($data));
+            Mail::to('blasekb@houseofswords.hu')->send(new BugReportEmail($data));
             return redirect('/bugreport')->with('status', 'Jelentés sikeresen elküldve!');
         } catch (Exception $err) {
             return redirect('/bugreport')->with('status', $err->getMessage());
