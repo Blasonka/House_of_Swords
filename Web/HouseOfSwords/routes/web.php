@@ -48,13 +48,13 @@ Route::group(['middleware' => ['auth', 'verified.email']], function (){
 
 
 // Csak bejelentkezve látszanak (admin joggal)
-Route::group(['middleware' => ['auth', 'admin']], function (){
+Route::group(['middleware' => ['auth', 'verified.email', 'admin']], function (){
     Route::get('/admin', [PageController::class, 'admin'])->name('admin');
 });
 
 
 // Csak bejelentkezve látszanak (owner joggal)
-Route::group(['middleware' => ['auth', 'owner']], function (){
+Route::group(['middleware' => ['auth', 'verified.email', 'owner']], function (){
     Route::get('/owner', [PageController::class, 'owner'])->name('owner');
 });
 

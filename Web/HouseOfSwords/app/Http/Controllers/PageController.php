@@ -67,7 +67,7 @@ class PageController extends Controller
             $user = User::where('Username', $request->Username)->where('PwdHash', $Password)->first();
             if ($user) {
                 Auth::login($user);
-                return redirect()->route('index');
+                return redirect()->route('user.profil');
             };
         };
         if (!$user){
@@ -75,10 +75,12 @@ class PageController extends Controller
         }
     }
 
-    function logout()
+    function logout(Request $request)
     {
-        Session::flush();
         Auth::logout();
+        error_log('logged out');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect()->route('index');
     }
 

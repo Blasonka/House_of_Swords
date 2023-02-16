@@ -17,11 +17,13 @@ class IsVerifyEmail
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->IsEmailVerified == 0) {
-            auth()->logout();
-            return redirect()->route('verify');
-        }
+        if (Auth::check()) {
+            if (Auth::user()->IsEmailVerified == 0) {
+                auth()->logout();
+                return redirect()->route('verify');
+            }
 
-        return $next($request);
+            return $next($request);
+        }
     }
 }
