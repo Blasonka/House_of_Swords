@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
 
-class MailNotify extends Mailable
+class BugReportEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -34,7 +34,7 @@ class MailNotify extends Mailable
     {
         return new Envelope(
             from: new Address('blasekb@houseofswords.hu', 'House of Swords'),
-            subject: 'Test email',
+            subject: 'Bug Report Email',
         );
     }
 
@@ -46,7 +46,7 @@ class MailNotify extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mail.mail',
+            view: 'mail.report',
             with: [ 'data' => $this->data ],
         );
     }

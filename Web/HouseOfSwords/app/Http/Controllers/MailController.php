@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MailRequests\BugReportRequest;
 use App\Http\Requests\MailRequests\MailRequest;
+use App\Mail\BugReportEmail;
 use Illuminate\Http\Request;
 use App\Mail\MailNotify;
+use App\Models\Bugreport;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Mail;
@@ -47,18 +49,19 @@ class MailController extends Controller
     function bugReportMail(BugReportRequest $request)
     {
         $data = [
-            'header' => 'Bug Report',
             'body' => $request->Text
         ];
         try {
-            Mail::to('blasek.balazs@gmail.com')->send(new MailNotify($data));
-            return response()->json(['Great, check your mailbox']);
+            Bugreport::create(["Text" => $request->Text]);
+            Mail::to('blasek.balazs@gmail.com')->send(new BugReportEmail($data));
+            return redirect('/bugreport')->with('status', 'Jelentés sikeresen elküldve!');
         } catch (Exception $err) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Sorry, something went wrong',
-                'details' => $err->getMessage()
-            ]);
+            return redirect('/bugreport')->with('status', $err->getMessage());
+            // return response()->json([
+            //     'success' => false,
+            //     'message' => 'Sorry, something went wrong',
+            //     'details' => $err->getMessage()
+            // ]);
         }
     }
 }

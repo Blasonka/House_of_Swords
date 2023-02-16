@@ -6,6 +6,7 @@ use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\Bugreport;
 use App\Models\User;
 
 class PageController extends Controller
@@ -47,7 +48,8 @@ class PageController extends Controller
 
     function admin()
     {
-        return view('admin.index');
+        $bugs = Bugreport::all();
+        return view('admin.index', ['bugs' => $bugs]);
     }
 
     function owner()

@@ -8,4 +8,18 @@
     </div>
 </div>
 
+<div class="container">
+    <div class="row">
+        @foreach ($bugs as $bug)
+        <div class="card my-3 mx-3" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Bug:{{$bug->Id}}</h5>
+              <p class="card-text">{{$bug->Text}}</p>
+              <a href="" class="btn btn-primary disabled">Probléma megoldva</a>
+            </div>
+          </div>
+        @endforeach
+    </div>
+</div>
+
 @endsection
