@@ -24,6 +24,10 @@
                             <a class="nav-link {{ request()->is('download') ? 'active' : '' }}"
                                 href="{{ route('download') }}">Letöltés</a>
                         </li>
+                        <li class="nav-item align-self-center">
+                            <a class="nav-link {{ request()->is('bugReport') ? 'active' : '' }}"
+                                href="{{ route('bugReport') }}">Hiba jelentése</a>
+                        </li>
                     </ul>
 
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">

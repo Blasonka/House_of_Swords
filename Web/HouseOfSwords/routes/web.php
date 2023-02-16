@@ -25,6 +25,7 @@ Route::get('/', [PageController::class, 'index'])->name('index');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/download', [PageController::class, 'download'])->name('download');
 Route::get('/verify',[PageController::class, 'verify'])->name('verify');
+Route::get('/bugreport',[PageController::class, 'bugReport'])->name('bugReport');
 
 
 // Bejelentkezés nélkül igen, de bejelentkezve nem látszik
@@ -63,6 +64,7 @@ Route::group(['middleware' => ['auth', 'verified.email', 'owner']], function (){
 Route::get('/send', [MailController::class, 'index']);
 Route::post('/send', [MailController::class, 'mail']);
 Route::get('/verify/{token}', [MailController::class, 'emailVerification'])->name('emailVerification');
+Route::post('/bugreport',[MailController::class, 'bugReportMail'])->name('bugReportMail');
 
 
 // 404 hiba kezelés

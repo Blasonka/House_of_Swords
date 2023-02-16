@@ -5,11 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Support\Facades\Session;
 
 class PageController extends Controller
 {
@@ -26,6 +23,11 @@ class PageController extends Controller
     function download()
     {
         return view('download');
+    }
+
+    function bugReport()
+    {
+        return view('report');
     }
 
     function register()
