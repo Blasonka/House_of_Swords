@@ -67,7 +67,7 @@ class BuildingController extends Controller
     public function showSpecial($Town_ID)
     {
         try {
-            return Building::all()->where('Towns_TownID', '=', $Town_ID)->toArray();
+            return Building::all()->where('Towns_TownID', '=', $Town_ID)->values();
         }
         catch (Exception $e) {
             return response()->json(['message'=>'Database error.'],400);
