@@ -95,8 +95,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS'),
-        'name' => env('MAIL_FROM_NAME'),
+        'address' => 'no-reply@houseofswords.hu',
+        'name' => 'House of Swords'
     ],
 
     /*
