@@ -17,7 +17,15 @@ class ResearchController extends Controller
      */
     public function index()
     {
-        return Research::all();
+        try {
+            return Research::all();
+        } catch (Exception $err) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An unknown error has occured.',
+                'details' => $err->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -49,7 +57,52 @@ class ResearchController extends Controller
      */
     public function show($id)
     {
-        return Research::find($id);
+        try {
+            $stat = Research::find($id);
+
+            if ($stat == null) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The requested stat does not exist.'
+                ], 400);
+            }
+
+            return response()->json($stat, 200);
+        } catch (Exception $err) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An unknown error has occured.',
+                'details' => $err->getMessage()
+            ], 500);
+        }
+    }
+
+    public function showUntilLevel($lvl){
+        try {
+            $stats = Research::all()->where('Lvl', '<=', $lvl);
+
+            if ($stats == null) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The requested stats do not exist.'
+                ], 400);
+            }
+
+            if (sizeof($stats) < $lvl || sizeof($stats) < 1) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The requested stats do not all exist.'
+                ], 400);
+            }
+
+            return response()->json($stats, 200);
+        } catch (Exception $err) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An unknown error has occured.',
+                'details' => $err->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -60,7 +113,10 @@ class ResearchController extends Controller
      */
     public function edit($id)
     {
-        //
+        return response()->json([
+            'success' => false,
+            'message' => 'You are not permitted to invoke this action.'
+        ], 401);
     }
 
     /**
@@ -72,7 +128,10 @@ class ResearchController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return response()->json([
+            'success' => false,
+            'message' => 'You are not permitted to invoke this action.'
+        ], 401);
     }
 
     /**
@@ -83,12 +142,23 @@ class ResearchController extends Controller
      */
     public function destroy($id)
     {
-        return Research::destroy($id);
+        return response()->json([
+            'success' => false,
+            'message' => 'You are not permitted to invoke this action.'
+        ], 401);
     }
 
     public function collectScience(Request $request){
         try {
             $building = Building::find($request->BuildingID);
+
+            if ($building == null)
+            {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The requested building does not exist.'
+                ], 400);
+            }
 
             if ($building->BuildingType != 'Research')
             {
@@ -110,7 +180,7 @@ class ResearchController extends Controller
         } catch (Exception $err) {
             return response()->json([
                 'success' => false,
-                'message' => 'An unknown server error occured.',
+                'message' => 'An unknown error has occured.',
                 'details' => $err->getMessage()
             ], 400);
         }
