@@ -59,7 +59,7 @@ class UnitController extends Controller
                 ], 400);
             }
 
-            return response()->json(Unit::all(), 200);
+            return response()->json($unit, 200);
         }
         catch (Exception $err) {
             return response()->json([
