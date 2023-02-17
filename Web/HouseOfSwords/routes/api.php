@@ -8,6 +8,7 @@ use App\Http\Controllers\FriendlistController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\BuildingControllers\ChurchController;
 use App\Http\Controllers\BuildingControllers\ResearchController;
+use App\Http\Controllers\UnitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +52,8 @@ Route::apiResource('buildings', BuildingController::class);
 Route::get('/towns/{Town_ID}/buildings', [BuildingController::class, 'showSpecial']);
 
 
-// BUILDING STATS
+// STATS
+Route::apiResource('stats/units', UnitController::class);
 Route::apiResource('stats/church', ChurchController::class);
 Route::apiResource('stats/research', ResearchController::class);
 
