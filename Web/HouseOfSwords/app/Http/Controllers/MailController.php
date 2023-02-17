@@ -27,12 +27,12 @@ class MailController extends Controller
             'header' => $request->Title,
             'body' => $request->Text
         ];
-        try {
-            Mail::to($request->Email)->send(new MailNotify($data));
-            return response()->json(['Great, check your mailbox']);
-        } catch (Exception $th) {
-            return response()->json(['Sorry, something went wrong', $th]);
-        }
+        Mail::to($request->Email)->send(new MailNotify($data));
+        return response()->json(['Great, check your mailbox']);
+        // try {
+        // } catch (Exception $th) {
+        //     return response()->json(['Sorry, something went wrong', $th]);
+        // }
     }
 
     public function emailVerification($token)
