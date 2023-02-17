@@ -33,7 +33,6 @@ class VerificationEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            // from: new Addres('blasekb@houseofswords.hu', 'House of Swords'),
             subject: 'Verification Email',
         );
     }
