@@ -33,7 +33,6 @@ class MailNotify extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address('blasekb@houseofswords.hu', 'House of Swords'),
             subject: 'Test email',
         );
     }
