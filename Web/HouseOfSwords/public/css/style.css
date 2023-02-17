@@ -5,6 +5,10 @@ body {
     font-family: 'MedievalSharp';
 }
 
+main{
+    margin-top: 6rem;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -112,7 +116,6 @@ body {
 .my-nav-item a {
     text-decoration: none;
     color: #7d7e7d;
-    /* padding: 0.7rem; */
 }
 
 .my-nav-item a:active {
@@ -126,6 +129,14 @@ body {
 .deco-none:hover {
     color: inherit;
     text-decoration: inherit;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    z-index: 10;
 }
 
 /*Navbar vége*/
