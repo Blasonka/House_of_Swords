@@ -15,9 +15,6 @@ class Research extends Model
 
     protected $fillable = [
         'SciencePM',
-        'MaxScience',
-        'NewResearchableUnit1',
-        'NewResearchableUnit2',
-        'NewResearchableUnit3'
+        'MaxScience'
     ];
 }

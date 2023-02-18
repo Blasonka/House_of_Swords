@@ -5,6 +5,8 @@ namespace App\Http\Controllers\BuildingControllers;
 use App\Http\Controllers\Controller;
 use App\Models\Building;
 use App\Models\Buildings\Research;
+use App\Models\ResearchedUnit;
+use App\Models\Unit;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -148,6 +150,7 @@ class ResearchController extends Controller
         ], 401);
     }
 
+    // ACTIONS
     public function collectScience(Request $request){
         try {
             $building = Building::find($request->BuildingID);
@@ -183,6 +186,45 @@ class ResearchController extends Controller
                 'message' => 'An unknown error has occured.',
                 'details' => $err->getMessage()
             ], 400);
+        }
+    }
+
+    public function researchUnit(Request $request){
+        try {
+            if (Unit::find($request->input('UnitID')) == null) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The requested unit does not exist.'
+                ], 400);
+            }
+
+            $researchBuilding = Building::find($request->input('ResearchBuildingID'));
+            if ($researchBuilding == null) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The requested research building does not exist.'
+                ], 400);
+            }
+            if ($researchBuilding->BuildingType != 'Research') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The requested building is not of type Research.'
+                ], 400);
+            }
+
+            $researchedUnit = new ResearchedUnit([
+                'ResearchBuildingID' => $request->input('ResearchBuildingID'),
+                'UnitID' => $request->input('UnitID')
+            ]);
+            $researchedUnit->save();
+
+            return response()->json($researchedUnit, 200);
+        } catch (Exception $err) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An unknown error has occured.',
+                'details' => $err->getMessage()
+            ], 500);
         }
     }
 }

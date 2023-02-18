@@ -69,6 +69,7 @@ Route::prefix('actions')->group(function () {
     // RESEARCH ACTIONS
     Route::prefix('research')->group(function () {
         Route::post('collectScience', [ResearchController::class, 'collectScience']);
+        Route::post('researchUnit', [ResearchController::class, 'researchUnit']);
     });
 
     // OTHER BUILDINGS' ACTIONS
