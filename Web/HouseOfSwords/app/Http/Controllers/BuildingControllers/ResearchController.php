@@ -79,33 +79,33 @@ class ResearchController extends Controller
         }
     }
 
-    public function showUntilLevel($lvl){
-        try {
-            $stats = Research::all()->where('Lvl', '<=', $lvl);
+    // public function showUntilLevel($lvl){
+    //     try {
+    //         $stats = Research::all()->where('Lvl', '<=', $lvl);
 
-            if ($stats == null) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'The requested stats do not exist.'
-                ], 400);
-            }
+    //         if ($stats == null) {
+    //             return response()->json([
+    //                 'success' => false,
+    //                 'message' => 'The requested stats do not exist.'
+    //             ], 400);
+    //         }
 
-            if (sizeof($stats) < $lvl || sizeof($stats) < 1) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'The requested stats do not all exist.'
-                ], 400);
-            }
+    //         if (sizeof($stats) < $lvl || sizeof($stats) < 1) {
+    //             return response()->json([
+    //                 'success' => false,
+    //                 'message' => 'The requested stats do not all exist.'
+    //             ], 400);
+    //         }
 
-            return response()->json($stats, 200);
-        } catch (Exception $err) {
-            return response()->json([
-                'success' => false,
-                'message' => 'An unknown error has occured.',
-                'details' => $err->getMessage()
-            ], 500);
-        }
-    }
+    //         return response()->json($stats, 200);
+    //     } catch (Exception $err) {
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'An unknown error has occured.',
+    //             'details' => $err->getMessage()
+    //         ], 500);
+    //     }
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -150,6 +150,39 @@ class ResearchController extends Controller
         ], 401);
     }
 
+    // GET RESEARCHED UNITS
+    public function getResearchedUnits($researchBuildingId){
+        try {
+            $building = Building::find($researchBuildingId);
+
+            if ($building == null)
+            {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The requested building does not exist.'
+                ], 400);
+            }
+
+            if ($building->BuildingType != 'Research')
+            {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The requested building is not of type Research.'
+                ], 400);
+            }
+
+            $researchedUnits = ResearchedUnit::all()->where('ResearchBuildingID', '=', $researchBuildingId);
+
+            return response()->json($researchedUnits->values(), 200);
+        } catch (Exception $err) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An unknown error has occured.',
+                'details' => $err->getMessage()
+            ], 500);
+        }
+    }
+
     // ACTIONS
     public function collectScience(Request $request){
         try {
@@ -185,7 +218,7 @@ class ResearchController extends Controller
                 'success' => false,
                 'message' => 'An unknown error has occured.',
                 'details' => $err->getMessage()
-            ], 400);
+            ], 500);
         }
     }
 

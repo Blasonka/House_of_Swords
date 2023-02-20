@@ -57,7 +57,8 @@ Route::apiResource('stats/units', UnitController::class);
 Route::apiResource('stats/church', ChurchController::class);
 
 Route::apiResource('stats/research', ResearchController::class);
-Route::get('stats/research/until/{lvl}', [ResearchController::class, 'showUntilLevel']);
+Route::get('stats/research/researchedUnits/{researchBuildingId}', [ResearchController::class, 'getResearchedUnits']);
+// Route::get('stats/research/until/{lvl}', [ResearchController::class, 'showUntilLevel']);
 
 // BUILDING ACTIONS
 Route::prefix('actions')->group(function () {
