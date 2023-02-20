@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Bugreport;
 use App\Models\User;
+use Exception;
 
 class PageController extends Controller
 {
@@ -66,16 +67,21 @@ class PageController extends Controller
             array_push($randomChar, chr($i + 97));
         };
 
-        for ($i = 0; $i <= 50; $i++) {
-            $Password = hash('sha512', $request->PwdHash . $PwdSalt . $randomChar[$i]);
-            $user = User::where('Username', $request->Username)->where('PwdHash', $Password)->first();
-            if ($user) {
-                Auth::login($user);
-                return redirect()->route('user.profil');
+        try {
+            for ($i = 0; $i <= 50; $i++) {
+                $Password = hash('sha512', $request->PwdHash . $PwdSalt . $randomChar[$i]);
+                $user = User::where('Username', $request->Username)->where('PwdHash', $Password)->first();
+                if ($user) {
+                    Auth::login($user);
+                    if ($user->IsEmailVerified == 0){ return redirect()->route('verify'); }
+                    else{ return redirect()->route('user.profil'); }
+                };
             };
-        };
-        if (!$user){
-            return redirect()->back()->withInput();
+            if (!$user){
+                return redirect()->back()->withErrors(['PwdHash' => 'Hibás jelszó']);
+            }
+        } catch (Exception $th) {
+            return redirect()->back()->withErrors([$th]);
         }
     }
 

@@ -16,6 +16,11 @@
                     @if ($errors->has('PwdHash'))
                         <span class="text-danger text-left">{{ $errors->first('PwdHash') }}</span>
                     @endif
+                    {{-- @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <span class="text-danger text-left">{{ $error }}</span>
+                        @endforeach
+                    @endif --}}
                     <button class="register-login-btn" type="submit">Belépés</button>
 
                     <p class="link">Nincs fiókod?<br>

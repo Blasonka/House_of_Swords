@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class IsVerifyEmail
+class IsNotVerifyEmail
 {
     /**
      * Handle an incoming request.
@@ -17,11 +17,9 @@ class IsVerifyEmail
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
-            if (Auth::user()->IsEmailVerified == 0) {
-                return redirect()->route('verify');
-            }
-            return $next($request);
+        if (Auth::check() && Auth::user()->IsEmailVerified != 0) {
+            return redirect()->route('verify');
         }
+        return $next($request);
     }
 }

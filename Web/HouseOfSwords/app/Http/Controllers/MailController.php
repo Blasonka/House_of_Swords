@@ -7,12 +7,13 @@ use App\Http\Requests\MailRequests\MailRequest;
 use App\Mail\BugReportEmail;
 use Illuminate\Http\Request;
 use App\Mail\MailNotify;
+use App\Mail\VerificationEmail;
 use App\Models\Bugreport;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-
-
+use Illuminate\Support\Str;
 
 class MailController extends Controller
 {
@@ -27,12 +28,12 @@ class MailController extends Controller
             'header' => $request->Title,
             'body' => $request->Text
         ];
-        Mail::to($request->Email)->send(new MailNotify($data));
-        return response()->json(['Great, check your mailbox']);
-        // try {
-        // } catch (Exception $th) {
-        //     return response()->json(['Sorry, something went wrong', $th]);
-        // }
+        try {
+            Mail::to($request->Email)->send(new MailNotify($data));
+            return response()->json(['Great, check your mailbox']);
+        } catch (Exception $th) {
+            return response()->json(['Sorry, something went wrong', $th]);
+        }
     }
 
     public function emailVerification($token)
@@ -56,12 +57,30 @@ class MailController extends Controller
             Mail::to('info@houseofswords.hu')->send(new BugReportEmail($data));
             return redirect('/bugreport')->with('status', 'Jelentés sikeresen elküldve!');
         } catch (Exception $err) {
-            return redirect('/bugreport')->with('status', $err->getMessage());
+            return redirect('/bugreport')->with('errors', 'Jelentés küldése sikertelen! Kérjük próbálja újra később, vagy vegye fel a kapcsolatot velünk közvetlenül emailben.');
+            // return redirect('/bugreport')->with('errors', $err->getMessage());
+
+
             // return response()->json([
             //     'success' => false,
             //     'message' => 'Sorry, something went wrong',
             //     'details' => $err->getMessage()
             // ]);
+        }
+    }
+    function verifyResend()
+    {
+        try {
+            $user = Auth::user();
+            $user->update(['EmailVerificationToken' => Str::random(32)]);
+            // $user = User::find(Auth::user());
+            // $user->update(['EmailVerificationToken' => Str::random(32)]);
+
+            Mail::to($user->EmailAddress)->send(new VerificationEmail($user));
+            return redirect()->back()->with('status', 'Az email sikeresen elküldve! Kérlek nézd meg a bejövő leveleidet és a spam mappádat is.');
+        } catch (Exception $err) {
+            return redirect()->back()->with('errors', 'A hitelesítő email újraküldése sikertelen! Kérjük próbálja újra később.');
+            return redirect()->back()->with('errors', $err->getMessage());
         }
     }
 }

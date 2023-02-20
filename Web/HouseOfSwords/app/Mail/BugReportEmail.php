@@ -33,7 +33,6 @@ class BugReportEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address('no-reply@houseofswords.hu', 'House of Swords'),
             subject: 'Bug Report Email',
         );
     }

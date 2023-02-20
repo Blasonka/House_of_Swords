@@ -23,7 +23,6 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [PageController::class, 'index'])->name('index');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/download', [PageController::class, 'download'])->name('download');
-Route::get('/verify',[PageController::class, 'verify'])->name('verify');
 Route::get('/bugreport',[PageController::class, 'bugReport'])->name('bugReport');
 
 
@@ -36,13 +35,19 @@ Route::group(['middleware' => ['guest']], function() {
 });
 
 
+// Bejelentkezve, látszik
 Route::group(['middleware' => ['auth']], function (){
-    //
+    Route::get('/logout',[PageController::class, 'logout'])->name('logout');
 });
+
+// Bejelentkezve, de nem hitelesített email cimmel látszik
+Route::group(['middleware' => ['auth', 'notverified.email']], function (){
+    Route::get('/verify',[PageController::class, 'verify'])->name('verify');
+});
+
 
 // Csak bejelentkezve látszanak (sima user joggal)
 Route::group(['middleware' => ['auth', 'verified.email']], function (){
-    Route::get('/logout',[PageController::class, 'logout'])->name('logout');
     Route::get('/profil', [PageController::class, 'profil'])->name('user.profil');
 });
 
@@ -64,8 +69,10 @@ Route::get('/send', [MailController::class, 'index']);
 Route::post('/send', [MailController::class, 'mail']);
 Route::get('/verify/{token}', [MailController::class, 'emailVerification'])->name('emailVerification');
 Route::post('/bugreport',[MailController::class, 'bugReportMail'])->name('bugReportMail');
+Route::post('/verifyresend',[MailController::class, 'verifyResend'])->name('verifyResend');
+
 
 
 // 404 hiba kezelés
-Route::any('{params}', [PageController::class, 'notFound']);
+Route::any('{params}', [PageController::class, 'notFound'])->name('notFound');
 

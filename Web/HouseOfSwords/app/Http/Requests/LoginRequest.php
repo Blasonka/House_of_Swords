@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'Username' => 'required',
+            'Username' => 'required|exists:users,Username',
             'PwdHash' => 'required'
         ];
     }
