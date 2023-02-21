@@ -1,14 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=MedievalSharp');
-body{
+
+body {
     overflow-x: hidden;
     font-family: 'MedievalSharp';
 }
 
-*{
+main{
+    margin-top: 6rem;
+}
+
+* {
     box-sizing: border-box;
 }
 
-.bg-image{
+.bg-image {
     position: fixed;
     left: 0;
     right: 0;
@@ -33,39 +38,39 @@ body{
     filter: blur(3px) grayscale(100%); */
 }
 
-.navbar_icons{
+.navbar_icons {
     max-width: 1.5rem;
 }
 
-#navbar_logo{
+#navbar_logo {
     max-width: 3rem;
 }
 
-#header_logo{
+#header_logo {
     max-width: 10rem;
 }
 
-.card:hover{
+.card:hover {
     transform: scale(1.08);
 }
 
-.card:hover .card-title{
+.card:hover .card-title {
     color: #2487ce;
 }
 
-.card:hover .card-text{
+.card:hover .card-text {
     color: #2487ce;
 }
 
-.card:hover .card-title-green{
+.card:hover .card-title-green {
     color: #99cc00;
 }
 
-.card:hover .card-text-green{
+.card:hover .card-text-green {
     color: #99cc00;
 }
 
-.card{
+.card {
     padding: 50px 30px;
     position: relative;
     overflow: hidden;
@@ -77,10 +82,85 @@ body{
 }
 
 .bg-text {
-    background-color: rgba(0,0,0, 0.4);
+    background-color: rgba(0, 0, 0, 0.4);
     color: white;
     border: 3px solid #f1f1f1;
     width: 80%;
     padding: 20px;
     margin: auto;
-  }
+}
+
+
+/*Navbar*/
+
+.my-nav-item {
+    margin: auto;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0.7rem;
+}
+
+.my-nav-item:after {
+    display: block;
+    content: '';
+    border-bottom: solid 1px #a6876e;
+    transform: scaleX(0);
+    transition: transform 300ms ease-in-out;
+}
+
+.my-nav-item:hover:after {
+    transform: scaleX(1);
+}
+
+.my-nav-item a {
+    text-decoration: none;
+    color: #7d7e7d;
+}
+
+.my-nav-item a:active {
+    color: #a6876e !important;
+}
+
+.my-active a {
+    color: #a6876e;
+}
+
+.deco-none:hover {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    z-index: 10;
+}
+
+/*Navbar vége*/
+
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #212529;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #a6876e;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #6c3b25;
+}
+
+/*Scrollbar vége*/

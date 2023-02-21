@@ -10,22 +10,22 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-lg-0">
-                        <li class="nav-item align-self-center">
-                            {{-- EZEK A REQUEST-ES SOROK NÉZIK MEG, HOGY MELYIK OLDALON VAN A USER, ÉS ÚGY TESZIK AKTÍVVÁ A NAVBAR ELEMEIT --}}
-                            <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" aria-current="page"
+                        {{-- EZEK A REQUEST-ES SOROK NÉZIK MEG, HOGY MELYIK OLDALON VAN A USER, ÉS ÚGY TESZIK AKTÍVVÁ A NAVBAR ELEMEIT --}}
+                        <li class="my-nav-item align-self-center {{ request()->is('/') ? 'my-active' : '' }}">
+                            <a class="my-link"
                                 href="{{ route('index') }}">Főoldal</a>
                         </li>
-                        <li class="nav-item align-self-center">
-                            <a class="nav-link {{ request()->is('about') ? 'active' : '' }}"
+                        <li class="my-nav-item align-self-center {{ request()->is('about') ? 'my-active' : '' }}">
+                            <a class="my-nav-link"
                                 href="{{ route('about') }}">A
                                 játékról</a>
                         </li>
-                        <li class="nav-item align-self-center">
-                            <a class="nav-link {{ request()->is('download') ? 'active' : '' }}"
+                        <li class="my-nav-item align-self-center {{ request()->is('download') ? 'my-active' : '' }}">
+                            <a class="my-nav-link"
                                 href="{{ route('download') }}">Letöltés</a>
                         </li>
-                        <li class="nav-item align-self-center">
-                            <a class="nav-link {{ request()->is('bugReport') ? 'active' : '' }}"
+                        <li class="my-nav-item align-self-center {{ request()->is('bugreport') ? 'my-active' : '' }}">
+                            <a class="my-nav-link"
                                 href="{{ route('bugReport') }}">Hiba jelentése</a>
                         </li>
                     </ul>
@@ -33,33 +33,33 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
                         @guest
-                            <li class="nav-item align-self-center">
-                                <a class="nav-link {{ request()->is('register') ? 'active' : '' }}"
+                            <li class="my-nav-item align-self-center {{ request()->is('register') ? 'my-active' : '' }}">
+                                <a class="my-nav-link"
                                     href="{{ route('register.show') }}">Regisztráció</a>
                             </li>
 
-                            <li class="nav-item align-self-center">
-                                <a class="nav-link {{ request()->is('login') ? 'active' : '' }}"
+                            <li class="my-nav-item align-self-center {{ request()->is('login') ? 'my-active' : '' }}">
+                                <a class="my-nav-link"
                                     href="{{ route('login.show') }}">Belépés</a>
                             </li>
                         @endguest
 
                         @auth
                             @if (isset(Auth::user()->Role) && Auth::user()->Role >= 2)
-                                <li class="nav-item align-self-center">
+                                <li class="my-nav-item align-self-center">
                                     @csrf
                                     <a class="nav-link" href="{{ route('owner') }}">Owner page</a>
                                 </li>
                             @endif
 
                             @if (isset(Auth::user()->Role) && Auth::user()->Role >= 1)
-                                <li class="nav-item align-self-center">
+                                <li class="my-nav-item align-self-center">
                                     @csrf
                                     <a class="nav-link" href="{{ route('admin') }}">Admin page</a>
                                 </li>
                             @endif
 
-                            <li class="nav-item align-self-center">
+                            <li class="my-nav-item align-self-center">
                                 @csrf
                                 <a class="nav-link" href="{{ route('logout') }}">
                                     <img class="navbar_icons" src="/img/exit.png" alt="">
