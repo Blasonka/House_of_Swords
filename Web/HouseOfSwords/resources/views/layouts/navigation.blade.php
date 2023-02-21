@@ -46,22 +46,22 @@
 
                         @auth
                             @if (isset(Auth::user()->Role) && Auth::user()->Role >= 2)
-                                <li class="my-nav-item align-self-center">
+                                <li class="my-nav-item align-self-center {{ request()->is('owner') ? 'my-active' : '' }}">
                                     @csrf
-                                    <a class="nav-link" href="{{ route('owner') }}">Owner page</a>
+                                    <a class="my-nav-link" href="{{ route('owner') }}">Owner page</a>
                                 </li>
                             @endif
 
                             @if (isset(Auth::user()->Role) && Auth::user()->Role >= 1)
-                                <li class="my-nav-item align-self-center">
+                                <li class="my-nav-item align-self-center {{ request()->is('admin') ? 'my-active' : '' }}">
                                     @csrf
-                                    <a class="nav-link" href="{{ route('admin') }}">Admin page</a>
+                                    <a class="my-nav-link" href="{{ route('admin') }}">Admin page</a>
                                 </li>
                             @endif
 
-                            <li class="my-nav-item align-self-center">
+                            <li class="nav-item align-self-center">
                                 @csrf
-                                <a class="nav-link" href="{{ route('logout') }}">
+                                <a class="my-nav-link" href="{{ route('logout') }}">
                                     <img class="navbar_icons" src="/img/exit.png" alt="">
                                 </a>
                             </li>
