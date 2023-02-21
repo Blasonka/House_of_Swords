@@ -143,7 +143,7 @@ main{
 
 
 /* Scrollbar */
-
+/* chrome, edge */
 ::-webkit-scrollbar {
     width: 20px;
 }
@@ -163,4 +163,8 @@ main{
     background-color: #6c3b25;
 }
 
+/* firefox */
+:root{
+    scrollbar-color: #a6876e #212529 !important;
+  }
 /*Scrollbar vége*/
