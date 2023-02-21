@@ -141,9 +141,13 @@
   }
 
   /* Megoldva*/
+
   .table tbody td.status .fixed {
-      background: #cff6dd;
       color: #1fa750;
+  }
+
+  .table tbody td.status .fixed-bg {
+      background: #cff6dd;
   }
 
   .table tbody td.status .fixed:after {
@@ -151,19 +155,23 @@
   }
 
   /*In progress*/
-  /* .table tbody td.status .inprogress {
-    background: #fdf5dd;
+  .table tbody td.status .inprogress {
     color: #cfa00c;
+}
+.table tbody td.status .inprogress-bg {
+    background: #fdf5dd;
 }
 .table tbody td.status .inprogress:after {
     background: #f2be1d;
-} */
+}
 
   /*In progress*/
   .table tbody td.status .bug {
-      background: #fddddd;
       color: #cf0c0c;
   }
+  .table tbody td.status .bug-bg {
+    background: #fddddd;
+}
 
   .table tbody td.status .bug:after {
       background: #f21d1d;
