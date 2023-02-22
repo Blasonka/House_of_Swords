@@ -40,6 +40,10 @@ Route::apiResource('users', UserController::class);
 Route::get('/users/username/{username}', [UserController::class, 'showByName']);
 
 
+// BUGREPORT STATUS
+Route::apiResource('bugreports', UserController::class);
+
+
 // TOWNS
 Route::apiResource('towns', TownController::class);
 Route::get('/users/{UID}/towns', [TownController::class, 'showSpecial']);
