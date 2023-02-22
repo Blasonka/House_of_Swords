@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bugreport;
+use Exception;
 use Illuminate\Http\Request;
 
-class BugReportsController extends Controller
+class BugReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -69,18 +70,20 @@ class BugReportsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // folyamazban
-        // try {
-        //     if (Bugreport::find($id)->exists()) {
-        //         $user = Bugreport::find($id);
-        //         $user->update($request->all());
-        //         return response()->json(['message' => 'Item was updated, id: ' . $id], 200);
-        //     } else {
-        //         return response()->json(['message' => 'Item not found, id: ' . $id], 404);
-        //     }
-        // } catch (Exception $e) {
-        //     return response()->json(['message' => 'Database error'], 400);
-        // }
+        try {
+            if (Bugreport::find($id)->exists()) {
+                $bugreport = Bugreport::find($id);
+                error_log($bugreport);
+                $bugreport->update($request->all());
+            return redirect()->route('admin');
+
+                return response()->json(['message' => 'Item was updated, id: ' . $id], 200);
+            } else {
+                return response()->json(['message' => 'Item not found, id: ' . $id], 404);
+            }
+        } catch (Exception $e) {
+            return response()->json(['message' => 'Database error'], 400);
+        }
     }
 
     /**

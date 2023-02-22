@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BugReportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -41,7 +42,7 @@ Route::get('/users/username/{username}', [UserController::class, 'showByName']);
 
 
 // BUGREPORT STATUS
-Route::apiResource('bugreports', UserController::class);
+Route::apiResource('bugreports', BugReportController::class);
 
 
 // TOWNS
