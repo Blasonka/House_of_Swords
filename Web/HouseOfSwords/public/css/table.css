@@ -175,4 +175,13 @@
 
   .table tbody td.status .bug:after {
       background: #f21d1d;
+
+  }
+
+  /* Statusz beállítás gombok */
+  .table tbody td.status .fixed-btn:after,
+  .table tbody td.status .inprogress-btn:after,
+  .table tbody td.status .bug-btn:after{
+    width: 1rem;
+    height: 1rem;
   }

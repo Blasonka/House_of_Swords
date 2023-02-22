@@ -10,35 +10,11 @@
                         <th scope="col" width="5%">Id</th>
                         <th scope="col" width="20%">Email</th>
                         <th scope="col" width="40%">Occupation</th>
-                        <th scope="col" width="13%">Hiba státusza</th>
-                        <th scope="col" width="10%"></th>
+                        <th scope="col" width="15%">Hiba státusza</th>
+                        <th scope="col" width="10%">Státusz változtatása</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- <tr scope="row">
-                        <td>00</td>
-                        <td><a href="#">user@email.com</a></td>
-                        <td><small class="d-block">Valami</small></td>
-                        <td class="status"><span class="bug bug-bg">Megoldatlan</span></td>
-                        <td>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                            </div>
-                        </td>
-                    </tr>
-
-                    <tr scope="row">
-                        <td>00</td>
-                        <td><a href="#">user@email.com</a></td>
-                        <td><small class="d-block">Valami</small></td>
-                        <td class="status"><span class="inprogress inprogress-bg">Folyamatban</span></td>
-                        <td>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                            </div>
-                        </td>
-                    </tr> --}}
-
                     @foreach ($bugs as $bug)
                         <tr scope="row">
                             <td>
@@ -57,13 +33,13 @@
                             <td class="status">
                                 <div class="row mx-auto">
                                     <div class="col-1">
-                                        <span class="fixed"></span>
+                                        <span class="fixed fixed-btn"></span>
                                     </div>
                                     <div class="col-1">
-                                        <span class="inprogress"></span>
+                                        <span class="inprogress inprogress-btn"></span>
                                     </div>
                                     <div class="col-1">
-                                        <span class="bug"></span>
+                                        <span class="bug bug-btn"></span>
                                     </div>
                                 </div>
                                 {{-- <div class="form-check form-switch">
