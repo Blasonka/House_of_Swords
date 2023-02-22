@@ -124,13 +124,15 @@
 
 
   /*bug status*/
-  .table tbody td.status span {
+  .table tbody td.status span,
+  .table tbody td.status button {
       position: relative;
       border-radius: 30px;
       padding: 4px 15px 4px 25px;
   }
 
-  .table tbody td.status span:after {
+  .table tbody td.status span:after,
+  .table tbody td.status button:after {
       position: absolute;
       top: 10px;
       left: 10px;
@@ -150,9 +152,11 @@
       background: #cff6dd;
   }
 
+  .table tbody td.status .btn-fixed,
   .table tbody td.status .fixed:after {
       background: #23bd5a;
   }
+
 
   /*In progress*/
   .table tbody td.status .inprogress {
@@ -161,6 +165,7 @@
 .table tbody td.status .inprogress-bg {
     background: #fdf5dd;
 }
+.table tbody td.status .btn-inprogress,
 .table tbody td.status .inprogress:after {
     background: #f2be1d;
 }
@@ -173,15 +178,19 @@
     background: #fddddd;
 }
 
+.table tbody td.status .btn-bug,
   .table tbody td.status .bug:after {
       background: #f21d1d;
 
   }
 
   /* Statusz beállítás gombok */
-  .table tbody td.status .fixed-btn:after,
+  .table tbody td.status button,
   .table tbody td.status .inprogress-btn:after,
   .table tbody td.status .bug-btn:after{
-    width: 1rem;
-    height: 1rem;
+    width: 15px;
+    height: 15px;
+    border: 0 none transparent;
+    padding:0;
+    margin:0;
   }

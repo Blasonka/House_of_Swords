@@ -33,13 +33,13 @@
                             <td class="status">
                                 <div class="row mx-auto">
                                     <div class="col-1">
-                                        <span class="fixed fixed-btn"></span>
+                                        <button type="submit" class="btn btn-sm btn-success btn-fixed"></button>
                                     </div>
                                     <div class="col-1">
-                                        <span class="inprogress inprogress-btn"></span>
+                                        <button type="submit" class="btn btn-sm btn-warning btn-inprogress"></button>
                                     </div>
                                     <div class="col-1">
-                                        <span class="bug bug-btn"></span>
+                                        <button type="submit" class="btn btn-sm btn-danger btn-bug"></button>
                                     </div>
                                 </div>
                                 {{-- <div class="form-check form-switch">
