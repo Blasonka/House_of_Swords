@@ -9,6 +9,7 @@ use App\Http\Requests\UserRequests\UserPatchRequest as PatchRequest;
 use App\Mail\VerificationEmail;
 use Illuminate\Support\Str;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
@@ -45,9 +46,14 @@ class UserController extends Controller
             ]);
 
             Mail::to($user->EmailAddress)->send(new VerificationEmail($user));
-            return redirect()->back();
+            Auth::login($user);
+                    if ($user->IsEmailVerified == 0) {
+                        return redirect()->route('verify');
+                    } else {
+                        return redirect()->route('user.profil');
+                    }
         } catch (Exception $e) {
-            return response()->json(['message' => 'Database error'], 400);
+            return response()->back()->with('errors', 'A regisztráció sikertelen! Kérjük próbálja újra később.');
         }
     }
 
