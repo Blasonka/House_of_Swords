@@ -4,6 +4,13 @@
 @section('content')
     <div class="row">
         <div class="col-12 col-md-5 col-lg-4 mx-auto mt-3">
+            @if (session('errors'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('errors') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <h2>Bejelentkezés</h2>
             <form action="/login" method="post">
                 @csrf
