@@ -131,7 +131,6 @@ class PageController extends Controller
     function logout(Request $request)
     {
         Auth::logout();
-        error_log('logged out');
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('index');

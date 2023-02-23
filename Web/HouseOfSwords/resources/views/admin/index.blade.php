@@ -20,7 +20,7 @@
                             <td>
                                 {{ $bug->Id }}
                             </td>
-                            <td><a href="#">user@email.com</a></td>
+                            <td><a href="#">{{ $bug->EmailAddress }}</a></td>
                             <td><small class="d-block">{{ $bug->Text }}</small></td>
                             @if ($bug->IsSolved == 0)
                                 <td class="status"><span class="bug bug-bg">Megoldatlan</span></td>

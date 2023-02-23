@@ -19,7 +19,7 @@ return [
     'after' => 'The :attribute must be a date after :date.',
     'after_or_equal' => 'The :attribute must be a date after or equal to :date.',
     'alpha' => 'The :attribute must only contain letters.',
-    'alpha_dash' => 'A :attribute mező csak  betűket, számokatmust, aláhúzásokat és kötőjeleket tartalmazhat.',
+    'alpha_dash' => 'A :attribute mező csak betűket, számokat, aláhúzásokat és kötőjeleket tartalmazhat.',
     'alpha_num' => 'The :attribute must only contain letters and numbers.',
     'array' => 'The :attribute must be an array.',
     'before' => 'The :attribute must be a date before :date.',

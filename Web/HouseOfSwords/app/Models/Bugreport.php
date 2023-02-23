@@ -16,6 +16,7 @@ class Bugreport extends Model
 
     protected $fillable = [
         'Text',
+        'EmailAddress',
         'IsSolved'
     ];
 }
