@@ -6,6 +6,7 @@ use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ResetPwRequest;
 use App\Models\Bugreport;
 use App\Models\User;
 use Exception;
@@ -61,7 +62,7 @@ class PageController extends Controller
         };
     }
 
-    function newpw(Request $request)
+    function newpw(ResetPwRequest $request)
     {
         try {
             $user = User::find($request->UID);
@@ -81,7 +82,7 @@ class PageController extends Controller
                 }
             };
         } catch (Exception $th) {
-            return response()->json(['Sorry, something went wrong', $th]);
+            return response()->back()->with('errors', 'A jelszó visszaállítása nem sikerült! Kérjük próbálja újra később');
         };
     }
 
