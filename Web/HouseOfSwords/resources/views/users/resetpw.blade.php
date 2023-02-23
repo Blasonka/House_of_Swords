@@ -10,9 +10,9 @@
                     {{ session('status') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            @elseif (session('errors'))
+            @elseif (session('error'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ session('errors') }}
+                    {{ session('error') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
@@ -25,7 +25,7 @@
                     <input name="UID" type="hidden" value="{{$user->UID}}">
                     <input name="PwdHash" type="password" placeholder="Jelszó">
                     @if ($errors->has('PwdHash'))
-                        <span class="text-danger text-left">{{ $errors->first('EmailAddress') }}</span>
+                        <span class="text-danger text-left">{{ $errors->first('PwdHash') }}</span>
                     @endif
                     <input name="PwdHash_confirmation" type="password" placeholder="Jelszó megerősítése">
                     @if ($errors->has('PwdHash_confirmation'))
