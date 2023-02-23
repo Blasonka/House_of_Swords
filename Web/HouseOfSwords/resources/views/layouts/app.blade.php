@@ -22,10 +22,11 @@
         @include('layouts.header')
     </header>
 
-    <main>
+    <main style="min-height: 55vh;">
         @yield('content')
     </main>
 
+    @include('layouts.footer')
     @include('layouts.scripts')
 </body>
 
