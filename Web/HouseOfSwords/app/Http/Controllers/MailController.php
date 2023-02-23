@@ -90,7 +90,9 @@ class MailController extends Controller
     function resetpw(PwResetRequest $request)
     {
         try {
-            Mail::to($request->EmailAddress)->send(new PwResetEmail);
+            $user = User::where('EmailAddress', $request->EmailAddress)->first();
+            $user->update(['EmailVerificationToken' => Str::random(32)]);
+            Mail::to($request->EmailAddress)->send(new PwResetEmail($user));
             return redirect()->back()->with('status', 'A jelszó visszaállító email sikeresen elküldve! Kérlek nézd meg a bejövő leveleidet és a spam mappádat is.');
         } catch (Exception $err) {
             return redirect()->back()->with('error', $err->getMessage());

@@ -5,21 +5,12 @@
             <h3>Kapcsolat</h3>
             <ul class="list-unstyled list pl-5">
                 <li class="footer-li">
-                    <div class="row">
-                        <div class="col-1"><img src="https://img.icons8.com/ios-filled/32/a6876e/apple-mail.png"/></div>
-                        <div class="col-11">
-                            <a href="mailto: info@houseofswords.hu" class="basic-link">info@houseofswords.hu</a>
-                        </div>
-                    </div>
+                    <img src="https://img.icons8.com/ios-filled/32/a6876e/apple-mail.png" class="me-3 align-top" />
+                    <a href="mailto: info@houseofswords.hu" class="basic-link">info@houseofswords.hu</a>
                 </li>
                 <li class="footer-li">
-                    <div class="row">
-                        <div class="col-1"><img src="https://img.icons8.com/external-smashingstocks-glyph-smashing-stocks/32/a6876e/external-location-web-smashingstocks-glyph-smashing-stocks.png" class="" /></div>
-                        <div class="col-11">
-                            <p>9021 - Győr, Szent István út 7.</p>
-                        </div>
-                    </div>
-
+                    <img src="https://img.icons8.com/external-smashingstocks-glyph-smashing-stocks/32/a6876e/external-location-web-smashingstocks-glyph-smashing-stocks.png" class="me-3 align-top" />
+                    <a href="https://goo.gl/maps/TCH6KQC1W8Dss8Wi9" class="basic-link">9021 Győr, Szent István út 7.</a>
                 </li>
             </ul>
         </div>
