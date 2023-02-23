@@ -22,7 +22,7 @@
         @include('layouts.header')
     </header>
 
-    <main>
+    <main style="min-height: 55vh;">
         @yield('content')
     </main>
 
