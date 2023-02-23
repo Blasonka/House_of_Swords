@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResetPwRequest;
+use App\Mail\PwResetEmail;
 use App\Models\Bugreport;
 use App\Models\User;
 use Exception;
@@ -54,7 +55,6 @@ class PageController extends Controller
         try {
             $user = User::where('EmailVerificationToken', $token)->first();
             if ($user) {
-                $user->update(['EmailVerificationToken' => null]);
                 return view('users.resetpw', ['user' => $user]);
             };
         } catch (Exception $th) {
@@ -72,6 +72,7 @@ class PageController extends Controller
                 $user->update([
                     'PwdHash' => hash('sha512', $request->input('PwdHash') . $PwdSalt . $randomChar),
                     'PwdSalt' => $PwdSalt,
+                    'EmailVerificationToken' => null
                 ]);
 
                 Auth::login($user);
@@ -82,7 +83,7 @@ class PageController extends Controller
                 }
             };
         } catch (Exception $th) {
-            return response()->back()->with('errors', 'A jelszó visszaállítása nem sikerült! Kérjük próbálja újra később');
+            return response()->back()->with('error', 'A jelszó visszaállítása nem sikerült! Kérjük próbálja újra később');
         };
     }
 
