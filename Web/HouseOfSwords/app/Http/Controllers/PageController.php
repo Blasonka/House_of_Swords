@@ -98,6 +98,10 @@ class PageController extends Controller
     {
         return view('users.login');
     }
+    function forgottenpw()
+    {
+        return view('users.forgottenpw');
+    }
 
     function notFound($params)
     {

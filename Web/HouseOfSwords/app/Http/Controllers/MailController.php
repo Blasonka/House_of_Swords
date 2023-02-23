@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MailRequests\BugReportRequest;
 use App\Http\Requests\MailRequests\MailRequest;
+use App\Http\Requests\MailRequests\PwResetRequest;
 use App\Mail\BugReportEmail;
 use Illuminate\Http\Request;
 use App\Mail\MailNotify;
+use App\Mail\PwResetEmail;
 use App\Mail\VerificationEmail;
 use App\Models\Bugreport;
 use App\Models\User;
@@ -68,6 +70,7 @@ class MailController extends Controller
             // ]);
         }
     }
+
     function verifyResend()
     {
         try {
@@ -81,6 +84,16 @@ class MailController extends Controller
         } catch (Exception $err) {
             return redirect()->back()->with('errors', 'A hitelesítő email újraküldése sikertelen! Kérjük próbálja újra később.');
             return redirect()->back()->with('errors', $err->getMessage());
+        }
+    }
+
+    function resetpw(PwResetRequest $request)
+    {
+        try {
+            Mail::to($request->EmailAddress)->send(new PwResetEmail);
+            return redirect()->back()->with('status', 'A jelszó visszaállító email sikeresen elküldve! Kérlek nézd meg a bejövő leveleidet és a spam mappádat is.');
+        } catch (Exception $err) {
+            return redirect()->back()->with('error', $err->getMessage());
         }
     }
 }
