@@ -7,6 +7,7 @@
     <title>Pw reset email</title>
 </head>
 <body>
-    <h1>Pw reset email works</h1>
+    <p>Please click the link below to reset yout password: </p>
+    <a href="{{ route('resetpw', $user->EmailVerificationToken) }}">Reset your password</a>
 </body>
 </html>

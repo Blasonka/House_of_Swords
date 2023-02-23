@@ -30,10 +30,14 @@ Route::get('/bugreport',[PageController::class, 'bugReport'])->name('bugReport')
 Route::group(['middleware' => ['guest']], function() {
     Route::get('/register', [PageController::class, 'register'])->name('register.show');
     Route::post('/register', [UserController::class, 'store'])->name('register.register');
+
     Route::get('/login', [PageController::class, 'loginshow'])->name('login.show');
     Route::post('/login',[PageController::class, 'login'])->name('login.login');
+
     Route::get('/forgottenpw', [PageController::class, 'forgottenpw'])->name('forgottenpw');
     Route::post('/resetpw', [MailController::class, 'resetpw'])->name('resetpw');
+    Route::get('/resetpw/{token}', [PageController::class, 'resetpw'])->name('resetpw');
+    Route::put('/resetpw', [PageController::class, 'newpw'])->name('newpw');
 });
 
 

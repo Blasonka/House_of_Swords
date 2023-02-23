@@ -19,14 +19,19 @@
 
             <h2>Elfelejtett jelszó</h2>
             <form action="/resetpw" method="POST">
+                @method('PUT')
                 @csrf
                 <div class="form">
-                    <input name="EmailAddress" type="email" placeholder="Email cím">
-                    @if ($errors->has('EmailAddress'))
+                    <input name="UID" type="hidden" value="{{$user->UID}}">
+                    <input name="PwdHash" type="password" placeholder="Jelszó">
+                    @if ($errors->has('PwdHash'))
                         <span class="text-danger text-left">{{ $errors->first('EmailAddress') }}</span>
                     @endif
-                    <p class="link">Küldj jelszó visszaállító emailt magadnak!</p>
-                    <button class="register-login-btn" type="submit">Email küldése</button>
+                    <input name="PwdHash_confirmation" type="password" placeholder="Jelszó megerősítése">
+                    @if ($errors->has('PwdHash_confirmation'))
+                        <span class="text-danger text-left">{{ $errors->first('PwdHash_confirmation') }}</span>
+                    @endif
+                    <button class="register-login-btn" type="submit">Jelszó beállítása</button>
                 </div>
             </form>
         </div>

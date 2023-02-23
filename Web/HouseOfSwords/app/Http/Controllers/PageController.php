@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Bugreport;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
@@ -47,6 +48,43 @@ class PageController extends Controller
         return view('users.verify');
     }
 
+    function resetpw($token)
+    {
+        try {
+            $user = User::where('EmailVerificationToken', $token)->first();
+            if ($user) {
+                $user->update(['EmailVerificationToken' => null]);
+                return view('users.resetpw', ['user' => $user]);
+            };
+        } catch (Exception $th) {
+            return response()->json(['Sorry, something went wrong', $th->getMessage()]);
+        };
+    }
+
+    function newpw(Request $request)
+    {
+        try {
+            $user = User::find($request->UID);
+            if ($user) {
+                $randomChar = chr(random_int(0, 25) + 65);
+                $PwdSalt = Str::random(20);
+                $user->update([
+                    'PwdHash' => hash('sha512', $request->input('PwdHash') . $PwdSalt . $randomChar),
+                    'PwdSalt' => $PwdSalt,
+                ]);
+
+                Auth::login($user);
+                if ($user->IsEmailVerified == 0) {
+                    return redirect()->route('verify');
+                } else {
+                    return redirect()->route('user.profil');
+                }
+            };
+        } catch (Exception $th) {
+            return response()->json(['Sorry, something went wrong', $th]);
+        };
+    }
+
     function admin()
     {
         $bugs = Bugreport::all();
@@ -73,11 +111,14 @@ class PageController extends Controller
                 $user = User::where('Username', $request->Username)->where('PwdHash', $Password)->first();
                 if ($user) {
                     Auth::login($user);
-                    if ($user->IsEmailVerified == 0){ return redirect()->route('verify'); }
-                    else{ return redirect()->route('user.profil'); }
+                    if ($user->IsEmailVerified == 0) {
+                        return redirect()->route('verify');
+                    } else {
+                        return redirect()->route('user.profil');
+                    }
                 };
             };
-            if (!$user){
+            if (!$user) {
                 return redirect()->back()->withErrors(['PwdHash' => 'Hibás jelszó']);
             }
         } catch (Exception $th) {

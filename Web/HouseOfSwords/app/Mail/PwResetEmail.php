@@ -13,14 +13,15 @@ class PwResetEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $user;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -44,6 +45,7 @@ class PwResetEmail extends Mailable
     {
         return new Content(
             view: 'mail.pwreset',
+            with: [ 'user' => $this->user ],
         );
     }
 

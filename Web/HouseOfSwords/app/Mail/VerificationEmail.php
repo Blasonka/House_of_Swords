@@ -8,7 +8,6 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Mailables\Address;
 
 class VerificationEmail extends Mailable
 {
@@ -23,6 +22,7 @@ class VerificationEmail extends Mailable
     public function __construct($user)
     {
         $this->user = $user;
+        error_log($this->user);
     }
 
     /**
