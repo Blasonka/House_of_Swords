@@ -20,4 +20,9 @@ class Building extends Model
         'BuildingLvl',
         'Params'
     ];
+
+    // KAPCSOLATOK
+    public function town(){
+        return $this->belongsTo(Town::class, 'Towns_TownID', 'TownID');
+    }
 }

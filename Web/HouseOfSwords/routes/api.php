@@ -7,6 +7,8 @@ use App\Http\Controllers\TownController;
 use App\Http\Controllers\FriendlistController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\BuildingControllers\ChurchController;
+use App\Models\Town;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,10 @@ Route::get('/', function(){
         'isItWorking' => 'Yes',
         'isItCool' => 'HELL YES'
     ];
+});
+
+Route::get('/test', function(){
+    return User::find(2)->friends;
 });
 
 

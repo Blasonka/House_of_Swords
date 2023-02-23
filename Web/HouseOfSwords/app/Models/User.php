@@ -24,4 +24,13 @@ class User extends Authenticatable
         'Role',
         'EmailVerificationToken',
     ];
+
+    // KAPCSOLATOK
+    public function towns() {
+        return $this->hasMany(Town::class, 'Users_UID', 'UID');
+    }
+
+    public function friends(){
+        return $this->belongsToMany(User::class, 'friendlist', 'FriendID', 'Users_UID');
+    }
 }
