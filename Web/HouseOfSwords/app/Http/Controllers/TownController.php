@@ -7,6 +7,7 @@ use App\Models\Town;
 use App\Http\Requests\TownRequests\TownCreationRequest as CreationRequest;
 use App\Http\Requests\TownRequests\TownPatchRequest as PatchRequest;
 use App\Models\Building;
+use App\Models\User;
 use Exception;
 
 class TownController extends Controller
@@ -75,13 +76,15 @@ class TownController extends Controller
     public function showSpecial($UID)
     {
         try {
-            $towns = [];
+            // $towns = [];
 
-            foreach (Town::all()->where('Users_UID', '=', $UID)->toArray() as $key => $value) {
-                array_push($towns, $value);
-            }
+            // foreach (Town::all()->where('Users_UID', '=', $UID)->toArray() as $key => $value) {
+            //     array_push($towns, $value);
+            // }
 
-            return response()->json($towns, 200);
+            // return response()->json($towns, 200);
+
+            return response()->json(User::find($UID)->towns, 200);
         }
         catch (Exception $e) {
             return response()->json(['message'=>'Database error.'],400);
