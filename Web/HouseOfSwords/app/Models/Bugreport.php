@@ -16,6 +16,16 @@ class Bugreport extends Model
 
     protected $fillable = [
         'Text',
+        'EmailAddress',
         'IsSolved'
     ];
+
+    // KAPCSOLATOK
+    public function user(){
+        if ($this->EmailAddress != null) {
+            return $this->hasOne(User::class, 'EmailAddress', 'EmailAddress');
+        }
+
+        return null;
+    }
 }

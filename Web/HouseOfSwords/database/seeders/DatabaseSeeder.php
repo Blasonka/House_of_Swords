@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use Database\Seeders\LevelstatsSeeders\ChurchStatsSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -25,7 +27,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             TownSeeder::class,
             BuildingSeeder::class,
-            FriendListSeeder::class
+            FriendListSeeder::class,
+            ChurchStatsSeeder::class,
+            BugReportSeeder::class
         ]);
     }
 }

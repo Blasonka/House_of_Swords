@@ -7,6 +7,7 @@ use App\Http\Controllers\TownController;
 use App\Http\Controllers\FriendlistController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\BuildingControllers\ChurchController;
+use App\Models\Bugreport;
 use App\Models\Town;
 use App\Models\User;
 
@@ -37,7 +38,9 @@ Route::get('/', function(){
 });
 
 Route::get('/test', function(){
-    return User::find(2)->friends;
+    // return User::find(1)->towns[0]->buildings[0]->levelStats;
+    // return Bugreport::find(1)->user;
+    return User::find(1)->bugreports;
 });
 
 

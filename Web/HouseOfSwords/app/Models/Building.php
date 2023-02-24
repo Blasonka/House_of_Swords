@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Buildings\Church;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +10,18 @@ class Building extends Model
 {
     use HasFactory;
 
-    // table properties
+    // ÉPÜLETTÍPUSNAK ÉS OSZTÁLYÁNAK SZÓTÁRA
+    private $typeClass = [
+        'Church' => Church::class,
+        'Barrack' => Church::class,
+        'Research' => Church::class,
+        'Warehouse' => Church::class,
+        'Infirmary' => Church::class,
+        'Diplomacy' => Church::class,
+        'Market' => Church::class
+    ];
+
+    // TÁBLA TULAJDONSÁGOK
     protected $table = 'buildings';
     protected $primaryKey = 'BuildingID';
     public $timestamps = false;
@@ -24,5 +36,9 @@ class Building extends Model
     // KAPCSOLATOK
     public function town(){
         return $this->belongsTo(Town::class, 'Towns_TownID', 'TownID');
+    }
+
+    public function levelStats(){
+        return $this->hasOne($this->typeClass[$this->BuildingType], 'Lvl', 'BuildingLvl');
     }
 }
