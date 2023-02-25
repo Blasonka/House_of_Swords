@@ -13,6 +13,7 @@ use App\Models\Town;
 use App\Models\User;
 use App\Http\Controllers\BuildingControllers\ResearchController;
 use App\Http\Controllers\UnitController;
+use App\Http\Middleware\GameSessionAuthentication;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,11 +26,18 @@ use App\Http\Controllers\UnitController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+// Hitelesség ellenőrzés / Bejelentkezés
+Route::get('/gameSessionAuthFail', function () {
+    return response([
+        'success' => false,
+        'message' => 'You are not authorized to access this data.'
+    ], 401);
+})->name('gameSessionAuthFail');
 
-//API működésének tesztje
+Route::get('/createGameSession', [UserController::class, 'loginRequest']);
+
+
+// API működésének tesztje
 Route::get('/', function(){
     return [
         'creator' => 'Wauboi',
@@ -75,7 +83,6 @@ Route::apiResource('stats/church', ChurchController::class);
 
 Route::apiResource('stats/research', ResearchController::class);
 Route::get('stats/research/researchedUnits/{researchBuildingId}', [ResearchController::class, 'getResearchedUnits']);
-// Route::get('stats/research/until/{lvl}', [ResearchController::class, 'showUntilLevel']);
 
 // BUILDING ACTIONS
 Route::prefix('actions')->group(function () {
