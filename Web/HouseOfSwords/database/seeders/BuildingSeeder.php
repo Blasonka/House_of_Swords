@@ -26,7 +26,8 @@ class BuildingSeeder extends Seeder
     public function run()
     {
         foreach ($this->buildingTypes as $key => $value) {
-            DB::table('buildings')->insert([
+            DB::table('buildings')->updateOrInsert([ 'Towns_TownID' => 1 ],
+            [
                 'Towns_TownID' => 1,
                 'BuildingType' => $value
             ]);

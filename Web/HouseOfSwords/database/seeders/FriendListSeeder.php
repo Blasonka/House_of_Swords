@@ -15,12 +15,20 @@ class FriendListSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('friendlist')->insert([
+        DB::table('friendlist')->updateOrInsert([
+            'Users_UID' => 1,
+            'FriendID' => 2
+        ],
+        [
             'Users_UID' => 1,
             'FriendID' => 2
         ]);
 
-        DB::table('friendlist')->insert([
+        DB::table('friendlist')->updateOrInsert([
+            'Users_UID' => 2,
+            'FriendID' => 1
+        ],
+        [
             'Users_UID' => 2,
             'FriendID' => 1
         ]);

@@ -23,7 +23,8 @@ class ResearchStatsSeeder extends Seeder
     public function run()
     {
         foreach ($this->statsPerLevel as $key => $value) {
-            DB::table('levelstats_research')->insert([
+            DB::table('levelstats_research')->updateOrInsert([ 'Lvl' => $key ],
+            [
                 'Lvl' => $key,
                 'SciencePM' => $value[0],
                 'MaxScience' => $value[1]

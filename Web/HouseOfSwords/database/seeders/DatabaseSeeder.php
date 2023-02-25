@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use Database\Seeders\LevelstatsSeeders\BarrackStatsSeeder;
 use Database\Seeders\LevelstatsSeeders\ChurchStatsSeeder;
 use Database\Seeders\LevelstatsSeeders\DiplomacyStatsSeeder;
 use Database\Seeders\LevelstatsSeeders\InfirmaryStatsSeeder;
@@ -36,11 +37,13 @@ class DatabaseSeeder extends Seeder
             BugReportSeeder::class,
             UnitSeeder::class,
 
+            // Levelstats Seeders
+            BarrackStatsSeeder::class,
             ChurchStatsSeeder::class,
+            DiplomacyStatsSeeder::class,
             InfirmaryStatsSeeder::class,
             MarketStatsSeeder::class,
             ResearchStatsSeeder::class,
-            DiplomacyStatsSeeder::class,
             WarehouseStatsSeeder::class
         ]);
     }

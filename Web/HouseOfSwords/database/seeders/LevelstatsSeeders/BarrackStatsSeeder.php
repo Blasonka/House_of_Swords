@@ -6,13 +6,13 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class DiplomacyStatsSeeder extends Seeder
+class BarrackStatsSeeder extends Seeder
 {
-    // Lvl => [ MaxAllyCount, MaxAllyRange ]
+    // Lvl => [ MaxUnitCount, MaxTrainingAmount, MaxAttackRange ]
     private $statsPerLevel = [
-        1 => [0, 0],
-        2 => [1, 50],
-        3 => [2, 100]
+        1 => [ 10, 5, 50 ],
+        2 => [ 20, 8, 100 ],
+        3 => [ 40, 10, 150 ]
     ];
 
     /**
@@ -23,11 +23,12 @@ class DiplomacyStatsSeeder extends Seeder
     public function run()
     {
         foreach ($this->statsPerLevel as $key => $value) {
-            DB::table('levelstats_diplomacy')->updateOrInsert([ 'Lvl' => $key ],
+            DB::table('levelstats_barrack')->updateOrInsert([ 'Lvl' => $key ],
             [
-                'Lvl' => $key,
-                'MaxAllyCount' => $value[0],
-                'MaxAllyRange' => $value[1]
+                'MaxUnitCount' => $value[0],
+                'MaxTrainingAmount' => $value[1],
+
+                'MaxAttackRange' => $value[2]
             ]);
         }
     }

@@ -15,7 +15,8 @@ class BugReportSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('bugreports')->insert([
+        DB::table('bugreports')->updateOrInsert([ 'Id' => 1 ],
+        [
             'Text' => 'A felhasználók által jelentett hibák itt fognak megjelenni.',
             'EmailAddress' => 'blasek.balazs@gmail.com',
             'IsSolved' => 2

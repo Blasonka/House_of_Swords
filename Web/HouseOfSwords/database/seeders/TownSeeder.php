@@ -15,7 +15,8 @@ class TownSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('towns')->insert([
+        DB::table('towns')->updateOrInsert([ 'TownID' => 1 ],
+        [
             'TownName' => 'Blasi városa',
             'XCords' => rand(-1000, 1000),
             'YCords' => rand(-1000, 1000),

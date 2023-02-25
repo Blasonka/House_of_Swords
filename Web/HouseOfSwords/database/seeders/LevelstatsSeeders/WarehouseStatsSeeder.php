@@ -23,7 +23,8 @@ class WarehouseStatsSeeder extends Seeder
     public function run()
     {
         foreach ($this->statsPerLevel as $key => $value) {
-            DB::table('levelstats_warehouse')->insert([
+            DB::table('levelstats_warehouse')->updateOrInsert([ 'Lvl' => $key ],
+            [
                 'Lvl' => $key,
 
                 'MaxBrigadeCount' => $value[0],

@@ -44,7 +44,8 @@ Route::get('/test', function(){
     // return User::find(1)->towns[0]->buildings[0]->levelStats;
     // return Bugreport::find(1)->user;
     // return User::find(1)->bugreports;
-    return User::find(1)->towns[0]->buildings[0]->levelStats;
+    // return User::find(1)->towns[0]->buildings[0]->levelStats;
+    return User::find(1)->get('PwdHash');
 });
 
 

@@ -23,7 +23,8 @@ class MarketStatsSeeder extends Seeder
     public function run()
     {
         foreach ($this->statsPerLevel as $key => $value) {
-            DB::table('levelstats_market')->insert([
+            DB::table('levelstats_market')->updateOrInsert([ 'Lvl' => $key ],
+            [
                 'Lvl' => $key,
                 'MaxTaxPercentage' => $value[0],
                 'HappinessModifierPerPercent' => $value[1]

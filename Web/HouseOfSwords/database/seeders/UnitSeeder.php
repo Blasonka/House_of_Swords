@@ -23,7 +23,8 @@ class UnitSeeder extends Seeder
     public function run()
     {
         foreach ($this->units as $key => $value) {
-            DB::table('units')->insert([
+            DB::table('units')->updateOrInsert([ 'UnitID' => $key ],
+            [
                 'UnitID' => $key,
 
                 'UnitName' => $value[0],

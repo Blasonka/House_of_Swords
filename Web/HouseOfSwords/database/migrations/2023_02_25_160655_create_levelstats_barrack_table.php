@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sieging_units', function (Blueprint $table) {
+        Schema::create('levelstats_barrack', function (Blueprint $table) {
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_general_ci';
 
-            $table->id('SiegingUnitID');
+            $table->id('Lvl');
 
-            $table->foreignId('SiegeID')->constrained('sieges', 'SiegeID');
-            $table->foreignId('UnitID')->constrained('units', 'UnitID');
+            $table->integer('MaxUnitCount')->unsigned();
+            $table->integer('MaxTrainingAmount')->unsigned();
 
-            $table->integer('UnitAmount')->unsigned();
+            $table->integer('MaxAttackRange')->unsigned();
         });
     }
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sieging_units');
+        Schema::dropIfExists('levelstats_barrack');
     }
 };

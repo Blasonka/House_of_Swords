@@ -23,7 +23,8 @@ class InfirmaryStatsSeeder extends Seeder
     public function run()
     {
         foreach ($this->statsPerLevel as $key => $value) {
-            DB::table('levelstats_infirmary')->insert([
+            DB::table('levelstats_infirmary')->updateOrInsert([ 'Lvl' => $key ],
+            [
                 'Lvl' => $key,
                 'HealingTime' => $value[0],
                 'Effectivity' => $value[1],

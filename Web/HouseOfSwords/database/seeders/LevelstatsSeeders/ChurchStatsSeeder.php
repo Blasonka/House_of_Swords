@@ -25,7 +25,8 @@ class ChurchStatsSeeder extends Seeder
     public function run()
     {
         foreach ($this->statsPerLevel as $key => $value) {
-            DB::table('levelstats_church')->insert([
+            DB::table('levelstats_church')->updateOrInsert([ 'Lvl' => $key ],
+            [
                 'Lvl' => $key,
                 'MassLength' => $value[0],
                 'HappinessBoost' => $value[1]

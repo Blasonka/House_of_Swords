@@ -14,6 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('sieges', function (Blueprint $table) {
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_general_ci';
+
             $table->id('SiegeID');
 
             $table->foreignId('AttackerTownID')->constrained('towns', 'TownID');
