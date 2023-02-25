@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('levelstats_market', function (Blueprint $table) {
-            $table->charset = 'utf8mb4';
-            $table->collation = 'utf8mb4_general_ci';
+        Schema::create('sieging_units', function (Blueprint $table) {
+            $table->id('SiegingUnitID');
 
-            $table->id('Lvl');
+            $table->foreignId('SiegeID')->constrained('sieges', 'SiegeID');
+            $table->foreignId('UnitID')->constrained('units', 'UnitID');
 
-            $table->integer('MaxTaxPercentage');
-            $table->integer('HappinessModifierPerPercent');
+            $table->integer('UnitAmount')->unsigned();
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('levelstats_market');
+        Schema::dropIfExists('sieging_units');
     }
 };

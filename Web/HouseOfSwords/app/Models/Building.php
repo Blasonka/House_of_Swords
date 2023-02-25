@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Buildings\Church;
+use App\Models\Buildings\Research;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +15,7 @@ class Building extends Model
     private $typeClass = [
         'Church' => Church::class,
         'Barrack' => Church::class,
-        'Research' => Church::class,
+        'Research' => Research::class,
         'Warehouse' => Church::class,
         'Infirmary' => Church::class,
         'Diplomacy' => Church::class,

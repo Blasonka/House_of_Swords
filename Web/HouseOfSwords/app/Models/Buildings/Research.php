@@ -9,7 +9,7 @@ class Research extends Model
 {
     use HasFactory;
 
-    protected $table = 'researchstats';
+    protected $table = 'levelstats_research';
     protected $primaryKey = 'Lvl';
     public $timestamps = false;
 

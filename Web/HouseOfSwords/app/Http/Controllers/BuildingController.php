@@ -70,7 +70,23 @@ class BuildingController extends Controller
             return Building::all()->where('Towns_TownID', '=', $Town_ID)->values();
         }
         catch (Exception $e) {
-            return response()->json(['message'=>'Database error.'],400);
+            return response()->json(['message'=>'Database error.'],500);
+        }
+    }
+
+    /**
+     * Display the specified resource that belongs to the given Town.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showLevelStats($BuildingID)
+    {
+        try {
+            return Building::find($BuildingID)->levelStats;
+        }
+        catch (Exception $e) {
+            return response()->json(['message'=>'Database error.'],500);
         }
     }
 

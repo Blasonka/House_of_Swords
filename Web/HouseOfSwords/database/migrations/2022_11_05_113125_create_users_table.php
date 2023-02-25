@@ -21,12 +21,13 @@ return new class extends Migration
 
             $table->string('Username', 30)->unique();
             $table->string('EmailAddress', 100)->unique();
-            $table->boolean('IsEmailVerified')->default(0);
+            $table->boolean('IsEmailVerified')->default(0)->unsigned();
             $table->string('PwdHash', 128);
             $table->string('PwdSalt', 20);
-            $table->tinyInteger('Role')->unsigned()->default(0);
+            $table->tinyInteger('Role')->unsigned()->default(0)->unsigned();
             $table->string('EmailVerificationToken', 32)->nullable();
-            $table->dateTime('LastLoginDate')->useCurrent();
+
+            $table->dateTime('LastOnline')->useCurrent()->nullable();
         });
     }
 

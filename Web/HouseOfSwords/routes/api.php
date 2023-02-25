@@ -43,7 +43,8 @@ Route::get('/', function(){
 Route::get('/test', function(){
     // return User::find(1)->towns[0]->buildings[0]->levelStats;
     // return Bugreport::find(1)->user;
-    return User::find(1)->bugreports;
+    // return User::find(1)->bugreports;
+    return User::find(1)->towns[0]->buildings[0]->levelStats;
 });
 
 
@@ -64,6 +65,7 @@ Route::get('/users/{UID}/towns', [TownController::class, 'showSpecial']);
 // BUILDINGS
 Route::apiResource('buildings', BuildingController::class);
 Route::get('/towns/{Town_ID}/buildings', [BuildingController::class, 'showSpecial']);
+Route::get('/buildings/{Building_ID}/levelstats', [BuildingController::class, 'showLevelStats']);
 
 
 // STATS

@@ -10,6 +10,7 @@ use Ramsey\Uuid\Type\Time;
 
 class ChurchStatsSeeder extends Seeder
 {
+    // Lvl => [ MassLength, HappinessBoost ]
     private $statsPerLevel = [
         1 => [ '00:10:00', 2 ],
         2 => [ '00:20:00', 5 ],

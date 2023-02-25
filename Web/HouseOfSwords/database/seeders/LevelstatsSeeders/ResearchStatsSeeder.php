@@ -6,13 +6,13 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class MarketStatsSeeder extends Seeder
+class ResearchStatsSeeder extends Seeder
 {
-    // Lvl => [ MaxTaxPercentage, HappinessModifierPerPercent ]
+    // Lvl => [ SciencePM, MaxScience ]
     private $statsPerLevel = [
-        1 => [10, 100],
-        2 => [15, 90],
-        3 => [20, 85]
+        1 => [2, 30],
+        2 => [3, 45],
+        3 => [10, 150]
     ];
 
     /**
@@ -23,10 +23,10 @@ class MarketStatsSeeder extends Seeder
     public function run()
     {
         foreach ($this->statsPerLevel as $key => $value) {
-            DB::table('levelstats_market')->insert([
+            DB::table('levelstats_research')->insert([
                 'Lvl' => $key,
-                'MaxTaxPercentage' => $value[0],
-                'HappinessModifierPerPercent' => $value[1]
+                'SciencePM' => $value[0],
+                'MaxScience' => $value[1]
             ]);
         }
     }

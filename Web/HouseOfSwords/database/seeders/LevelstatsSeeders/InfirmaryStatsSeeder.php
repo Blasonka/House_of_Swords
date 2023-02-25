@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class InfirmaryStatsSeeder extends Seeder
 {
+    // Lvl => [ HealingTime, Effectivity, MaxInjuredUnits, MaxHealedUnits ]
     private $statsPerLevel = [
         1 => ['06:00:00', 25, 10, 10],
         2 => ['05:30:00', 25, 15, 25],

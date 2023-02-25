@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('levelstats_market', function (Blueprint $table) {
-            $table->charset = 'utf8mb4';
-            $table->collation = 'utf8mb4_general_ci';
-
+        Schema::create('levelstats_diplomacy', function (Blueprint $table) {
             $table->id('Lvl');
 
-            $table->integer('MaxTaxPercentage');
-            $table->integer('HappinessModifierPerPercent');
+            $table->integer('MaxAllyCount')->unsigned();
+            $table->integer('MaxAllyRange')->unsigned();
         });
     }
 
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('levelstats_market');
+        Schema::dropIfExists('levelstats_diplomacy');
     }
 };
