@@ -39,14 +39,20 @@ class ResearchUpdate extends Command
         }
 
         foreach ($researchBuildings as $key => $value) {
-            $params = json_decode($value->Params);
+            // $params = json_decode($value->Params);
 
-            $params->currentScience += $scienceBasedOnLevel[$value->BuildingLvl - 1];
-            if ($params->currentScience > $maxScienceBasedOnLevel[$value->BuildingLvl - 1]){
-                $params->currentScience = $maxScienceBasedOnLevel[$value->BuildingLvl - 1];
+            // $params->currentScience += $scienceBasedOnLevel[$value->BuildingLvl - 1];
+            // if ($params->currentScience > $maxScienceBasedOnLevel[$value->BuildingLvl - 1]){
+            //     $params->currentScience = $maxScienceBasedOnLevel[$value->BuildingLvl - 1];
+            // }
+
+            // $value->Params = json_encode($params);
+
+            $value->currentScience += $scienceBasedOnLevel[$value->BuildingLvl - 1];
+            if ($value->currentScience > $maxScienceBasedOnLevel[$value->BuildingLvl - 1]){
+                $value->currentScience = $maxScienceBasedOnLevel[$value->BuildingLvl - 1];
             }
 
-            $value->Params = json_encode($params);
             $value->save();
         }
 
