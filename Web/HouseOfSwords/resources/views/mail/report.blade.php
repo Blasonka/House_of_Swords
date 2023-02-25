@@ -8,6 +8,6 @@
 </head>
 <body>
     <h1>Bug Report Email</h1>
-    <p>{{ $data['body'] }}</p>
+    <p>{{ $data->body }}</p>
 </body>
 </html>

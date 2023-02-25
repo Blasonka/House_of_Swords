@@ -143,7 +143,7 @@ main{
 
 
 /* Scrollbar */
-
+/* chrome, edge */
 ::-webkit-scrollbar {
     width: 20px;
 }
@@ -163,4 +163,26 @@ main{
     background-color: #6c3b25;
 }
 
+/* firefox */
+:root{
+    scrollbar-color: #a6876e #212529 !important;
+  }
 /*Scrollbar vége*/
+
+/* footer */
+.footer-li{
+    margin: auto;
+    color: #7d7e7d;
+    font-size: 20px;
+    padding: 0.7rem;
+}
+
+/* .basic-link, */
+/* a, */
+a.basic-link:link ,
+a.basic-link:visited ,
+a.basic-link:active ,
+a.basic-link:hover {
+    color: #a6876e;
+    text-decoration: underline!important;
+}
