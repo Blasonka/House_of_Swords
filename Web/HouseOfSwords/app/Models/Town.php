@@ -26,4 +26,13 @@ class Town extends Model
         'YCords',
         'Users_UID'
     ];
+
+    // KAPCSOLATOK
+    public function user(){
+        return $this->belongsTo(User::class, 'Users_UID', 'UID');
+    }
+
+    public function buildings(){
+        return $this->hasMany(Building::class, 'Towns_TownID', 'TownID');
+    }
 }

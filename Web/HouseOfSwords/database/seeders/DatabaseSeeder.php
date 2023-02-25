@@ -3,6 +3,14 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use Database\Seeders\LevelstatsSeeders\BarrackStatsSeeder;
+use Database\Seeders\LevelstatsSeeders\ChurchStatsSeeder;
+use Database\Seeders\LevelstatsSeeders\DiplomacyStatsSeeder;
+use Database\Seeders\LevelstatsSeeders\InfirmaryStatsSeeder;
+use Database\Seeders\LevelstatsSeeders\MarketStatsSeeder;
+use Database\Seeders\LevelstatsSeeders\ResearchStatsSeeder;
+use Database\Seeders\LevelstatsSeeders\WarehouseStatsSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +28,23 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $this->call([
+            UserSeeder::class,
+            TownSeeder::class,
+            BuildingSeeder::class,
+            FriendListSeeder::class,
+            BugReportSeeder::class,
+            UnitSeeder::class,
+
+            // Levelstats Seeders
+            BarrackStatsSeeder::class,
+            ChurchStatsSeeder::class,
+            DiplomacyStatsSeeder::class,
+            InfirmaryStatsSeeder::class,
+            MarketStatsSeeder::class,
+            ResearchStatsSeeder::class,
+            WarehouseStatsSeeder::class
+        ]);
     }
 }

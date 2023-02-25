@@ -8,6 +8,9 @@ use App\Http\Controllers\TownController;
 use App\Http\Controllers\FriendlistController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\BuildingControllers\ChurchController;
+use App\Models\Bugreport;
+use App\Models\Town;
+use App\Models\User;
 use App\Http\Controllers\BuildingControllers\ResearchController;
 use App\Http\Controllers\UnitController;
 
@@ -37,6 +40,14 @@ Route::get('/', function(){
     ];
 });
 
+Route::get('/test', function(){
+    // return User::find(1)->towns[0]->buildings[0]->levelStats;
+    // return Bugreport::find(1)->user;
+    // return User::find(1)->bugreports;
+    // return User::find(1)->towns[0]->buildings[0]->levelStats;
+    return User::find(1)->get('PwdHash');
+});
+
 
 // USERS
 Route::apiResource('users', UserController::class);
@@ -55,6 +66,7 @@ Route::get('/users/{UID}/towns', [TownController::class, 'showSpecial']);
 // BUILDINGS
 Route::apiResource('buildings', BuildingController::class);
 Route::get('/towns/{Town_ID}/buildings', [BuildingController::class, 'showSpecial']);
+Route::get('/buildings/{Building_ID}/levelstats', [BuildingController::class, 'showLevelStats']);
 
 
 // STATS
