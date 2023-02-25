@@ -18,6 +18,10 @@ class Building extends Model
         'Towns_TownID',
         'BuildingType',
         'BuildingLvl',
-        'Params'
+        'Params',
+        'lastCureDate',
+        'currentCure',
+        'injuredUnits',
+        'healedUnits'
     ];
 }

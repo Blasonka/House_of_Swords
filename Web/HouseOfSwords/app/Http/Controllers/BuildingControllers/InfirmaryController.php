@@ -78,23 +78,19 @@ class InfirmaryController extends Controller
                 ], 400);
             }
 
-            $infirmaryStats = Infirmary::find($infirmary->BuildingLvl);
-            $params = json_decode($infirmary->Params);
-
-            if ($params->injuredUnits == 0) {
+            if ($infirmary->injuredUnits == 0) {
                 return response()->json([
                     'success' => false,
                     'message' => 'To start cure you must have injured units.'
                 ], 400);
             }
 
-            $params->lastCureDate = date('Y-m-d H:i:s');
-            $params->currentCure = $params->injuredUnits;
-            $params->injuredUnits = 0;
-            $infirmary->Params = json_encode($params);
+            $infirmary->lastCureDate = date('Y-m-d H:i:s');
+            $infirmary->currentCure = $infirmary->injuredUnits;
+            $infirmary->injuredUnits = 0;
             $infirmary->save();
-
             return response()->json($infirmary, 200);
+
         } catch (Exception $err) {
             return response()->json([
                 'success' => false,
@@ -118,24 +114,21 @@ class InfirmaryController extends Controller
             }
 
             $infirmaryStats = Infirmary::find($infirmary->BuildingLvl);
-            $params = json_decode($infirmary->Params);
 
             //sikeresen meggyógyított unit-ok (gyógyított*effectivity(%))/100 lefelé kerektítve
-            $newHealedUnits = floor(($params->currentCure * $infirmaryStats->Effectivity) / 100);
+            $newHealedUnits = floor(($infirmary->currentCure * $infirmaryStats->Effectivity) / 100);
 
-            //healedUnits hozzáadása
-            if ($infirmaryStats->MaxHealedUnits <= ($params->healedUnits + $newHealedUnits)) {
-                $params->healedUnits = $infirmaryStats->MaxHealedUnits;
+            //healedUnits hozzáadása (figyelembe véve, hogy ne legyen több a maximum megengedettnél)
+            if ($infirmaryStats->MaxHealedUnits <= ($infirmary->healedUnits + $newHealedUnits)) {
+                $infirmary->healedUnits = $infirmaryStats->MaxHealedUnits;
             } else {
-                $params->healedUnits += $newHealedUnits;
+                $infirmary->healedUnits += $newHealedUnits;
             }
 
-            $params->currentCure = 0;
-
-            $infirmary->Params = json_encode($params);
+            $infirmary->currentCure = 0;
             $infirmary->save();
-
             return response()->json($infirmary, 200);
+
         } catch (Exception $err) {
             return response()->json([
                 'success' => false,
