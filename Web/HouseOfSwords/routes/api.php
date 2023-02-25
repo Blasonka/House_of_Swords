@@ -10,6 +10,7 @@ use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\BuildingControllers\ChurchController;
 use App\Http\Controllers\BuildingControllers\ResearchController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\BuildingControllers\InfirmaryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,7 @@ Route::get('/towns/{Town_ID}/buildings', [BuildingController::class, 'showSpecia
 // STATS
 Route::apiResource('stats/units', UnitController::class);
 Route::apiResource('stats/church', ChurchController::class);
+Route::apiResource('stats/infirmary', InfirmaryController::class);
 
 Route::apiResource('stats/research', ResearchController::class);
 Route::get('stats/research/researchedUnits/{researchBuildingId}', [ResearchController::class, 'getResearchedUnits']);
@@ -78,6 +80,9 @@ Route::prefix('actions')->group(function () {
         Route::post('researchUnit', [ResearchController::class, 'researchUnit']);
     });
 
+    Route::post('startMass', [ChurchController::class, 'startMass']);
+    Route::post('startCure', [InfirmaryController::class, 'StartCure']);
+    Route::post('finishCure', [InfirmaryController::class, 'FinishCure']);
     // OTHER BUILDINGS' ACTIONS
     // ...
 });
