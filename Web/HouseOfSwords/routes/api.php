@@ -11,6 +11,7 @@ use App\Http\Controllers\BuildingControllers\ChurchController;
 use App\Http\Controllers\BuildingControllers\ResearchController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\BuildingControllers\InfirmaryController;
+use App\Http\Controllers\BuildingControllers\WarehouseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ use App\Http\Controllers\BuildingControllers\InfirmaryController;
 // });
 
 //API működésének tesztje
-Route::get('/', function(){
+Route::get('/', function () {
     return [
         'creator' => 'Wauboi',
         'whatIsThis' => 'An API',
@@ -62,8 +63,9 @@ Route::get('/towns/{Town_ID}/buildings', [BuildingController::class, 'showSpecia
 Route::apiResource('stats/units', UnitController::class);
 Route::apiResource('stats/church', ChurchController::class);
 Route::apiResource('stats/infirmary', InfirmaryController::class);
-
 Route::apiResource('stats/research', ResearchController::class);
+Route::apiResource('stats/warehouse', WarehouseController::class);
+
 Route::get('stats/research/researchedUnits/{researchBuildingId}', [ResearchController::class, 'getResearchedUnits']);
 // Route::get('stats/research/until/{lvl}', [ResearchController::class, 'showUntilLevel']);
 
@@ -85,6 +87,12 @@ Route::prefix('actions')->group(function () {
         Route::post('startCure', [InfirmaryController::class, 'StartCure']);
         Route::post('finishCure', [InfirmaryController::class, 'FinishCure']);
     });
+
+    // WAREHOUSE ACTIONS
+    Route::prefix('warehouse')->group(function () {
+        Route::post('addbrigade', [WarehouseController::class, 'AddBrigade']);
+    });
+
     // OTHER BUILDINGS' ACTIONS
     // ...
 });
@@ -95,5 +103,5 @@ Route::apiResource('friendlists', FriendlistController::class);
 
 // ANY UNKNOWN METHODS
 Route::any('{params}', function ($params) {
-    return 'Error 404: Requested content does not exist → '.$params.'.';
+    return 'Error 404: Requested content does not exist → ' . $params . '.';
 });
