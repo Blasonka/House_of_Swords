@@ -80,9 +80,11 @@ Route::prefix('actions')->group(function () {
         Route::post('researchUnit', [ResearchController::class, 'researchUnit']);
     });
 
-    Route::post('startMass', [ChurchController::class, 'startMass']);
-    Route::post('startCure', [InfirmaryController::class, 'StartCure']);
-    Route::post('finishCure', [InfirmaryController::class, 'FinishCure']);
+    // INFIRMARY ACTIONS
+    Route::prefix('infirmary')->group(function () {
+        Route::post('startCure', [InfirmaryController::class, 'StartCure']);
+        Route::post('finishCure', [InfirmaryController::class, 'FinishCure']);
+    });
     // OTHER BUILDINGS' ACTIONS
     // ...
 });
