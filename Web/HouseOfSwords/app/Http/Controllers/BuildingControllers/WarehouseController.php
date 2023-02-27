@@ -97,29 +97,28 @@ class WarehouseController extends Controller
                 ], 400);
             }
 
+            if($warehouse->BrigadeInWarehouse < 1){
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid request, minimum one brigade is required!'
+                ], 400);
+            }
             if($request->has('addStone')){
                 $warehouse->BrigadeInStone += $request->addStone;
-                $warehouse->save();
-                return response()->json($warehouse, 200);
             }
-
-            if($request->has('addWood')){
+            else if($request->has('addWood')){
                 $warehouse->BrigadeInWood += $request->addWood;
-                $warehouse->save();
-                return response()->json($warehouse, 200);
             }
-
-            if($request->has('addMetal')){
+            else if($request->has('addMetal')){
                 $warehouse->BrigadeInMetal += $request->addMetal;
-                $warehouse->save();
-                return response()->json($warehouse, 200);
+            }
+            else if($request->has('addGold')){
+                $warehouse->BrigadeInGold += $request->addGold;
             }
 
-            if($request->has('addGold')){
-                $warehouse->BrigadeInGold += $request->addGold;
-                $warehouse->save();
-                return response()->json($warehouse, 200);
-            }
+            $warehouse->BrigadeInWarehouse--;
+            $warehouse->save();
+            return response()->json($warehouse, 200);
 
             return response()->json([
                 'success' => false,
