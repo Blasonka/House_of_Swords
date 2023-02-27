@@ -21,6 +21,8 @@
                     <div class="col-12">
                         <form action="/editProfil" method="post">
                             @csrf
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+
                             <h2 class="text-start">Felhasználói adatok</h2>
                             <div class="form">
                                 <input name="Username" type="text" placeholder="Felhasználónév">

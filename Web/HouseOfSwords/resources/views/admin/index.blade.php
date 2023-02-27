@@ -20,7 +20,13 @@
                             <td>
                                 {{ $bug->Id }}
                             </td>
-                            <td><a href="#">{{ $bug->EmailAddress }}</a></td>
+                            <td>
+                                @if ($bug->EmailAddress == 'anonymus')
+                                    {{ $bug->EmailAddress }}
+                                @else
+                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to={{ $bug->EmailAddress }}" target="_blank">{{ $bug->EmailAddress }}</a>
+                                @endif
+                            </td>
                             <td><small class="d-block">{{ $bug->Text }}</small></td>
                             @if ($bug->IsSolved == 0)
                                 <td class="status"><span class="bug bug-bg">Megoldatlan</span></td>
@@ -33,21 +39,21 @@
                             <td class="status">
                                 <div class="row mx-auto">
                                     <div class="col-1">
-                                        <form action="/api/bugreports/{{$bug->Id}}" method="POST">
+                                        <form action="/api/bugreports/{{ $bug->Id }}" method="POST">
                                             @method('PATCH')
                                             <input name="IsSolved" value="2" type="text" hidden>
                                             <button type="submit" class="btn btn-sm btn-success btn-fixed"></button>
                                         </form>
                                     </div>
                                     <div class="col-1">
-                                        <form action="/api/bugreports/{{$bug->Id}}" method="POST">
+                                        <form action="/api/bugreports/{{ $bug->Id }}" method="POST">
                                             @method('PATCH')
                                             <input name="IsSolved" value="1" type="text" hidden>
                                             <button type="submit" class="btn btn-sm btn-warning btn-inprogress"></button>
                                         </form>
                                     </div>
                                     <div class="col-1">
-                                        <form action="/api/bugreports/{{$bug->Id}}" method="POST">
+                                        <form action="/api/bugreports/{{ $bug->Id }}" method="POST">
                                             @method('PATCH')
                                             <input name="IsSolved" value="0" type="text" hidden>
                                             <button type="submit" class="btn btn-sm btn-danger btn-bug"></button>
