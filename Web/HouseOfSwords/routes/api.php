@@ -91,6 +91,7 @@ Route::prefix('actions')->group(function () {
     // WAREHOUSE ACTIONS
     Route::prefix('warehouse')->group(function () {
         Route::post('addbrigade', [WarehouseController::class, 'AddBrigade']);
+        Route::post('removebrigade', [WarehouseController::class, 'RemoveBrigade']);
     });
 
     // OTHER BUILDINGS' ACTIONS

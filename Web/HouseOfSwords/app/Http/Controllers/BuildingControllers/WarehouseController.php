@@ -86,7 +86,8 @@ class WarehouseController extends Controller
         //
     }
 
-    public function AddBrigade(Request $request){
+    public function AddBrigade(Request $request)
+    {
         try {
             $warehouse = Building::find($request->BuildingID);
 
@@ -97,34 +98,82 @@ class WarehouseController extends Controller
                 ], 400);
             }
 
-            if($warehouse->BrigadeInWarehouse < 1){
+            if ($warehouse->BrigadeInWarehouse < 1) {
                 return response()->json([
                     'success' => false,
                     'message' => 'Invalid request, minimum one brigade is required!'
                 ], 400);
             }
-            if($request->has('addStone')){
+
+            if ($request->has('addStone')) {
                 $warehouse->BrigadeInStone += $request->addStone;
-            }
-            else if($request->has('addWood')){
+            } else if ($request->has('addWood')) {
                 $warehouse->BrigadeInWood += $request->addWood;
-            }
-            else if($request->has('addMetal')){
+            } else if ($request->has('addMetal')) {
                 $warehouse->BrigadeInMetal += $request->addMetal;
-            }
-            else if($request->has('addGold')){
+            } else if ($request->has('addGold')) {
                 $warehouse->BrigadeInGold += $request->addGold;
+            } else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid input, the request must contain one of the following fields: addStone, addWood, addMetal or addGold'
+                ], 400);
             }
 
             $warehouse->BrigadeInWarehouse--;
             $warehouse->save();
             return response()->json($warehouse, 200);
 
+
+        } catch (Exception $err) {
             return response()->json([
                 'success' => false,
-                'message' => 'Invalid input, the request must contain one of the following fields: addStone, addWood, addMetal or addGold'
-            ], 400);
+                'message' => 'An unknown server error has occured.',
+                'details' => $err->getMessage()
+            ], 500);
+        }
+    }
 
+    public function RemoveBrigade(Request $request)
+    {
+        try {
+            $warehouse = Building::find($request->BuildingID);
+
+            if ($warehouse->BuildingType != "Warehouse") {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The requested building is not of type Warehouse.'
+                ], 400);
+            }
+
+            if ($request->has('removeAll')) {
+                $warehouse->BrigadeInWarehouse += ($warehouse->BrigadeInStone + $warehouse->BrigadeInWood + $warehouse->BrigadeInMetal + $warehouse->BrigadeInGold);
+                $warehouse->BrigadeInStone = 0;
+                $warehouse->BrigadeInWood = 0;
+                $warehouse->BrigadeInMetal = 0;
+                $warehouse->BrigadeInGold = 0;
+                $warehouse->save();
+                return response()->json($warehouse, 200);
+            }
+
+            if ($request->has('removeStone')) {
+                $warehouse->BrigadeInStone -= $request->removeStone;
+            } else if ($request->has('removeWood')) {
+                $warehouse->BrigadeInWood -= $request->removeWood;
+            } else if ($request->has('removeMetal')) {
+                $warehouse->BrigadeInMetal -= $request->removeMetal;
+            } else if ($request->has('removeGold')) {
+                $warehouse->BrigadeInGold -= $request->removeGold;
+            } else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid input, the request must contain one of the following fields: removeStone, removeWood, removeMetal or removeGold'
+                ], 400);
+            }
+
+            $warehouse->BrigadeInWarehouse++;
+            $warehouse->save();
+            return response()->json($warehouse, 200);
         } catch (Exception $err) {
             return response()->json([
                 'success' => false,
