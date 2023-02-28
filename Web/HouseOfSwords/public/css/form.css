@@ -71,11 +71,11 @@ h2{
     color: #fff;
     transition: 0.4s ease;
 }
+
 .register-login-btn:hover{
     background: #fff;
     color: #6C3B25;
 }
-
 
 /*Log In With*/
 
@@ -119,4 +119,18 @@ label{
 .profil-picture{
     display: flex;
     align-items: center;
+}
+
+.form .disabled{
+    width: 100%;
+    height: 35px;
+    background: transparent;
+    border-bottom: 1px solid #6C3B25;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    color: grey;
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-top: 30px;
 }

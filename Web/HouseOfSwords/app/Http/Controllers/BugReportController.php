@@ -73,11 +73,9 @@ class BugReportController extends Controller
         try {
             if (Bugreport::find($id)->exists()) {
                 $bugreport = Bugreport::find($id);
-                error_log($bugreport);
                 $bugreport->update($request->all());
-            return redirect()->route('admin');
-
-                return response()->json(['message' => 'Item was updated, id: ' . $id], 200);
+                return redirect()->back();
+                // return response()->json(['message' => 'Item was updated, id: ' . $id], 200);
             } else {
                 return response()->json(['message' => 'Item not found, id: ' . $id], 404);
             }

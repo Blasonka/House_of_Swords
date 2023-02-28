@@ -59,6 +59,11 @@
                                 </li>
                             @endif
 
+                            <li class="my-nav-item align-self-center {{ request()->is('profil') ? 'my-active' : '' }}">
+                                @csrf
+                                <a class="my-nav-link" href="{{ route('user.profil') }}">Profil</a>
+                            </li>
+
                             <li class="nav-item align-self-center">
                                 @csrf
                                 <a class="my-nav-link" href="{{ route('logout') }}">

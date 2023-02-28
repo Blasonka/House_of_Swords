@@ -111,12 +111,14 @@ class UserController extends Controller
             if (User::find($id)->exists()) {
                 $user = User::find($id);
                 $user->update($request->all());
-                return response()->json(['message' => 'Item was updated, id: ' . $id], 200);
+                return redirect()->route('user.profil');
+                // return response()->json(['message' => 'Item was updated, id: ' . $id], 200);
             } else {
                 return response()->json(['message' => 'Item not found, id: ' . $id], 404);
             }
-        } catch (Exception $e) {
-            return response()->json(['message' => 'Database error'], 400);
+        } catch (Exception $err) {
+            return redirect()->route('user.profil')->with('errors', $err->getMessage());
+            // return response()->json(['message' => 'Database error'], 400);
         }
     }
 

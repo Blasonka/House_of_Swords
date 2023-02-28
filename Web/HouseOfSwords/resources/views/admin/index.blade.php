@@ -24,7 +24,8 @@
                                 @if ($bug->EmailAddress == 'anonymus')
                                     {{ $bug->EmailAddress }}
                                 @else
-                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to={{ $bug->EmailAddress }}" target="_blank">{{ $bug->EmailAddress }}</a>
+                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to={{ $bug->EmailAddress }}"
+                                        target="_blank">{{ $bug->EmailAddress }}</a>
                                 @endif
                             </td>
                             <td><small class="d-block">{{ $bug->Text }}</small></td>
