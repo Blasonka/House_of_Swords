@@ -2,8 +2,22 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
+// Siege System Dependencies
+use Database\Seeders\SiegeSystem\SiegesSeeder;
+use Database\Seeders\SiegeSystem\SiegingUnitsSeeder;
+
+// Levelstats Dependencies
+use Database\Seeders\LevelstatsSeeders\BarrackStatsSeeder;
+use Database\Seeders\LevelstatsSeeders\ChurchStatsSeeder;
+use Database\Seeders\LevelstatsSeeders\DiplomacyStatsSeeder;
+use Database\Seeders\LevelstatsSeeders\InfirmaryStatsSeeder;
+use Database\Seeders\LevelstatsSeeders\MarketStatsSeeder;
+use Database\Seeders\LevelstatsSeeders\ResearchStatsSeeder;
+use Database\Seeders\LevelstatsSeeders\WarehouseStatsSeeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +28,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            // Basic Seeders
+            UserSeeder::class,
+            TownSeeder::class,
+            BuildingSeeder::class,
+            FriendListSeeder::class,
+            BugReportSeeder::class,
+            UnitSeeder::class,
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+            // Levelstats Seeders
+            BarrackStatsSeeder::class,
+            ChurchStatsSeeder::class,
+            DiplomacyStatsSeeder::class,
+            InfirmaryStatsSeeder::class,
+            MarketStatsSeeder::class,
+            ResearchStatsSeeder::class,
+            WarehouseStatsSeeder::class,
+
+            // Attack System Seeders
+            SiegesSeeder::class,
+            SiegingUnitsSeeder::class
+        ]);
     }
 }
