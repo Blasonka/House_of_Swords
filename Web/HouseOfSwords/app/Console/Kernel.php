@@ -16,19 +16,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-        // $schedule->call(function () {
-        //     // Az adatbázis frissítő kód
-        //     DB::table('towns')
-        //         ->where('TownID', '=', 1)
-        //         ->increment('HappinessValue');
-
-        // })->everyMinute();
-
         $schedule->command('TownResourcesUpdate')
             ->everyMinute();
 
         $schedule->command('ResearchUpdate')
+            ->everyMinute();
+
+        $schedule->command('LogoutOfflineUsers')
             ->everyMinute();
     }
 

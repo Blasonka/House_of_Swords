@@ -28,7 +28,7 @@ use App\Http\Middleware\GameSessionAuthentication;
 
 // Hitelesség ellenőrzés / Bejelentkezés
 Route::get('/gameSessionAuthFail', function () {
-    return response([
+    return response()->json([
         'success' => false,
         'message' => 'You are not authorized to access this data.'
     ], 401);

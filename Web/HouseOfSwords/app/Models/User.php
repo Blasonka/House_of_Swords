@@ -23,6 +23,8 @@ class User extends Authenticatable
         'PwdSalt',
         'Role',
         'EmailVerificationToken',
+        'GameSessionToken',
+        'LastOnline'
     ];
 
     // KAPCSOLATOK
