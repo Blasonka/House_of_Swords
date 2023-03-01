@@ -139,4 +139,39 @@ class UserController extends Controller
             return response()->json(['message' => 'Database error.'], 400);
         }
     }
+
+    public function loginRequest(Request $request) {
+        $username = $request->input('Username', null);
+        $pwdHash = $request->input('PwdHash', null);
+
+        if (!$username || !$pwdHash) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Username or password is missing!'
+            ], 400);
+        }
+
+        $user = User::all()->firstWhere('Username', 'LIKE', $username);
+
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User does not exist!'
+            ], 404);
+        }
+
+        if ($user->PwdHash != $pwdHash) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid credentials!'
+            ], 401);
+        }
+
+        // AUTHENTICATION SUCCESSFUL
+        $user->GameSessionToken = Str::random(32);
+        $user->LastOnline = date('Y-m-d H:i:s');
+        $user->save();
+
+        return response()->json($user, 200);
+    }
 }

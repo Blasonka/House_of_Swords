@@ -22,16 +22,16 @@ return new class extends Migration
             $table->string('Username', 30)->unique();
             $table->string('EmailAddress', 100)->unique();
 
-            $table->string('PwdHash', 128)->invisible()->default('');
-            $table->string('PwdSalt', 20)->invisible()->default('');
+            $table->string('PwdHash', 128);
+            $table->string('PwdSalt', 20);
 
             $table->tinyInteger('Role')->unsigned()->default(0);
 
-            $table->boolean('IsEmailVerified')->unsigned()->default(0);
-            $table->string('EmailVerificationToken', 32)->nullable()->invisible();
+            $table->boolean('IsEmailVerified')->default(0)->unsigned();
+            $table->string('EmailVerificationToken', 32)->nullable();
 
-            $table->string('GameSessionToken', 20)->nullable()->invisible();
-            $table->dateTime('LastOnline')->useCurrent()->nullable();
+            $table->string('GameSessionToken', 32)->nullable();
+            $table->dateTime('LastOnline')->nullable();
         });
     }
 
