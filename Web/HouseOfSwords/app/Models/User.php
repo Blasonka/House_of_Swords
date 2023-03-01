@@ -24,7 +24,8 @@ class User extends Authenticatable
         'Role',
         'EmailVerificationToken',
         'GameSessionToken',
-        'LastOnline'
+        'LastOnline',
+        'ProfileImageUrl'
     ];
 
     // KAPCSOLATOK
