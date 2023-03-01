@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->updateOrInsert([ 'Username' => 'admin' ],
+        DB::table('users')->updateOrInsert([ 'EmailAddress' => 'blasek.balazs@gmail.com' ],
         [
             'Username' => 'admin',
             'EmailAddress' => 'blasek.balazs@gmail.com',
@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'Role' => 2
         ]);
 
-        DB::table('users')->updateOrInsert([ 'Username' => 'admin2' ],
+        DB::table('users')->updateOrInsert([ 'EmailAddress' => 'venteralex1@gmail.com' ],
         [
             'Username' => 'admin2',
             'EmailAddress' => 'venteralex1@gmail.com',
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
             'Role' => 2
         ]);
 
-        DB::table('users')->updateOrInsert([ 'Username' => 'admin3' ],
+        DB::table('users')->updateOrInsert([ 'EmailAddress' => 'laura.luksa03@gmail.com' ],
         [
             'Username' => 'admin3',
             'EmailAddress' => 'laura.luksa03@gmail.com',
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
             'Role' => 2
         ]);
 
-        DB::table('users')->updateOrInsert([ 'Username' => 'TesztAdmin' ],
+        DB::table('users')->updateOrInsert([ 'EmailAddress' => 'tesztadmin@gmail.com' ],
         [
             'Username' => 'TesztAdmin',
             'EmailAddress' => 'tesztadmin@gmail.com',
@@ -55,7 +55,7 @@ class UserSeeder extends Seeder
             'Role' => 1
         ]);
 
-        DB::table('users')->updateOrInsert([ 'Username' => 'TesztJozsef' ],
+        DB::table('users')->updateOrInsert([ 'EmailAddress' => 'tesztjozsi@gmail.com' ],
         [
             'Username' => 'TesztJozsef',
             'EmailAddress' => 'tesztjozsi@gmail.com',
