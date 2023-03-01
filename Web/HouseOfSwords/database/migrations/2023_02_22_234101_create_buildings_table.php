@@ -31,6 +31,13 @@ return new class extends Migration
 
             // CHURCH PARAMS
             $table->dateTime('lastMassDate')->nullable();
+
+            // WAREHOUSE PARAMS
+            $table->integer('BrigadeInWood')->unsigned()->nullable();
+            $table->integer('BrigadeInStone')->unsigned()->nullable();
+            $table->integer('BrigadeInMetal')->unsigned()->nullable();
+            $table->integer('BrigadeInGold')->unsigned()->nullable();
+            $table->integer('BrigadeInWarehouse')->unsigned()->nullable();
         });
     }
 
