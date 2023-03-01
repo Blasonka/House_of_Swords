@@ -10,7 +10,7 @@ class User extends Authenticatable
 {
     use HasFactory;
 
-    // tábla tulajdonságok
+    // Tábla tulajdonságok
     protected $table = 'users';
     protected $primaryKey = 'UID';
     public $timestamps = false;
@@ -23,5 +23,20 @@ class User extends Authenticatable
         'PwdSalt',
         'Role',
         'EmailVerificationToken',
+        'GameSessionToken',
+        'LastOnline'
     ];
+
+    // KAPCSOLATOK
+    public function towns() {
+        return $this->hasMany(Town::class, 'Users_UID', 'UID');
+    }
+
+    public function friends(){
+        return $this->belongsToMany(User::class, 'friendlist', 'FriendID', 'Users_UID');
+    }
+
+    public function bugreports(){
+        return $this->hasMany(Bugreport::class, 'EmailAddress', 'EmailAddress');
+    }
 }

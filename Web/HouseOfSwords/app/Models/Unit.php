@@ -10,19 +10,19 @@ class Unit extends Model
     use HasFactory;
 
     // table properties
-    protected $table = 'unitstats';
+    protected $table = 'units';
     protected $primaryKey = 'UnitID';
     public $timestamps = false;
 
     protected $fillable = [
-        "UnitName",
-        "UnitSize",
-        "AttackValue",
-        "DefenseValue",
-        "MobilityValue",
-        "TrainingTime",
-        "TrainingCostGold",
-        "TrainingCostFallen",
-        "ResearchCost"
+        'UnitName',
+        'UnitSize',
+        'AttackValue',
+        'DefenseValue',
+        'MobilityValue',
+        'TrainingTime',
+        'TrainingCostGold',
+        'TrainingCostFallen',
+        'ResearchCost'
     ];
 }
