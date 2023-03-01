@@ -10,7 +10,7 @@ class Infirmary extends Model
     use HasFactory;
 
     // table properties
-    protected $table = 'infirmarystats';
+    protected $table = 'levelstats_infirmary';
     protected $primaryKey = 'Lvl';
     public $timestamps = false;
 
