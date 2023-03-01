@@ -17,7 +17,7 @@
         @endif
 
         <div class="row">
-            <!-- Profilkép-->
+            <!-- Profilkép               'Username' => 'unique:users|min:6|max:20|alpha_dash'-->
             <div class="col-md-5 col-12">
                 <h2 class="text-start">Profilkép</h2>
                 <div class="profil-picture">
@@ -33,14 +33,13 @@
                     <!-- Felhasználói adatok-->
                     <div class="col-12">
                         <form action="/api/users/{{ Auth::user()->UID }}" method="POST">
-                            @method('PATCH');
+                            @method('PATCH')
                             @csrf
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-
                             <h2 class="text-start">Felhasználói adatok</h2>
                             <div class="form">
                                 <input name="Username" type="text" placeholder="Felhasználónév"
-                                    value="{{ Auth::user()->Username }}">
+                                    value="{{ Auth::user()->Username }}" required min="6" max="20">
                                 <label class="mt-3" for="Username">Felhasználónév</label>
                                 {{-- <input name="EmailAddress" type="email" placeholder="Email cím" value="{{ Auth::user()->EmailAddress }}" disabled> --}}
                                 <p class="mt-5 disabled">{{ Auth::user()->EmailAddress }}</p>
