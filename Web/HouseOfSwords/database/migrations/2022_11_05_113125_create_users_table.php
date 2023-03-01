@@ -32,6 +32,8 @@ return new class extends Migration
 
             $table->string('GameSessionToken', 32)->nullable();
             $table->dateTime('LastOnline')->nullable();
+
+            $table->string('ProfileImageUrl', 100)->nullable();
         });
     }
 
