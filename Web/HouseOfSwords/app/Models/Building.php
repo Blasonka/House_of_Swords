@@ -13,8 +13,8 @@ class Building extends Model
 
     // ÉPÜLETTÍPUSNAK ÉS OSZTÁLYÁNAK SZÓTÁRA
     private $typeClass = [
-        'Church' => Church::class,
         'Barrack' => Church::class,
+        'Church' => Church::class,
         'Research' => Research::class,
         'Warehouse' => Church::class,
         'Infirmary' => Church::class,

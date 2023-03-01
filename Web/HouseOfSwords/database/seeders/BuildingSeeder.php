@@ -2,20 +2,21 @@
 
 namespace Database\Seeders;
 
+use App\Models\Town;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class BuildingSeeder extends Seeder
 {
-    private $buildingTypes = [
-        'Church',
-        'Research',
-        'Warehouse',
-        'Market',
+    public $buildingTypes = [
         'Barrack',
+        'Church',
         'Diplomacy',
-        'Infirmary'
+        'Infirmary',
+        'Market',
+        'Research',
+        'Warehouse'
     ];
 
     /**
@@ -25,12 +26,14 @@ class BuildingSeeder extends Seeder
      */
     public function run()
     {
-        foreach ($this->buildingTypes as $key => $value) {
-            DB::table('buildings')->updateOrInsert([ 'Towns_TownID' => 1 ],
-            [
-                'Towns_TownID' => 1,
-                'BuildingType' => $value
-            ]);
+        foreach (Town::all() as $key => $town) {
+            foreach ($this->buildingTypes as $key => $building) {
+                DB::table('buildings')->updateOrInsert([ 'Towns_TownID' => $town->Town_ID ],
+                [
+                    'Towns_TownID' => 1,
+                    'BuildingType' => $building
+                ]);
+            }
         }
     }
 }

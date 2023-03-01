@@ -22,5 +22,13 @@ class TownSeeder extends Seeder
             'YCords' => rand(-1000, 1000),
             'Users_UID' => 1
         ]);
+
+        DB::table('towns')->updateOrInsert([ 'TownID' => 2 ],
+        [
+            'TownName' => 'Alex városa',
+            'XCords' => rand(-1000, 1000),
+            'YCords' => rand(-1000, 1000),
+            'Users_UID' => 2
+        ]);
     }
 }

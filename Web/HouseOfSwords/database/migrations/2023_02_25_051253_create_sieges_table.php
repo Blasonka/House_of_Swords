@@ -24,7 +24,9 @@ return new class extends Migration
 
             $table->dateTime('SiegeTime');
 
-            $table->integer('LootPercentage');
+            $table->integer('LootPercentage')->unsigned();
+
+            $table->tinyInteger('AttackerWon')->unsigned()->nullable();
         });
     }
 

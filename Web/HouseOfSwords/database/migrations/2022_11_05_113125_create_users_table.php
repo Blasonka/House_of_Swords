@@ -25,9 +25,9 @@ return new class extends Migration
             $table->string('PwdHash', 128)->invisible()->default('');
             $table->string('PwdSalt', 20)->invisible()->default('');
 
-            $table->tinyInteger('Role')->unsigned()->default(0)->unsigned();
+            $table->tinyInteger('Role')->unsigned()->default(0);
 
-            $table->boolean('IsEmailVerified')->default(0)->unsigned();
+            $table->boolean('IsEmailVerified')->unsigned()->default(0);
             $table->string('EmailVerificationToken', 32)->nullable()->invisible();
 
             $table->string('GameSessionToken', 20)->nullable()->invisible();

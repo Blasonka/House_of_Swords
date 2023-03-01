@@ -10,7 +10,7 @@ class User extends Authenticatable
 {
     use HasFactory;
 
-    // tábla tulajdonságok
+    // Tábla tulajdonságok
     protected $table = 'users';
     protected $primaryKey = 'UID';
     public $timestamps = false;
