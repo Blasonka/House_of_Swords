@@ -144,17 +144,16 @@ class UserController extends Controller
 
     public function loginRequest(Request $request) {
         $username = $request->input('Username', null);
-        $pwdHash = $request->input('PwdHash', null);
+        $pwd = $request->input('Password', null);
 
-        if (!$username || !$pwdHash) {
+        if (!$username || !$pwd) {
             return response()->json([
                 'success' => false,
                 'message' => 'Username or password is missing!'
             ], 400);
         }
 
-        $user = User::all()->firstWhere('Username', 'LIKE', $username);
-
+        $user = User::all()->firstWhere('Username', '=', $username);
         if (!$user) {
             return response()->json([
                 'success' => false,
@@ -162,7 +161,25 @@ class UserController extends Controller
             ], 404);
         }
 
-        if ($user->PwdHash != $pwdHash) {
+        $isPasswordCorrect = false;
+        foreach (range('a', 'z') as $i) {
+            $currentHash = hash('sha512', $pwd . $user->PwdSalt . $i);
+
+            if ($currentHash == $user->PwdHash){
+                $isPasswordCorrect = true;
+                break;
+            }
+        }
+        foreach (range('A', 'Z') as $i) {
+            $currentHash = hash('sha512', $pwd . $user->PwdSalt . $i);
+
+            if ($currentHash == $user->PwdHash){
+                $isPasswordCorrect = true;
+                break;
+            }
+        }
+
+        if (!$isPasswordCorrect) {
             return response()->json([
                 'success' => false,
                 'message' => 'Invalid credentials!'
