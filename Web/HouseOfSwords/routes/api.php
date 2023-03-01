@@ -34,7 +34,7 @@ Route::get('/gameSessionAuthFail', function () {
     ], 401);
 })->name('gameSessionAuthFail');
 
-Route::get('/createGameSession', [UserController::class, 'loginRequest']);
+Route::post('/createGameSession', [UserController::class, 'loginRequest']);
 
 
 // API működésének tesztje
