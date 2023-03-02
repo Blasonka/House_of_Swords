@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BugReportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\PageController;
@@ -25,6 +26,7 @@ Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/download', [PageController::class, 'download'])->name('download');
 Route::get('/bugreport',[PageController::class, 'bugReport'])->name('bugReport');
 
+Route::patch('/admin/bugreports/{Id}', [BugReportController::class, 'updateOnWebsite']);
 
 // Bejelentkezés nélkül igen, de bejelentkezve nem látszik
 Route::group(['middleware' => ['guest']], function() {

@@ -84,6 +84,26 @@ class BugReportController extends Controller
         }
     }
 
+    public function updateOnWebsite(Request $request, $id)
+    {
+        try {
+            if (Bugreport::find($id)->exists()) {
+                $bugreport = Bugreport::find($id);
+                $bugreport->update($request->all());
+                return redirect()->back();
+                // return response()->json(['message' => 'Item was updated, id: ' . $id], 200);
+            } else {
+                return redirect()->back()->withErrors([
+                    'message' => 'Item not found.'
+                ]);
+            }
+        } catch (Exception $e) {
+            return response()->back()->withErrors([
+                'message' => 'Database error.'
+            ]);
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *

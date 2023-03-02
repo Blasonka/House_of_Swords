@@ -40,21 +40,24 @@
                             <td class="status">
                                 <div class="row mx-auto">
                                     <div class="col-1">
-                                        <form action="/api/bugreports/{{ $bug->Id }}" method="POST">
+                                        <form action="/admin/bugreports/{{ $bug->Id }}" method="POST">
+                                            @csrf
                                             @method('PATCH')
                                             <input name="IsSolved" value="2" type="text" hidden>
                                             <button type="submit" class="btn btn-sm btn-success btn-fixed"></button>
                                         </form>
                                     </div>
                                     <div class="col-1">
-                                        <form action="/api/bugreports/{{ $bug->Id }}" method="POST">
+                                        <form action="/admin/bugreports/{{ $bug->Id }}" method="POST">
+                                            @csrf
                                             @method('PATCH')
                                             <input name="IsSolved" value="1" type="text" hidden>
                                             <button type="submit" class="btn btn-sm btn-warning btn-inprogress"></button>
                                         </form>
                                     </div>
                                     <div class="col-1">
-                                        <form action="/api/bugreports/{{ $bug->Id }}" method="POST">
+                                        <form action="/admin/bugreports/{{ $bug->Id }}" method="POST">
+                                            @csrf
                                             @method('PATCH')
                                             <input name="IsSolved" value="0" type="text" hidden>
                                             <button type="submit" class="btn btn-sm btn-danger btn-bug"></button>

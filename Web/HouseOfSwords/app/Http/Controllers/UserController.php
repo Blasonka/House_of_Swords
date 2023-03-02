@@ -191,6 +191,8 @@ class UserController extends Controller
         $user->LastOnline = date('Y-m-d H:i:s');
         $user->save();
 
-        return response()->json($user, 200);
+        Auth::login($user);
+
+        return response()->json(Auth::user(), 200);
     }
 }
