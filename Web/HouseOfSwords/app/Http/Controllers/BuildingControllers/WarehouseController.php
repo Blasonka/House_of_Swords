@@ -113,7 +113,7 @@ class WarehouseController extends Controller
                 $warehouse->BrigadeInMetal += $request->addMetal;
             } else if ($request->has('addGold')) {
                 $warehouse->BrigadeInGold += $request->addGold;
-            } else{
+            } else {
                 return response()->json([
                     'success' => false,
                     'message' => 'Invalid input, the request must contain one of the following fields: addStone, addWood, addMetal or addGold'
@@ -123,8 +123,6 @@ class WarehouseController extends Controller
             $warehouse->BrigadeInWarehouse--;
             $warehouse->save();
             return response()->json($warehouse, 200);
-
-
         } catch (Exception $err) {
             return response()->json([
                 'success' => false,
@@ -156,18 +154,18 @@ class WarehouseController extends Controller
                 return response()->json($warehouse, 200);
             }
 
-            if ($request->has('removeStone')) {
-                $warehouse->BrigadeInStone -= $request->removeStone;
-            } else if ($request->has('removeWood')) {
-                $warehouse->BrigadeInWood -= $request->removeWood;
-            } else if ($request->has('removeMetal')) {
-                $warehouse->BrigadeInMetal -= $request->removeMetal;
-            } else if ($request->has('removeGold')) {
-                $warehouse->BrigadeInGold -= $request->removeGold;
-            } else{
+            if ($request->has('removeStone') && $warehouse->BrigadeInStone > 0) {
+                $warehouse->BrigadeInStone --;
+            } else if ($request->has('removeWood') && $warehouse->BrigadeInWood > 0) {
+                $warehouse->BrigadeInWood --;
+            } else if ($request->has('removeMetal') && $warehouse->BrigadeInMetal > 0) {
+                $warehouse->BrigadeInMetal --;
+            } else if ($request->has('removeGold') && $warehouse->BrigadeInGold > 0) {
+                $warehouse->BrigadeInGold --;
+            } else {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Invalid input, the request must contain one of the following fields: removeStone, removeWood, removeMetal or removeGold'
+                    'message' => 'Invalid input, the request must contain one of the following fields: removeStone, removeWood, removeMetal or removeGold. Or Math problem.'
                 ], 400);
             }
 
