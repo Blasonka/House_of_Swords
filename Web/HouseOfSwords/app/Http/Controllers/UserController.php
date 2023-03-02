@@ -143,6 +143,8 @@ class UserController extends Controller
     }
 
     public function loginRequest(Request $request) {
+        session()->flush();
+
         $username = $request->input('Username', null);
         $pwd = $request->input('Password', null);
 
