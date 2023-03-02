@@ -10,7 +10,7 @@ class Warehouse extends Model
     use HasFactory;
 
     // table properties
-    protected $table = 'warehousestats';
+    protected $table = 'levelstats_warehouse';
     protected $primaryKey = 'Lvl';
     public $timestamps = false;
 
