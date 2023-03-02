@@ -10,6 +10,7 @@ class GameSessionAuthentication
 {
     private $notAuthorizedRoute = 'api/gameSessionAuthFail';
     private $apiLoginRoute = 'api/createGameSession';
+    private $testRoute = 'api/test';
 
     /**
      * Handle an incoming request.
@@ -27,7 +28,10 @@ class GameSessionAuthentication
 
         // ONLY ALLOW REQUESTS WITH GAME SESSION TOKENS OR LOGIN REQUESTS
         $sessionToken = $request->query('gamesessiontoken', null);
-        if (!$sessionToken && $request->path() != $this->notAuthorizedRoute && $request->path() != $this->apiLoginRoute){
+        if (!$sessionToken &&
+            $request->path() != $this->notAuthorizedRoute &&
+            $request->path() != $this->apiLoginRoute &&
+            $request->path() != $this->testRoute){
             return redirect($this->notAuthorizedRoute);
         }
 
