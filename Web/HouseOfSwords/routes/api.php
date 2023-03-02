@@ -15,6 +15,7 @@ use App\Http\Controllers\BuildingControllers\ResearchController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\BuildingControllers\InfirmaryController;
 use App\Http\Middleware\GameSessionAuthentication;
+use App\Http\Controllers\BuildingControllers\WarehouseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,8 +101,9 @@ Route::get('/buildings/{Building_ID}/levelstats', [BuildingController::class, 's
 Route::apiResource('stats/units', UnitController::class);
 Route::apiResource('stats/church', ChurchController::class);
 Route::apiResource('stats/infirmary', InfirmaryController::class);
-
 Route::apiResource('stats/research', ResearchController::class);
+Route::apiResource('stats/warehouse', WarehouseController::class);
+
 Route::get('stats/research/researchedUnits/{researchBuildingId}', [ResearchController::class, 'getResearchedUnits']);
 
 // BUILDING ACTIONS
@@ -122,6 +124,13 @@ Route::prefix('actions')->group(function () {
         Route::post('startCure', [InfirmaryController::class, 'StartCure']);
         Route::post('finishCure', [InfirmaryController::class, 'FinishCure']);
     });
+
+    // WAREHOUSE ACTIONS
+    Route::prefix('warehouse')->group(function () {
+        Route::post('addbrigade', [WarehouseController::class, 'AddBrigade']);
+        Route::post('removebrigade', [WarehouseController::class, 'RemoveBrigade']);
+    });
+
     // OTHER BUILDINGS' ACTIONS
     // ...
 });
@@ -132,5 +141,5 @@ Route::apiResource('friendlists', FriendlistController::class);
 
 // ANY UNKNOWN METHODS
 Route::any('{params}', function ($params) {
-    return 'Error 404: Requested content does not exist → '.$params.'.';
+    return 'Error 404: Requested content does not exist → ' . $params . '.';
 });
