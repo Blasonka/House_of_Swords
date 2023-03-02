@@ -38,6 +38,12 @@ return new class extends Migration
             $table->integer('BrigadeInMetal')->unsigned()->nullable();
             $table->integer('BrigadeInGold')->unsigned()->nullable();
             $table->integer('BrigadeInWarehouse')->unsigned()->nullable();
+
+            // INFIRMARY PARAMS
+            $table->dateTime('lastCureDate')->nullable();
+            $table->integer('currentCure')->unsigned()->nullable();
+            $table->integer('injuredUnits')->unsigned()->nullable();
+            $table->integer('healedUnits')->unsigned()->nullable();
         });
     }
 

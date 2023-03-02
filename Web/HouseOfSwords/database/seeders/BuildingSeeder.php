@@ -30,7 +30,7 @@ class BuildingSeeder extends Seeder
             foreach ($this->buildingTypes as $key => $building) {
                 DB::table('buildings')->updateOrInsert([ 'Towns_TownID' => $town->Town_ID ],
                 [
-                    'Towns_TownID' => 1,
+                    'Towns_TownID' => $town->TownID,
                     'BuildingType' => $building
                 ]);
             }
