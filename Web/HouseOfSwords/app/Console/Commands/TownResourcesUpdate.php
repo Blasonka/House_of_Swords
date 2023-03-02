@@ -30,12 +30,12 @@ class TownResourcesUpdate extends Command
     {
         $towns = Town::all();
 
-        foreach ($towns as $key => $value) {
-            $value->Wood += 1;
-            $value->Stone += 1;
-            $value->Metal += 1;
-            $value->Gold += 1;
-            $value->save();
+        foreach ($towns as $key => $town) {
+            $town->Wood += 1;
+            $town->Stone += 1;
+            $town->Metal += 1;
+            $town->Gold += 1;
+            $town->save();
         }
 
         return Command::SUCCESS;
