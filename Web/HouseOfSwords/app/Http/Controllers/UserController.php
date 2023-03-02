@@ -143,6 +143,17 @@ class UserController extends Controller
     }
 
     public function loginRequest(Request $request) {
+
+        // session()->flush();
+        // return;
+
+        if (session()->get('user') != null){
+            return response()->json([
+                'success' => true,
+                'message' => 'Someone is already logged in.'
+            ], 418);
+        }
+
         $username = $request->input('Username', null);
         $pwd = $request->input('Password', null);
 
@@ -191,8 +202,8 @@ class UserController extends Controller
         $user->LastOnline = date('Y-m-d H:i:s');
         $user->save();
 
-        Auth::login($user);
+        session()->put('user', $user);
 
-        return response()->json(Auth::user(), 200);
+        return response()->json($user, 200);
     }
 }

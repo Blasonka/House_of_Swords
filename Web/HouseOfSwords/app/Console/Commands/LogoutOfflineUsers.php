@@ -6,6 +6,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 
 class LogoutOfflineUsers extends Command
@@ -31,14 +32,28 @@ class LogoutOfflineUsers extends Command
      */
     public function handle()
     {
-        foreach (User::all() as $key => $user) {
-            if ($user->GameSessionToken){
-                $fiveMinutesAgo = Carbon::now()->subMinutes(5);
+        // foreach (User::all() as $key => $user) {
+        //     if ($user->GameSessionToken){
+        //         $fiveMinutesAgo = Carbon::now()->subMinutes(5);
 
-                if (Carbon::parse($user->LastOnline)->lessThan($fiveMinutesAgo)){
-                    $user->GameSessionToken = null;
-                    $user->save();
-                }
+        //         if (Carbon::parse($user->LastOnline)->lessThan($fiveMinutesAgo)){
+        //             $user->GameSessionToken = null;
+        //             $user->save();
+
+        //             session()->flush();
+        //         }
+        //     }
+        // }
+
+        $user = session()->get('user');
+        if ($user){
+            $fiveMinutesAgo = Carbon::now()->subMinutes(5);
+
+            if (Carbon::parse($user->LastOnline)->lessThan($fiveMinutesAgo)){
+                $user->GameSessionToken = null;
+                $user->save();
+
+                session()->flush();
             }
         }
 

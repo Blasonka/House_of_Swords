@@ -59,18 +59,18 @@ Route::get('/test', function(){
     // return User::find(1)->get('PwdHash');
 
     #region SIEGES RELATIONSHIPS TESTS
-    // A town's incoming and outgoing attacks
-    return Town::find(1)->initiatedSieges;
-    return Town::find(2)->incomingSieges;
+    // // A town's incoming and outgoing attacks
+    // return Town::find(1)->initiatedSieges;
+    // return Town::find(2)->incomingSieges;
 
-    // Getting a siege's defender or attacker town
-    return Town::find(1)->initiatedSieges[0]->attacker;
-    return Town::find(1)->initiatedSieges[0]->defender;
+    // // Getting a siege's defender or attacker town
+    // return Town::find(1)->initiatedSieges[0]->attacker;
+    // return Town::find(1)->initiatedSieges[0]->defender;
 
-    // Getting the attacking units, their amounts and types
-    return Town::find(1)->initiatedSieges[0]->attackerUnits;
-    return Town::find(1)->initiatedSieges[0]->attackerUnits[0]->UnitAmount;
-    return Town::find(1)->initiatedSieges[0]->attackerUnits[0]->unitType;
+    // // Getting the attacking units, their amounts and types
+    // return Town::find(1)->initiatedSieges[0]->attackerUnits;
+    // return Town::find(1)->initiatedSieges[0]->attackerUnits[0]->UnitAmount;
+    // return Town::find(1)->initiatedSieges[0]->attackerUnits[0]->unitType;
     #endregion
     #endregion
 });
