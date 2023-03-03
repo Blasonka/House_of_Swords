@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Models\Buildings\Church;
+use App\Models\Buildings\Infirmary;
 use App\Models\Buildings\Research;
+use App\Models\Buildings\Warehouse;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,8 +18,8 @@ class Building extends Model
         'Barrack' => Church::class,
         'Church' => Church::class,
         'Research' => Research::class,
-        'Warehouse' => Church::class,
-        'Infirmary' => Church::class,
+        'Warehouse' => Warehouse::class,
+        'Infirmary' => Infirmary::class,
         'Diplomacy' => Church::class,
         'Market' => Church::class
     ];
