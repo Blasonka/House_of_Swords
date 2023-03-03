@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Building;
 use App\Models\Buildings\Church;
 use App\Models\Town;
+use Carbon\Carbon;
 use DateInterval;
 use DateTime;
 use Exception;
@@ -85,17 +86,19 @@ class ChurchController extends Controller
             }
 
             $churchStats = Church::find($church->BuildingLvl);
-            $params = json_decode($church->Params);
 
-            // CHECK IF ENOUGH TIME HAS PASSED SINCE LAST MASS
-            // $massLengthUnix = $churchStats->MassLength;
-            // $currentDateUnix = date_create()->format('Y-m-d H:i:s');
-            // $lastMassDateUnix = $params->lastMassDate;
+            $church->lastMassDate = Carbon::now();
+            // $params = json_decode($church->Params);
 
-            // return response()->json($lastMassDateUnix);
+            // // CHECK IF ENOUGH TIME HAS PASSED SINCE LAST MASS
+            // // $massLengthUnix = $churchStats->MassLength;
+            // // $currentDateUnix = date_create()->format('Y-m-d H:i:s');
+            // // $lastMassDateUnix = $params->lastMassDate;
 
-            $params->lastMassDate = date('Y-m-d H:i:s');
-            $church->Params = json_encode($params);
+            // // return response()->json($lastMassDateUnix);
+
+            // $params->lastMassDate = date('Y-m-d H:i:s');
+            // $church->Params = json_encode($params);
             $church->save();
 
             $town = Town::find($church->Towns_TownID);

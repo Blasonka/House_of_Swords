@@ -31,7 +31,7 @@ class Building extends Model
         'Towns_TownID',
         'BuildingType',
         'BuildingLvl',
-        'Params',
+        'lastMassDate',
         'lastCureDate',
         'currentCure',
         'injuredUnits',
