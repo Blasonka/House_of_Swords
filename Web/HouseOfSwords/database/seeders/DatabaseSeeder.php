@@ -17,7 +17,7 @@ use Database\Seeders\LevelstatsSeeders\InfirmaryStatsSeeder;
 use Database\Seeders\LevelstatsSeeders\MarketStatsSeeder;
 use Database\Seeders\LevelstatsSeeders\ResearchStatsSeeder;
 use Database\Seeders\LevelstatsSeeders\WarehouseStatsSeeder;
-
+use Database\Seeders\SiegeSystem\TrainedUnitsSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -48,7 +48,8 @@ class DatabaseSeeder extends Seeder
 
             // Attack System Seeders
             SiegesSeeder::class,
-            SiegingUnitsSeeder::class
+            SiegingUnitsSeeder::class,
+            TrainedUnitsSeeder::class
         ]);
     }
 }
