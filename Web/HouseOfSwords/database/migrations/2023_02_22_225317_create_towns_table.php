@@ -25,10 +25,15 @@ return new class extends Migration
             $table->string('TownName', 20);
             $table->integer('HappinessValue')->unsigned()->default(100);
 
-            $table->integer('Wood')->unsigned()->default(100);
-            $table->integer('Stone')->unsigned()->default(100);
-            $table->integer('Metal')->unsigned()->default(50);
-            $table->integer('Gold')->unsigned()->default(25);
+            // $table->integer('Wood')->unsigned()->default(100);
+            // $table->integer('Stone')->unsigned()->default(100);
+            // $table->integer('Metal')->unsigned()->default(50);
+            // $table->integer('Gold')->unsigned()->default(25);
+
+            $table->double('Wood')->unsigned()->default(100);
+            $table->double('Stone')->unsigned()->default(100);
+            $table->double('Metal')->unsigned()->default(50);
+            $table->double('Gold')->unsigned()->default(25);
 
             $table->integer('CampaignLvl')->unsigned()->default(0);
 
