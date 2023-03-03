@@ -25,12 +25,18 @@ return new class extends Migration
             $table->string('BuildingType', 20);
             $table->integer('BuildingLvl')->unsigned()->default(1);
 
+            // CHURCH PARAMS
+            $table->dateTime('lastMassDate')->nullable();
+
+            // INFIRMARY PARAMS
+            $table->dateTime('lastCureDate')->nullable();
+            $table->integer('currentCure')->unsigned()->nullable();
+            $table->integer('injuredUnits')->unsigned()->nullable();
+            $table->integer('healedUnits')->unsigned()->nullable();
+
             // RESEARCH PARAMS
             $table->integer('currentScience')->unsigned()->nullable();
             $table->integer('storedScience')->unsigned()->nullable();
-
-            // CHURCH PARAMS
-            $table->dateTime('lastMassDate')->nullable();
 
             // WAREHOUSE PARAMS
             $table->integer('BrigadeInWood')->unsigned()->nullable();
@@ -38,12 +44,6 @@ return new class extends Migration
             $table->integer('BrigadeInMetal')->unsigned()->nullable();
             $table->integer('BrigadeInGold')->unsigned()->nullable();
             $table->integer('BrigadeInWarehouse')->unsigned()->nullable();
-
-            // INFIRMARY PARAMS
-            $table->dateTime('lastCureDate')->nullable();
-            $table->integer('currentCure')->unsigned()->nullable();
-            $table->integer('injuredUnits')->unsigned()->nullable();
-            $table->integer('healedUnits')->unsigned()->nullable();
         });
     }
 

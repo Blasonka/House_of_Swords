@@ -28,14 +28,31 @@ class Building extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        // BASIC FIELDS
         'Towns_TownID',
         'BuildingType',
         'BuildingLvl',
+
+        // PARAMETERS THAT DEPEND ON THE BUILDING'S TYPE
+        // RESEARCH
+        'currentScience',
+        'storedScience',
+
+        // CHURCH
         'lastMassDate',
+
+        // INFIRMARY
         'lastCureDate',
         'currentCure',
         'injuredUnits',
-        'healedUnits'
+        'healedUnits',
+
+        // WAREHOUSE
+        'BrigadeInWood',
+        'BrigadeInStone',
+        'BrigadeInMetal',
+        'BrigadeInGold',
+        'BrigadeInWarehouse'
     ];
 
     // KAPCSOLATOK

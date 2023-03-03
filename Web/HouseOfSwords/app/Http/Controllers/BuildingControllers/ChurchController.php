@@ -10,6 +10,7 @@ use App\Models\Town;
 use Carbon\Carbon;
 use DateInterval;
 use DateTime;
+use DateTimeZone;
 use Exception;
 
 use function PHPSTORM_META\type;
@@ -87,7 +88,7 @@ class ChurchController extends Controller
 
             $churchStats = Church::find($church->BuildingLvl);
 
-            $church->lastMassDate = Carbon::now();
+            $church->lastMassDate = date('Y-m-d H:i:s');
             // $params = json_decode($church->Params);
 
             // // CHECK IF ENOUGH TIME HAS PASSED SINCE LAST MASS

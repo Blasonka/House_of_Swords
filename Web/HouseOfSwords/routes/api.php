@@ -16,6 +16,8 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\BuildingControllers\InfirmaryController;
 use App\Http\Middleware\GameSessionAuthentication;
 use App\Http\Controllers\BuildingControllers\WarehouseController;
+use App\Models\Building;
+use App\Models\Buildings\Infirmary;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +31,7 @@ use App\Http\Controllers\BuildingControllers\WarehouseController;
 */
 
 // Hitelesség ellenőrzés / Bejelentkezés
-Route::get('/gameSessionAuthFail', function () {
+Route::any('/gameSessionAuthFail', function () {
     return response()->json([
         'success' => false,
         'message' => 'You are not authorized to access this data.'
@@ -74,6 +76,8 @@ Route::get('/test', function(){
     // return Town::find(1)->initiatedSieges[0]->attackerUnits[0]->unitType;
     #endregion
     #endregion
+
+    return Building::all();
 
     return response()->json('Test works!', 200);
 });
@@ -143,5 +147,8 @@ Route::apiResource('friendlists', FriendlistController::class);
 
 // ANY UNKNOWN METHODS
 Route::any('{params}', function ($params) {
-    return 'Error 404: Requested content does not exist → ' . $params . '.';
+    return response()->json([
+        'success' => false,
+        'message' =>  'Error 404: Requested content does not exist → ' . $params . '.'
+    ], 404);
 });
