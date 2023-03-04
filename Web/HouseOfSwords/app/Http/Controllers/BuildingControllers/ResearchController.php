@@ -186,9 +186,9 @@ class ResearchController extends Controller
     // ACTIONS
     public function collectScience(Request $request){
         try {
-            $building = Building::find($request->BuildingID);
+            $research = Building::find($request->BuildingID);
 
-            if ($building == null)
+            if ($research == null)
             {
                 return response()->json([
                     'success' => false,
@@ -196,7 +196,7 @@ class ResearchController extends Controller
                 ], 400);
             }
 
-            if ($building->BuildingType != 'Research')
+            if ($research->BuildingType != 'Research')
             {
                 return response()->json([
                     'success' => false,
@@ -204,15 +204,15 @@ class ResearchController extends Controller
                 ], 400);
             }
 
-            $params = json_decode($building->Params);
+            // $params = json_decode($building->Params);
 
-            $params->storedScience += $params->currentScience;
-            $params->currentScience = 0;
+            $research->storedScience += $research->currentScience;
+            $research->currentScience = 0;
 
-            $building->Params = json_encode($params);
-            $building->save();
+            // $building->Params = json_encode($params);
+            $research->save();
 
-            return response()->json($building, 200);
+            return response()->json($research, 200);
         } catch (Exception $err) {
             return response()->json([
                 'success' => false,
