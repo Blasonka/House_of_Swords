@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TownController;
 use App\Http\Controllers\FriendlistController;
 use App\Http\Controllers\BuildingController;
+use App\Http\Controllers\BuildingControllers\BarrackController;
 use App\Http\Controllers\BuildingControllers\ChurchController;
 use App\Models\Bugreport;
 use App\Models\Town;
@@ -104,11 +105,15 @@ Route::get('/buildings/{Building_ID}/levelstats', [BuildingController::class, 's
 
 
 // STATS
-Route::apiResource('stats/units', UnitController::class);
-Route::apiResource('stats/church', ChurchController::class);
-Route::apiResource('stats/infirmary', InfirmaryController::class);
-Route::apiResource('stats/research', ResearchController::class);
-Route::apiResource('stats/warehouse', WarehouseController::class);
+Route::prefix('stats')->group(function () {
+    Route::apiResource('units', UnitController::class);
+    Route::apiResource('church', ChurchController::class);
+    Route::apiResource('infirmary', InfirmaryController::class);
+    Route::apiResource('research', ResearchController::class);
+    Route::apiResource('warehouse', WarehouseController::class);
+    Route::apiResource('barrack', BarrackController::class);
+
+});
 
 Route::get('stats/research/researchedUnits/{researchBuildingId}', [ResearchController::class, 'getResearchedUnits']);
 
