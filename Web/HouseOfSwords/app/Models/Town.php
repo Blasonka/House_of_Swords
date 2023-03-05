@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\SiegeSystem\Siege;
+use App\Models\SiegeSystem\TrainedUnit;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -44,5 +45,9 @@ class Town extends Model
 
     public function incomingSieges(){
         return $this->hasMany(Siege::class, 'DefenderTownID', 'TownID');
+    }
+
+    public function trainedUnits(){
+        return $this->hasMany(TrainedUnit::class, 'TownID', 'TownID');
     }
 }

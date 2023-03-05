@@ -18,7 +18,10 @@ use App\Http\Controllers\BuildingControllers\InfirmaryController;
 use App\Http\Middleware\GameSessionAuthentication;
 use App\Http\Controllers\BuildingControllers\WarehouseController;
 use App\Models\Building;
+use App\Models\Buildings\Barrack;
 use App\Models\Buildings\Infirmary;
+use App\Models\SiegeSystem\TrainedUnit;
+use App\Models\Unit;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +80,15 @@ Route::get('/test', function(){
     // return Town::find(1)->initiatedSieges[0]->attackerUnits[0]->unitType;
     #endregion
     #endregion
+    $trainedunits = Town::find(1)->trainedUnits()
+    ->join('units', 'trained_units.UnitID', '=', 'units.UnitID')
+    ->select('UnitAmount','units.*')->get();
+
+    return $trainedunits;
+    // $town = Town::find(1);
+    return response()->json([
+        'units'=>$trainedunits
+    ], 200);
 
     return Building::all();
 
@@ -119,6 +131,10 @@ Route::get('stats/research/researchedUnits/{researchBuildingId}', [ResearchContr
 
 // BUILDING ACTIONS
 Route::prefix('actions')->group(function () {
+    // BARRACK ACTIONS
+    Route::prefix('barrack')->group(function () {
+        Route::get('{Town_ID}/showtrainedunits', [BarrackController::class, 'showTrainedUnits']);
+    });
     // CHURCH ACTIONS
     Route::prefix('church')->group(function () {
         Route::post('startMass', [ChurchController::class, 'startMass']);

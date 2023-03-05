@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BuildingControllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Buildings\Barrack;
+use App\Models\Town;
 use Illuminate\Http\Request;
 
 class BarrackController extends Controller
@@ -82,5 +83,11 @@ class BarrackController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showTrainedUnits($id){
+        return Town::find($id)->trainedUnits()
+        ->join('units', 'trained_units.UnitID', '=', 'units.UnitID')
+        ->select('UnitAmount','units.*')->get();
     }
 }
