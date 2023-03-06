@@ -117,7 +117,7 @@ class BarrackController extends Controller
                 $town->Gold -= $request->ResourceAmount;
                 if($town->Gold>=0){
                     $town->save();
-                    return response()->json($town, 200);
+                    return response()->json($barrack, 200);
                 }
             }
             else if($request->usingResource=='fallen'){
@@ -128,7 +128,7 @@ class BarrackController extends Controller
                 $infirmary->healedUnits -= $request->ResourceAmount;
                 if($infirmary->healedUnits>=0){
                     $infirmary->save();
-                    return response()->json($infirmary, 200);
+                    return response()->json($barrack, 200);
                 }
             }
 
