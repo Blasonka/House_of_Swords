@@ -28,6 +28,11 @@ class GameSessionAuthentication
 
         // ONLY ALLOW REQUESTS WITH GAME SESSION TOKENS OR LOGIN REQUESTS
         $sessionToken = $request->query('gamesessiontoken', null);
+
+        if ($sessionToken == null) {
+            $sessionToken = $request->bearerToken();
+        }
+
         if (!$sessionToken &&
             $request->path() != $this->notAuthorizedRoute &&
             $request->path() != $this->apiLoginRoute &&
