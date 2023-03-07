@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResetPwRequest;
+use App\Http\Requests\UserRequests\UserPatchRequest;
 use App\Mail\PwResetEmail;
 use App\Models\Bugreport;
 use App\Models\User;
@@ -43,6 +44,59 @@ class PageController extends Controller
     function profil()
     {
         return view('users.profil');
+    }
+
+    function profilUpdate(UserPatchRequest $request, $UID)
+    {
+        try {
+            if (User::find($UID)->exists()) {
+                $user = User::find($UID);
+
+                // Felhasználónév frissítése
+                if ($request->Username) {
+                    $user->update([
+                        'Username' => $request->Username
+                    ]);
+                    return redirect()->route('user.profil')->with('status', 'Felhasználónév sikeresen frissítve');
+                }
+
+                // Jelszó frissítése
+                elseif ($request->NewPassword) {
+                    $correctPassword = false;
+                    $PwdSalt =  Auth::user()->PwdSalt;
+                    $randomChar = [];
+                    for ($i = 0; $i <= 25; $i++) {
+                        array_push($randomChar, chr($i + 65));
+                        array_push($randomChar, chr($i + 97));
+                    }
+
+                    for ($i = 0; $i <= 50; $i++) {
+                        $PwdHash = hash('sha512', $request->Password . $PwdSalt . $randomChar[$i]);
+                        if ($PwdHash == Auth::user()->PwdHash) {
+                            $correctPassword = true;
+                            break;
+                        }
+                    }
+
+                    if ($correctPassword) {
+                        $randomChar = chr(random_int(0, 25) + 65);
+                        $PwdSalt = Str::random(20);
+                        $user->update([
+                            'PwdHash' => hash('sha512', $request->NewPassword . $PwdSalt . $randomChar)
+                        ]);
+                        return redirect()->route('user.profil')->with('status', 'Jelszó sikeresen frissítve');
+                    } else if (!$correctPassword) {
+                        return redirect()->route('user.profil')->with('error', 'Hibás jelszó');
+                    }
+                } else {
+                    return redirect()->route('user.profil')->with('status', 'Hiba!');
+                }
+            } else {
+                return redirect()->route('user.profil')->with('error', 'Item not found, id: ' . $UID);
+            }
+        } catch (Exception $err) {
+            return redirect()->route('user.profil')->with('error', $err->getMessage());
+        }
     }
 
     function verify()

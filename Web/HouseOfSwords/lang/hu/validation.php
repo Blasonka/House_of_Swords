@@ -97,7 +97,7 @@ return [
         'array' => 'The :attribute must have at least :min items.',
         'file' => 'The :attribute must be at least :min kilobytes.',
         'numeric' => 'The :attribute must be at least :min.',
-        'string' => 'A :attribute mezőnek legalább :min karakter hosszúnak kell lennie.',
+        'string' => 'A(z) :attribute mezőnek legalább :min karakter hosszúnak kell lennie.',
     ],
     'min_digits' => 'The :attribute must have at least :min digits.',
     'multiple_of' => 'The :attribute must be a multiple of :value.',
@@ -173,7 +173,10 @@ return [
         'Username' => 'felhasználónév',
         'EmailAddress' => 'Email cím',
         'PwdHash' => 'jelszó',
-        'PwdHash_confirmation' => 'jelszó megerősítése'
+        'Password' => 'jelszó',
+        'PwdHash_confirmation' => 'jelszó megerősítése',
+        'NewPassword' => 'új jelszó',
+        'NewPassword_confirmation' => 'új jelszó megerősítése',
         ],
 
 ];

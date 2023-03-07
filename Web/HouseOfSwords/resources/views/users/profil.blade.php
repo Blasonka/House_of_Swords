@@ -9,9 +9,9 @@
                 {{ session('status') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-        @elseif (session('errors'))
+        @elseif (session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ session('errors') }}
+                {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
@@ -32,7 +32,7 @@
                 <div class="row">
                     <!-- Felhasználói adatok-->
                     <div class="col-12">
-                        <form action="/api/users/{{ Auth::user()->UID }}" method="POST">
+                        <form action="/profil/{{ Auth::user()->UID }}" method="POST">
                             @method('PATCH')
                             @csrf
                             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -40,8 +40,10 @@
                             <div class="form">
                                 <input name="Username" type="text" placeholder="Felhasználónév"
                                     value="{{ Auth::user()->Username }}" required min="6" max="20">
-                                <label class="mt-3" for="Username">Felhasználónév</label>
-                                {{-- <input name="EmailAddress" type="email" placeholder="Email cím" value="{{ Auth::user()->EmailAddress }}" disabled> --}}
+                                <label class="mt-3" for="Username">Felhasználónév</label><br>
+                                @if ($errors->has('Username'))
+                                    <span class="text-danger text-left">{{ $errors->first('Username') }}</span>
+                                @endif
                                 <p class="mt-5 disabled">{{ Auth::user()->EmailAddress }}</p>
                                 <label for="EmailAddress">Email cím</label>
                                 <button class="register-login-btn">Változtatások mentése</button>
@@ -52,14 +54,25 @@
                 <div class="row">
                     <!-- jelszó változtatás -->
                     <div class="col-12">
-                        <form action="/editProfil" method="post">
+                        <form action="/profil/{{ Auth::user()->UID }}" method="POST">
+                            @method('PATCH')
                             @csrf
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                             <h2 class="text-start">Jelszó változtatás</h2>
                             <div class="form">
-                                <input name="PwdHash" type="password" placeholder="Jelszó">
-                                <input name="NewPwdHash" type="password" placeholder="Új jelszó">
-                                <input name="NewPwdHash_confirmation" type="password" placeholder="Új jelszó megerősítése">
-                                <button class="register-login-btn" disabled>Változtatások mentése</button>
+                                <input name="Password" type="password" placeholder="Jelszó" required>
+                                @if ($errors->has('Password'))
+                                    <span class="text-danger text-left">{{ $errors->first('Password') }}</span>
+                                @endif
+                                <input name="NewPassword" type="password" placeholder="Új jelszó" required>
+                                @if ($errors->has('NewPassword'))
+                                    <span class="text-danger text-left">{{ $errors->first('NewPassword') }}</span>
+                                @endif
+                                <input name="NewPassword_confirmation" type="password" placeholder="Új jelszó megerősítése" required>
+                                @if ($errors->has('NewPassword_confirmation'))
+                                    <span class="text-danger text-left">{{ $errors->first('NewPassword_confirmation') }}</span>
+                                @endif
+                                <button class="register-login-btn">Változtatások mentése</button>
                             </div>
                         </form>
                     </div>
