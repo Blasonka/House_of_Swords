@@ -17,6 +17,7 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\BuildingControllers\InfirmaryController;
 use App\Http\Middleware\GameSessionAuthentication;
 use App\Http\Controllers\BuildingControllers\WarehouseController;
+use App\Http\Controllers\SiegeController;
 use App\Models\Building;
 use App\Models\Buildings\Barrack;
 use App\Models\Buildings\Infirmary;
@@ -119,6 +120,12 @@ Route::get('/buildings/{Building_ID}/levelstats', [BuildingController::class, 's
 // STATS
 Route::prefix('stats')->group(function () {
     Route::apiResource('units', UnitController::class);
+    Route::prefix('sieges')->group(function () {
+        Route::get('initiated/{id}', [SiegeController::class, 'showInitiatedSieges']);
+        Route::get('incoming/{id}',[SiegeController::class, 'showincomingSieges']);
+    });
+
+    //Buildings
     Route::apiResource('church', ChurchController::class);
     Route::apiResource('infirmary', InfirmaryController::class);
     Route::apiResource('research', ResearchController::class);
