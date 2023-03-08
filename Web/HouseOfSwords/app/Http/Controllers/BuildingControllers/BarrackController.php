@@ -128,6 +128,7 @@ class BarrackController extends Controller
                 $infirmary->healedUnits -= $request->ResourceAmount;
                 if($infirmary->healedUnits>=0){
                     $infirmary->save();
+                    $barrack->healedUnits=$infirmary->healedUnits;
                     return response()->json($barrack, 200);
                 }
             }
