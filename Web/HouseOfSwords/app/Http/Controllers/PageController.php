@@ -82,7 +82,8 @@ class PageController extends Controller
                         $randomChar = chr(random_int(0, 25) + 65);
                         $PwdSalt = Str::random(20);
                         $user->update([
-                            'PwdHash' => hash('sha512', $request->NewPassword . $PwdSalt . $randomChar)
+                            'PwdHash' => hash('sha512', $request->NewPassword . $PwdSalt . $randomChar),
+                            'PwdSalt' => $PwdSalt
                         ]);
                         return redirect()->route('user.profil')->with('status', 'Jelszó sikeresen frissítve');
                     } else if (!$correctPassword) {
