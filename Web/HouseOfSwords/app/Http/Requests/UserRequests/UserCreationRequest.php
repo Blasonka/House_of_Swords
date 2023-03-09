@@ -34,18 +34,6 @@ class UserCreationRequest extends FormRequest
         ];
     }
 
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            // 'Username.required' => 'A felhasználónév mező kitöltése kötelező',
-        ];
-    }
-
     /*public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json($validator->errors(), 422));

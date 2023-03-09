@@ -42,18 +42,19 @@ class UserController extends Controller
                 'EmailVerificationToken' => Str::random(32),
                 'PwdHash' => hash('sha512', $request->input('PwdHash') . $PwdSalt . $randomChar),
                 'PwdSalt' => $PwdSalt,
-                'Role' => 0
+                'Role' => 0,
+                'IsEmailVerified' => 0
             ]);
 
             Mail::to($user->EmailAddress)->send(new VerificationEmail($user));
             Auth::login($user);
-                    if ($user->IsEmailVerified == 0) {
-                        return redirect()->route('verify');
-                    } else {
-                        return redirect()->route('user.profil');
-                    }
+            if ($user->IsEmailVerified == 0) {
+                return redirect()->route('verify');
+            } else {
+                return redirect()->route('user.profil');
+            }
         } catch (Exception $e) {
-            return response()->back()->with('errors', 'A regisztráció sikertelen! Kérjük próbálja újra később.');
+            return redirect()->back()->with('errors', 'A regisztráció sikertelen! Kérjük próbálja újra később.')->setStatusCode(422);
         }
     }
 
@@ -133,7 +134,8 @@ class UserController extends Controller
         }
     }
 
-    public function loginRequest(Request $request) {
+    public function loginRequest(Request $request)
+    {
         session()->flush();
 
         $username = $request->input('Username', null);
@@ -158,7 +160,7 @@ class UserController extends Controller
         foreach (range('a', 'z') as $i) {
             $currentHash = hash('sha512', $pwd . $user->PwdSalt . $i);
 
-            if ($currentHash == $user->PwdHash){
+            if ($currentHash == $user->PwdHash) {
                 $isPasswordCorrect = true;
                 break;
             }
@@ -166,7 +168,7 @@ class UserController extends Controller
         foreach (range('A', 'Z') as $i) {
             $currentHash = hash('sha512', $pwd . $user->PwdSalt . $i);
 
-            if ($currentHash == $user->PwdHash){
+            if ($currentHash == $user->PwdHash) {
                 $isPasswordCorrect = true;
                 break;
             }
@@ -189,10 +191,11 @@ class UserController extends Controller
         return response()->json(Auth::user(), 200);
     }
 
-    public function logoutRequest(Request $request) {
+    public function logoutRequest(Request $request)
+    {
         $user = User::firstWhere('GameSessionToken', $request->bearerToken());
 
-        if (!$user){
+        if (!$user) {
             return response()->json([
                 'success' => false,
                 'message' => 'This user does not exist.'
