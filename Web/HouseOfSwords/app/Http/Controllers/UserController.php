@@ -105,21 +105,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PatchRequest $request, $id)
+    public function update($id)
     {
-        try {
-            if (User::find($id)->exists()) {
-                $user = User::find($id);
-                $user->update($request->all());
-                return redirect()->route('user.profil');
-                // return response()->json(['message' => 'Item was updated, id: ' . $id], 200);
-            } else {
-                return response()->json(['message' => 'Item not found, id: ' . $id], 404);
-            }
-        } catch (Exception $err) {
-            return redirect()->route('user.profil')->with('errors', $err->getMessage());
-            // return response()->json(['message' => 'Database error'], 400);
-        }
+        return response()->json([
+            'success' => false,
+            'message' => 'You are not authorized to commit this action.'
+        ], 401);
     }
 
     /**
