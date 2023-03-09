@@ -22,9 +22,17 @@
                 <h2 class="text-start">Profilkép</h2>
                 <div class="profil-picture">
                     <div class="form w-100 text-center">
-                        <img class="img-account-profile rounded-circle my-5" src="/img/avatar.jpg" alt="profil picture">
+                        <img class="img-account-profile rounded-circle my-5"
+                            src="{{ asset('storage/images/' . Auth::user()->ProfileImageUrl) }}" alt="profil picture">
                         <div class="small font-italic text-muted mb-2">JPG vagy PNG kiterjesztés</div>
-                        <button class="register-login-btn" disabled>Kép feltöltése</button>
+                        <form action="/save-image/{{ Auth::user()->UID }}" method="POST" enctype="multipart/form-data">
+                            @method('PATCH')
+                            @csrf
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                            <input type="file" name="image">
+                            <button type="submit" class="register-login-btn">Kép feltöltése</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -68,9 +76,11 @@
                                 @if ($errors->has('NewPassword'))
                                     <span class="text-danger text-left">{{ $errors->first('NewPassword') }}</span>
                                 @endif
-                                <input name="NewPassword_confirmation" type="password" placeholder="Új jelszó megerősítése" required>
+                                <input name="NewPassword_confirmation" type="password" placeholder="Új jelszó megerősítése"
+                                    required>
                                 @if ($errors->has('NewPassword_confirmation'))
-                                    <span class="text-danger text-left">{{ $errors->first('NewPassword_confirmation') }}</span>
+                                    <span
+                                        class="text-danger text-left">{{ $errors->first('NewPassword_confirmation') }}</span>
                                 @endif
                                 <button class="register-login-btn">Változtatások mentése</button>
                             </div>
