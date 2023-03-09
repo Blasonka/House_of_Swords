@@ -13,6 +13,7 @@ use App\Models\Bugreport;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class PageController extends Controller
 {
@@ -44,6 +45,32 @@ class PageController extends Controller
     function profil()
     {
         return view('users.profil');
+    }
+
+    public function saveImage(Request $request, $UID)
+    {
+        // Validate the uploaded file
+        $request->validate([
+            'image' => 'required|image',
+        ]);
+
+        // Save the image to the file system
+        $path = $request->file('image')->store('public/images');
+
+        // Save the image URL to the database
+        $imageUrl = Storage::url($path);
+        // $imageUrl = Storage::url($path);
+
+        if (User::find($UID)->exists()) {
+            $user = User::find($UID);
+
+            $user->update([
+                'ProfileImageUrl' => $path
+            ]);
+        }
+
+        // Redirect the user back to the form
+        return redirect()->back();
     }
 
     function profilUpdate(UserPatchRequest $request, $UID)
