@@ -107,7 +107,10 @@ class UserController extends Controller
      */
     public function update($id)
     {
-        //
+        return response()->json([
+            'success' => false,
+            'message' => 'You are not authorized to commit this action.'
+        ], 401);
     }
 
     /**

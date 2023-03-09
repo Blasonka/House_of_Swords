@@ -26,7 +26,8 @@ class TownCreationRequest extends FormRequest
     public function rules()
     {
         return [
-            'TownName' => 'required|string|min:5|max:20' //,
+            'TownName' => 'required|string|min:5|max:20',
+            'Users_UID' => 'required|exists:users,UID'
             // 'HappinessValue' => 'integer',
             // 'Wood' => 'integer|min:0',
             // 'Stone' => 'integer|min:0',
