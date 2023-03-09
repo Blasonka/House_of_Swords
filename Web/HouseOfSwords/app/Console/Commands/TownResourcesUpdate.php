@@ -38,11 +38,24 @@ class TownResourcesUpdate extends Command
                 ['BuildingType', '=', 'Warehouse'],
             ])->get()->first();
 
-            $resourcheStats = Warehouse::find($buildings->BuildingLvl);
-            $town->Wood += $buildings->BrigadeInWood * $resourcheStats->WoodCollectionPM;
-            $town->Stone += $buildings->BrigadeInStone * $resourcheStats->StoneCollectionPM;
-            $town->Metal += $buildings->BrigadeInMetal * $resourcheStats->MetalCollectionPM;
-            $town->Gold += $buildings->BrigadeInGold * $resourcheStats->GoldCollectionPM;
+            $warehouseStats = Warehouse::find($buildings->BuildingLvl);
+            $town->Wood += $buildings->BrigadeInWood * $warehouseStats->WoodCollectionPM;
+            $town->Stone += $buildings->BrigadeInStone * $warehouseStats->StoneCollectionPM;
+            $town->Metal += $buildings->BrigadeInMetal * $warehouseStats->MetalCollectionPM;
+            $town->Gold += $buildings->BrigadeInGold * $warehouseStats->GoldCollectionPM;
+            if($town->Wood > $warehouseStats->MaxCollectedWood){
+                $town->Wood = $warehouseStats->MaxCollectedWood;
+            }
+            if($town->Stone > $warehouseStats->MaxCollectedStone){
+                $town->Stone = $warehouseStats->MaxCollectedStone;
+            }
+            if($town->Metal > $warehouseStats->MaxCollectedMetal){
+                $town->Metal = $warehouseStats->MaxCollectedMetal;
+            }
+            if($town->Gold > $warehouseStats->MaxCollectedGold){
+                $town->Gold = $warehouseStats->MaxCollectedGold;
+            }
+
             $town->save();
         }
 

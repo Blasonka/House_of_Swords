@@ -8,10 +8,11 @@
                 <thead>
                     <tr>
                         <th scope="col" width="5%">Id</th>
+                        <th scope="col" width="8%">Idő</th>
                         <th scope="col" width="20%">Email</th>
-                        <th scope="col" width="40%">Occupation</th>
+                        <th scope="col" width="30%">Hiba</th>
                         <th scope="col" width="15%">Hiba státusza</th>
-                        <th scope="col" width="10%">Státusz változtatása</th>
+                        <th scope="col" width="12%">Státusz változtatása</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,6 +20,9 @@
                         <tr scope="row">
                             <td>
                                 {{ $bug->Id }}
+                            </td>
+                            <td>
+                                {{ $bug->Date }}
                             </td>
                             <td>
                                 @if ($bug->EmailAddress == 'anonymus')
