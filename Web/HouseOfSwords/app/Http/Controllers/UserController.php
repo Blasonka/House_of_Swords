@@ -188,4 +188,23 @@ class UserController extends Controller
 
         return response()->json(Auth::user(), 200);
     }
+
+    public function logoutRequest(Request $request) {
+        $user = User::firstWhere('GameSessionToken', $request->bearerToken());
+
+        if (!$user){
+            return response()->json([
+                'success' => false,
+                'message' => 'This user does not exist.'
+            ], 400);
+        }
+
+        $user->GameSessionToken = null;
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'The user with this token has been logged out.'
+        ], 200);
+    }
 }

@@ -39,7 +39,7 @@ Route::any('/gameSessionAuthFail', function () {
 })->name('gameSessionAuthFail');
 
 Route::post('/createGameSession', [UserController::class, 'loginRequest']);
-
+Route::post('/terminateGameSession', [UserController::class, 'logoutRequest']);
 
 // API működésének tesztje
 Route::get('/', function(){

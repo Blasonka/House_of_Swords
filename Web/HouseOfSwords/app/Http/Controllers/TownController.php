@@ -7,7 +7,9 @@ use App\Models\Town;
 use App\Http\Requests\TownRequests\TownCreationRequest as CreationRequest;
 use App\Http\Requests\TownRequests\TownPatchRequest as PatchRequest;
 use App\Models\Building;
+use App\Models\SiegeSystem\TrainedUnit;
 use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 
 class TownController extends Controller
@@ -31,11 +33,65 @@ class TownController extends Controller
     public function store(CreationRequest $request)
     {
         try {
+            // CREATE TOWN
             $town = Town::create([
                 'TownName' => $request->TownName,
-                'XCords' => random_int(-200, 200),
-                'YCords' => random_int(-200, 200),
+                'XCords' => random_int(-1000, 1000),
+                'YCords' => random_int(-1000, 1000),
                 'Users_UID' => $request->Users_UID
+            ]);
+
+            // CREATE BUILDINGS FOR TOWN
+            $defaultDate = Carbon::create(2000, 1, 1, 0, 0, 0);
+
+            foreach (Building::$typeClass as $buildingType => $buildingClass) {
+                $params = [
+                    'Towns_TownID' => $town->TownID,
+                    'BuildingType' => $buildingType
+                ];
+
+                switch ($buildingType) {
+                    case 'Barrack':
+                        // ...
+                        break;
+                    case 'Church':
+                        $params['lastMassDate'] = $defaultDate;
+                        break;
+                    case 'Diplomacy':
+                        // ...
+                        break;
+                    case 'Infirmary':
+                        $params['lastCureDate'] = $defaultDate;
+                        $params['currentCure'] = 0;
+                        $params['injuredUnits'] = 0;
+                        $params['healedUnits'] = 0;
+                        break;
+                    case 'Market':
+                        // ...
+                        break;
+                    case 'Research':
+                        $params['currentScience'] = 0;
+                        $params['storedScience'] = 0;
+                        break;
+                    case 'Warehouse':
+                        $params['BrigadeInWood'] = 0;
+                        $params['BrigadeInStone'] = 0;
+                        $params['BrigadeInMetal'] = 0;
+                        $params['BrigadeInGold'] = 0;
+                        $params['BrigadeInWarehouse'] = 4;
+                        break;
+                    default:
+                        break;
+                }
+
+                Building::create($params);
+            }
+
+            // CREATE TRAINED UNIT RECORD FOR SWORDSMAN
+            TrainedUnit::create([
+                'TownID' => $town->TownID,
+                'UnitID' => 1,
+                'UnitAmount' => 0
             ]);
 
             return Town::find($town->TownID);

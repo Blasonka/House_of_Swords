@@ -14,7 +14,7 @@ class Building extends Model
     use HasFactory;
 
     // ÉPÜLETTÍPUSNAK ÉS OSZTÁLYÁNAK SZÓTÁRA
-    private $typeClass = [
+    public static $typeClass = [
         'Barrack' => Church::class,
         'Church' => Church::class,
         'Research' => Research::class,

@@ -50,8 +50,8 @@ class GameSessionAuthentication
 
             $userWithToken->LastOnline = Carbon::now();
             $userWithToken->save();
-        }
 
-        return $next($request);
+            return $next($request); // ->with('userWithToken', $userWithToken)
+        }
     }
 }
