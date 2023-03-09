@@ -14,6 +14,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use PhpParser\Node\Stmt\TryCatch;
 
 class PageController extends Controller
 {
@@ -49,28 +50,39 @@ class PageController extends Controller
 
     public function saveImage(Request $request, $UID)
     {
-        // Validate the uploaded file
-        $request->validate([
-            'image' => 'required|image',
-        ]);
+        try {
+            // Validate the uploaded file
+            // $request->validate([
+            //     'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // ]);
 
-        // Save the image to the file system
-        $path = $request->file('image')->store('public/images');
-
-        // Save the image URL to the database
-        $imageUrl = Storage::url($path);
-        // $imageUrl = Storage::url($path);
-
-        if (User::find($UID)->exists()) {
-            $user = User::find($UID);
-
-            $user->update([
-                'ProfileImageUrl' => $path
+            $request->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
+
+            // Get the uploaded file
+            $file = $request->file('image');
+
+            // Get the file name
+            $fileName = Auth::user()->Username . '_profilePicture.' . $file->getClientOriginalExtension();
+
+            // Store the file in the storage directory
+            $path = $file->storeAs('public/images', $fileName);
+
+            // Save the file name to the database
+            if (User::find($UID)->exists()) {
+                $user = User::find($UID);
+
+                $user->update([
+                    'ProfileImageUrl' => $fileName
+                ]);
+            }
+            return redirect()->back()->with('status', 'Profilkép sikeresen frissítve');;
+        } catch (Exception $err) {
+            return redirect()->back()->with('error', $err->getMessage());
         }
 
         // Redirect the user back to the form
-        return redirect()->back();
     }
 
     function profilUpdate(UserPatchRequest $request, $UID)
