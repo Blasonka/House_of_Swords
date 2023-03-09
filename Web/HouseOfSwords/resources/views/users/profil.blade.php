@@ -22,8 +22,13 @@
                 <h2 class="text-start">Profilkép</h2>
                 <div class="profil-picture">
                     <div class="form w-100 text-center">
-                        <img class="img-account-profile rounded-circle my-5"
-                            src="{{ asset('storage/images/' . Auth::user()->ProfileImageUrl) }}" alt="profil picture">
+                        @if (Auth::user()->ProfileImageUrl == null)
+                            <img class="img-account-profile rounded-circle my-5"
+                                src="img/avatar.jpg" alt="profil picture">
+                        @else
+                            <img class="img-account-profile rounded-circle my-5"
+                                src="{{ asset('storage/images/' . Auth::user()->ProfileImageUrl) }}" alt="profil picture">
+                        @endif
                         <div class="small font-italic text-muted mb-2">JPG vagy PNG kiterjesztés</div>
                         <form action="/save-image/{{ Auth::user()->UID }}" method="POST" enctype="multipart/form-data">
                             @method('PATCH')
