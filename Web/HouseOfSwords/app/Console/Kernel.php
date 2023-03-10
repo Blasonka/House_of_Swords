@@ -24,6 +24,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('LogoutOfflineUsers')
             ->everyMinute();
+
+        $schedule->command('ClearSolvedBugreports')
+            ->weeklyOn(7, '23:59');
     }
 
     /**
