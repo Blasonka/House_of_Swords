@@ -11,12 +11,6 @@
     <div class="container">
         <div class="row">
 
-            {{-- @auth
-                <div>
-                    {{ Auth::user()->Username }}
-                </div>
-            @endauth --}}
-
             <div class="card m-5 col-6 col-md-4 col-lg-3 mx-auto text-center" style="width: 18rem;">
                 <img src="./img/coding.png" class="card-img my-3" alt="An image about coding">
                 <hr class="text-secondary opacity-5">

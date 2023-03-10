@@ -58,6 +58,9 @@ Route::group(['middleware' => ['auth', 'notverified.email']], function (){
 Route::group(['middleware' => ['auth', 'verified.email']], function (){
     Route::get('/profil', [PageController::class, 'profil'])->name('user.profil');
     Route::patch('/profil/{UID}', [PageController::class, 'profilUpdate'])->name('user.profilUpdate');
+
+    Route::patch('/save-image/{UID}', [PageController::class, 'saveImage'])->name('save-image');
+
 });
 
 

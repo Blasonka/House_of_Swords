@@ -63,7 +63,7 @@ return [
         'numeric' => 'The :attribute must be greater than or equal to :value.',
         'string' => 'The :attribute must be greater than or equal to :value characters.',
     ],
-    'image' => 'The :attribute must be an image.',
+    'image' => 'A(z) :attribute mezőnek egy képnek kell lennie.',
     'in' => 'The selected :attribute is invalid.',
     'in_array' => 'The :attribute field does not exist in :other.',
     'integer' => 'A megadott :attribute mező csak számot tartalmazhat.',
@@ -86,12 +86,12 @@ return [
     'mac_address' => 'The :attribute must be a valid MAC address.',
     'max' => [
         'array' => 'The :attribute must not have more than :max items.',
-        'file' => 'The :attribute must not be greater than :max kilobytes.',
+        'file' => 'A(z) :attribute mező mérete nem lehet nagyobb, mint :max kilobyte.',
         'numeric' => 'The :attribute must not be greater than :max.',
         'string' => 'The :attribute must not be greater than :max characters.',
     ],
     'max_digits' => 'The :attribute must not have more than :max digits.',
-    'mimes' => 'The :attribute must be a file of type: :values.',
+    'mimes' => 'A(z) :attribute mezőnek az alábbi formátumban kell lennie: type: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
         'array' => 'The :attribute must have at least :min items.',
@@ -177,6 +177,7 @@ return [
         'PwdHash_confirmation' => 'jelszó megerősítése',
         'NewPassword' => 'új jelszó',
         'NewPassword_confirmation' => 'új jelszó megerősítése',
+        'image' => 'kép',
         ],
 
 ];
