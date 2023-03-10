@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Email Verification</title>
+    <title>Email hitelesítése</title>
 </head>
 
 <body>
-    <p>Please verify your email with the link bellow: </p>
-    <a href="{{ route('emailVerification', $user->EmailVerificationToken) }}">Verify Email</a>
+    <p>Kérlek hitelesítsd emailedet az alábbi linkkel: </p>
+    <a href="{{ route('emailVerification', $user->EmailVerificationToken) }}">Email hitelesítése</a>
 </body>
 
 </html>
