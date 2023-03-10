@@ -29,7 +29,7 @@
                             <img class="img-account-profile rounded-circle my-5"
                                 src="{{ asset('storage/images/' . Auth::user()->ProfileImageUrl) }}" alt="profil picture">
                         @endif
-                        <div class="small font-italic text-muted mb-2">JPG vagy PNG kiterjesztés</div>
+                        <div class="small font-italic text-muted mb-2">JPG, JPEG, PNG, GIF vagy SVG kiterjesztés</div>
                         <form action="/save-image/{{ Auth::user()->UID }}" method="POST" enctype="multipart/form-data">
                             @method('PATCH')
                             @csrf
