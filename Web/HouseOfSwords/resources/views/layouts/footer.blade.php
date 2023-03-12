@@ -16,7 +16,7 @@
         <div class="col-lg-4 col-12 text-center mx-auto border-bottom my-5">
             <img src="/img/logo.png" alt="logo" class="w-50">
             <h3>House of Swords</h3>
-            <p>A House of Swords egy izgalmas középkori világban játszódó stratégiai játék, ahol a játékosoknak taktikusan kell irányítaniuk a hadseregüket és ügyesen kezelniük erőforrásaikat a győzelem érdekében..</p>
+            <p>A House of Swords egy izgalmas középkori világban játszódó stratégiai játék, ahol a játékosoknak taktikusan kell irányítaniuk a hadseregüket és ügyesen kezelniük erőforrásaikat a győzelem érdekében.</p>
         </div>
         <div class="col-lg-4 col-12 text-center my-5 border-bottom">
             <h3>Navigálás</h3>
