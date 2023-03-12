@@ -134,3 +134,20 @@ label{
     letter-spacing: 1px;
     margin-top: 30px;
 }
+
+.showPwdIcon{
+    background: transparent;
+
+    height: 35px;
+
+    border-bottom: 1px solid #6C3B25;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+
+    margin-top: 30px;
+}
+
+.showPwdIcon img{
+    height: 100%;
+}

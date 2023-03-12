@@ -17,24 +17,37 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
                 <div class="form">
-                    <input name="Username" type="text" placeholder="Felhasználónév">
-                    @if ($errors->has('Username'))
+                    <input name="Username" type="text" placeholder="Felhasználónév" value="{{ old('Username') }}">
+
+                    <div class="d-flex">
+                        <input id="PwdField" name="PwdHash" type="password" placeholder="Jelszó" class="mb-3">
+                        <button id="showPwdButton" type="button" class="showPwdIcon" onclick="showPwd(true);">
+                            <img src="img/showPassword.png" alt="Show password"/>
+                        </button>
+                    </div>
+
+                    @if ($errors->has('Username') || $errors->has('PwdHash'))
+                        <span class="text-danger text-left">Hibás felhasználónév vagy jelszó!</span>
+                    @endif
+
+                    {{-- @if ($errors->has('Username'))
                         <span class="text-danger text-left">{{ $errors->first('Username') }}</span>
                     @endif
-                    <input name="PwdHash" type="password" placeholder="Jelszó" class="mb-3">
                     @if ($errors->has('PwdHash'))
                         <span class="text-danger text-left">{{ $errors->first('PwdHash') }}</span>
-                    @endif
+                    @endif --}}
+
                     <button class="register-login-btn" type="submit">Belépés</button>
 
                     <p class="link">Nincs fiókod?<br>
-                        <a href="/register">Regisztrálj</a> itt</a>
+                        <a href="/register">Regisztrálj itt</a>
                     </p>
+
                     <p class="link">
                         <a href="/forgottenpw">Elfelejtetted a jelszavad?</a>
                     </p>
-                    <p class="liw">Lépj be ezzel:</p>
 
+                    <p class="liw">Lépj be ezzel:</p>
                     <div class="icons text-center">
                         <a href="#">
                             <ion-icon name="logo-facebook"></ion-icon>
@@ -50,5 +63,7 @@
             </form>
         </div>
     </div>
+
+    <script src="js/showPwd.js"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 @endsection
