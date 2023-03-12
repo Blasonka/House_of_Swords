@@ -18,6 +18,7 @@
 
             <p class="display-6">Kérlek hitelesítsd az email címedet!</p>
             <p class="">Nézd meg a postaládádat, amennyiben nem kaptál levelet, a linkre kattintva küldhetsz egy újat
+                a már megadott <b><i>{{ Auth::user()->EmailAddress }}</i></b> email címre
             </p>
             <div class="d-grid gap-2 col-6 mx-auto">
                 <form action="/verifyresend" method="POST">

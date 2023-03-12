@@ -48,20 +48,20 @@
                             @if (isset(Auth::user()->Role) && Auth::user()->Role >= 2)
                                 <li class="my-nav-item align-self-center {{ request()->is('owner') ? 'my-active' : '' }}">
                                     @csrf
-                                    <a class="my-nav-link" href="{{ route('owner') }}">Owner page</a>
+                                    <a class="my-nav-link" href="{{ route('owner') }}">Tulajdonos oldal</a>
                                 </li>
                             @endif
 
                             @if (isset(Auth::user()->Role) && Auth::user()->Role >= 1)
                                 <li class="my-nav-item align-self-center {{ request()->is('admin') ? 'my-active' : '' }}">
                                     @csrf
-                                    <a class="my-nav-link" href="{{ route('admin') }}">Admin page</a>
+                                    <a class="my-nav-link" href="{{ route('admin') }}">Adminisztrátor oldal</a>
                                 </li>
                             @endif
 
                             <li class="my-nav-item align-self-center {{ request()->is('profil') ? 'my-active' : '' }}">
                                 @csrf
-                                <a class="my-nav-link" href="{{ route('user.profil') }}">Profil</a>
+                                <a class="my-nav-link" href="{{ route('user.profil') }}">{{Auth::user()->Username}}</a>
                             </li>
 
                             <li class="nav-item align-self-center">
