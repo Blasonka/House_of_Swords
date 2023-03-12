@@ -10,29 +10,41 @@
 
                 <h2>Regisztráció</h2>
                 <div class="form">
-                    <input name="Username" type="text" placeholder="Felhasználónév">
+                    {{-- FELHASZNÁLÓNÉV ÉS EMAIL CÍM --}}
+                    <input name="Username" type="text" placeholder="Felhasználónév" value="{{ old('Username') }}">
                     @if ($errors->has('Username'))
                         <span class="text-danger text-left">{{ $errors->first('Username') }}</span>
                     @endif
-                    <input name="EmailAddress" type="text" placeholder="Email cím">
+
+                    <input name="EmailAddress" type="text" placeholder="Email cím" value="{{ old('EmailAddress') }}">
                     @if ($errors->has('EmailAddress'))
                         <span class="text-danger text-left">{{ $errors->first('EmailAddress') }}</span>
                     @endif
-                    <input name="PwdHash" type="password" placeholder="Jelszó">
+
+                    {{-- JELSZÓ --}}
+                    <div class="d-flex">
+                        <input id="PwdField" name="PwdHash" type="password" placeholder="Jelszó">
+                        <button id="showPwdButton" type="button" class="showPwdIcon" onclick="showPwd(true);">
+                            <img src="img/showPassword.png" alt="Show password"/>
+                        </button>
+                    </div>
                     @if ($errors->has('PwdHash'))
                         <span class="text-danger text-left">{{ $errors->first('PwdHash') }}</span>
                     @endif
-                    <input name="PwdHash_confirmation" type="password" placeholder="Jelszó megerősítése">
+
+                    <input id="PwdFieldConf" name="PwdHash_confirmation" type="password" placeholder="Jelszó megerősítése">
                     @if ($errors->has('PwdHash_confirmation'))
                         <span class="text-danger text-left">{{ $errors->first('PwdHash_confirmation') }}</span>
                     @endif
-                    <button class="register-login-btn">Regisztrálok</button>
+
+                    {{-- KÜLDÉS --}}
+                    <button type="submit" class="register-login-btn">Regisztrálok</button>
 
                     <p class="link">Már regisztráltál?<br>
-                        <a href="/login">Jelentkezz be</a> itt</a>
+                        <a href="/login">Jelentkezz be itt</a>
                     </p>
-                    <p class="liw">Lépj be ezzel:</p>
 
+                    <p class="liw">Lépj be ezzel:</p>
                     <div class="icons text-center">
                         <a href="#">
                             <ion-icon name="logo-facebook"></ion-icon>
@@ -59,5 +71,6 @@
         </div>
     </div>
 
+    <script src="js/showPwd.js"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 @endsection
