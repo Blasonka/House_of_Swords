@@ -20,6 +20,7 @@
                     <a href="/" class="btn btn-primary disabled mt-auto">Elolvasom</a>
                 </div>
             </div>
+
             <div class="card m-5 col-6 col-md-4 col-lg-3 mx-auto text-center" style="width: 18rem;">
                 <img src="./img/information.png" class="card-img my-3" alt="Information sign">
                 <hr class="text-secondary opacity-5">
@@ -29,15 +30,17 @@
                     <a href="/" class="btn btn-primary disabled mt-auto">Elolvasom</a>
                 </div>
             </div>
+
             <div class="card m-5 col-6 col-md-4 col-lg-3 mx-auto text-center" style="width: 18rem;">
                 <img src="./img/devTeam.png" class="card-img my-3" alt="Three people in a team">
                 <hr class="text-secondary opacity-5">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">Csapat</h5>
                     <p class="card-text">A fejlesztőcsapat bemutatása.</p>
-                    <a href="/" class="btn btn-primary disabled mt-auto">Elolvasom</a>
+                    <a href="/cards/developers" class="btn btn-primary mt-auto">Elolvasom</a>
                 </div>
             </div>
+
             <div class="card m-5 col-6 col-md-4 col-lg-3 mx-auto text-center" style="width: 18rem;">
                 <img src="./img/eula.png" class="card-img my-3" alt="An image about coding">
                 <hr class="text-secondary opacity-5">

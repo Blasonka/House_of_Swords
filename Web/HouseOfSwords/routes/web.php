@@ -26,6 +26,12 @@ Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/download', [PageController::class, 'download'])->name('download');
 Route::get('/bugreport',[PageController::class, 'bugReport'])->name('bugReport');
 
+Route::prefix('/cards')->group(function () {
+    Route::get('/developers', function() {
+        return view('home.introduction');
+    });
+});
+
 Route::patch('/admin/bugreports/{Id}', [BugReportController::class, 'updateOnWebsite']);
 
 // Bejelentkezés nélkül igen, de bejelentkezve nem látszik
