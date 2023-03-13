@@ -36,6 +36,11 @@ class Building extends Model
         'BuildingLvl',
 
         // PARAMETERS THAT DEPEND ON THE BUILDING'S TYPE
+        // BARRACK
+        'LastTrainingDate',
+        'TrainedUnitID',
+        'TrainedAmount',
+
         // RESEARCH
         'currentScience',
         'storedScience',

@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Building;
 use App\Models\Buildings\Barrack;
 use App\Models\Town;
+use App\Models\Unit;
+use DateTime;
 use Illuminate\Http\Request;
 use Exception;
+
 
 class BarrackController extends Controller
 {
@@ -112,11 +115,17 @@ class BarrackController extends Controller
                 ], 400);
             }
 
+            $unitstats = Unit::find($request->selectedUnitID);
+
             if($request->usingResource=='gold'){
                 $town = $barrack->town;
-                $town->Gold -= $request->ResourceAmount;
+                $town->Gold -= $request->ResourceAmount*$unitstats->TrainingCostGold;
                 if($town->Gold>=0){
                     $town->save();
+                    $barrack->LastTrainingDate= date('Y-m-d H:i:s');
+                    $barrack->TrainedUnitID = $request->selectedUnitID;
+                    $barrack->TrainedAmount = $request->ResourceAmount;
+                    $barrack->save();
                     return response()->json($barrack, 200);
                 }
             }
@@ -125,10 +134,14 @@ class BarrackController extends Controller
                     ['BuildingType','like','Infirmary'],
                     ['Towns_TownID','=',$barrack->Towns_TownID]
                 ])->get()[0];
-                $infirmary->healedUnits -= $request->ResourceAmount;
+                $infirmary->healedUnits -= $request->ResourceAmount*$unitstats->TrainingCostFallen;
                 if($infirmary->healedUnits>=0){
                     $infirmary->save();
                     $barrack->healedUnits=$infirmary->healedUnits;
+                    $barrack->LastTrainingDate= date('Y-m-d H:i:s');
+                    $barrack->TrainedUnitID = $request->selectedUnitID;
+                    $barrack->TrainedAmount = $request->ResourceAmount;
+                    $barrack->save();
                     return response()->json($barrack, 200);
                 }
             }
