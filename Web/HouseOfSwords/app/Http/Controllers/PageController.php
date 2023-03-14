@@ -12,6 +12,7 @@ use App\Mail\PwResetEmail;
 use App\Models\Bugreport;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use PhpParser\Node\Stmt\TryCatch;
@@ -77,7 +78,7 @@ class PageController extends Controller
                     'ProfileImageUrl' => $fileName
                 ]);
             }
-            cache()->flush();
+            Cache::flush();
             return redirect()->back()->with('status', 'Profilkép sikeresen frissítve');;
         } catch (Exception $err) {
             return redirect()->back()->with('error', $err->getMessage());
