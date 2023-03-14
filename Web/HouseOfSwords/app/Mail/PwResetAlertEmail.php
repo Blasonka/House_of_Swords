@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class PwResetEmail extends Mailable
+class PwResetAlertEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,7 +32,7 @@ class PwResetEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Jelszó visszaállítása',
+            subject: 'Jelszó sikeres visszaállítása!',
         );
     }
 
@@ -44,7 +44,7 @@ class PwResetEmail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mail.pwreset',
+            view: 'mail.pwresetalert',
             with: [ 'user' => $this->user ],
         );
     }

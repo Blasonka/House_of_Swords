@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResetPwRequest;
 use App\Http\Requests\UserRequests\UserPatchRequest;
+use App\Mail\PwResetAlertEmail;
 use App\Mail\PwResetEmail;
 use App\Models\Bugreport;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use PhpParser\Node\Stmt\TryCatch;
@@ -126,6 +128,7 @@ class PageController extends Controller
                             'PwdHash' => hash('sha512', $request->NewPassword . $PwdSalt . $randomChar),
                             'PwdSalt' => $PwdSalt
                         ]);
+                        Mail::to($user->EmailAddress)->send(new PwResetAlertEmail($user));
                         return redirect()->route('user.profil')->with('status', 'Jelszó sikeresen frissítve');
                     } else if (!$correctPassword) {
                         return redirect()->route('user.profil')->with('error', 'Hibás jelszó');
@@ -170,7 +173,7 @@ class PageController extends Controller
                     'PwdSalt' => $PwdSalt,
                     'EmailVerificationToken' => null
                 ]);
-
+                Mail::to($user->EmailAddress)->send(new PwResetAlertEmail($user));
                 Auth::login($user);
                 if ($user->IsEmailVerified == 0) {
                     return redirect()->route('verify');

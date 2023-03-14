@@ -33,7 +33,7 @@ class VerificationEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Verification Email',
+            subject: 'Emailcím hitelesítése',
         );
     }
 
