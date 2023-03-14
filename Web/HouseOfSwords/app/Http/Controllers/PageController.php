@@ -77,6 +77,7 @@ class PageController extends Controller
                     'ProfileImageUrl' => $fileName
                 ]);
             }
+            cache()->flush();
             return redirect()->back()->with('status', 'Profilkép sikeresen frissítve');;
         } catch (Exception $err) {
             return redirect()->back()->with('error', $err->getMessage());
