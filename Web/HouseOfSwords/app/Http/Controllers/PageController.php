@@ -14,6 +14,7 @@ use App\Models\Bugreport;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -188,7 +189,10 @@ class PageController extends Controller
 
     function admin()
     {
-        $bugs = Bugreport::all();
+        $bugs = DB::table('bugreports')
+                ->orderBy('IsSolved', 'asc')
+                ->orderBy('Date', 'asc')
+                ->get();
         return view('admin.index', ['bugs' => $bugs]);
     }
 
