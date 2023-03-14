@@ -21,7 +21,7 @@ return new class extends Migration
 
             $table->longText('Text');
             $table->string('EmailAddress', 100)->nullable()->default(null);
-            $table->tinyInteger('IsSolved')->unsigned()->default(0);
+            $table->tinyInteger('IsSolved')->unsigned()->default(1);
             $table->date('Date')->useCurrent()->default(now());
         });
     }
