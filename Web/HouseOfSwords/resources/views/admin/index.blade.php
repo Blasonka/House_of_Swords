@@ -33,9 +33,9 @@
                                 @endif
                             </td>
                             <td><small class="d-block">{{ $bug->Text }}</small></td>
-                            @if ($bug->IsSolved == 0)
+                            @if ($bug->IsSolved == 1)
                                 <td class="status"><span class="bug bug-bg">Megoldatlan</span></td>
-                            @elseif ($bug->IsSolved == 1)
+                            @elseif ($bug->IsSolved == 0)
                                 <td class="status"><span class="inprogress inprogress-bg">Folyamatban</span></td>
                             @else
                                 <td class="status"><span class="fixed fixed-bg">Megoldva</span></td>
@@ -55,7 +55,7 @@
                                         <form action="/admin/bugreports/{{ $bug->Id }}" method="POST">
                                             @csrf
                                             @method('PATCH')
-                                            <input name="IsSolved" value="1" type="text" hidden>
+                                            <input name="IsSolved" value="0" type="text" hidden>
                                             <button type="submit" class="btn btn-sm btn-warning btn-inprogress"></button>
                                         </form>
                                     </div>
@@ -63,7 +63,7 @@
                                         <form action="/admin/bugreports/{{ $bug->Id }}" method="POST">
                                             @csrf
                                             @method('PATCH')
-                                            <input name="IsSolved" value="0" type="text" hidden>
+                                            <input name="IsSolved" value="1" type="text" hidden>
                                             <button type="submit" class="btn btn-sm btn-danger btn-bug"></button>
                                         </form>
                                     </div>

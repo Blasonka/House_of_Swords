@@ -189,10 +189,7 @@ class PageController extends Controller
 
     function admin()
     {
-        $bugs = DB::table('bugreports')
-                ->orderBy('IsSolved', 'asc')
-                ->orderBy('Date', 'asc')
-                ->get();
+        $bugs = DB::table('bugreports')->orderBy('IsSolved', 'asc')->orderBy('Date', 'asc')->get();
         return view('admin.index', ['bugs' => $bugs]);
     }
 
