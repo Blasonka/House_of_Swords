@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="conatiner">
-        <div class="row bg-text pt-4">
+        <div class="row bg-text pt-4 mb-3">
             <form method="POST" href="/bugreport">
                 @csrf
 
@@ -26,6 +26,9 @@
 
                 <button type="submit" class="btn btn-info">Jelentés küldése</button>
             </form>
+        </div>
+        <div class="row bg-text pt-4">
+            <label><b>FIGYELEM:</b> Amennyiben be van jelentkezve, az email címe mentésre kerül a jelentésével, és a hiba állapotáról további üzeneteket kaphat.</label>
         </div>
     </div>
 @endsection
