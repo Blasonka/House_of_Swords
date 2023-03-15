@@ -180,18 +180,18 @@ class BarrackController extends Controller
                 ], 400);
             }
             // $unitstats = Unit::find($request->selectedUnitID);
-            $trainedUnit = TrainedUnit::all()->where('TownID', '=', $barrack->Towns_TownID)->get();
-            // ->where([
-            //     ['TownID', '=', $barrack->Towns_TownID],
-            //     ['UnitID', '=', $barrack->TrainedUnitID]
-            // ]);
-            return response()->json($trainedUnit, 200);
-            // $trainedUnit->UnitAmount += $barrack->TrainedAmount;
-            // $trainedUnit->save();
+            $trainedUnit = TrainedUnit::where([
+                ['TownID', '=', $barrack->Towns_TownID],
+                ['UnitID', '=', $barrack->TrainedUnitID]
+            ])->get()[0];
+            // return response()->json($trainedUnit, 200);
 
-            // $barrack->TrainedUnitID = 0;
-            // $barrack->TrainedAmount = 0;
-            // $barrack->save();
+            $trainedUnit->UnitAmount += $barrack->TrainedAmount;
+            $trainedUnit->save();
+
+            $barrack->TrainedUnitID = 0;
+            $barrack->TrainedAmount = 0;
+            $barrack->save();
 
             return response()->json($barrack, 200);
         } catch (Exception $err) {
