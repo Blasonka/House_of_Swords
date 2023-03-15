@@ -17,7 +17,7 @@
                 </thead>
                 <tbody>
                     @foreach ($bugs as $bug)
-                        <tr scope="row">
+                        <tr id="bug_{{ $bug->Id }}" scope="row">
                             <td>
                                 {{ $bug->Id }}
                             </td>
@@ -44,7 +44,7 @@
                             <td class="status">
                                 <div class="row mx-auto">
                                     <div class="col-1">
-                                        <form action="/admin/bugreports/{{ $bug->Id }}" method="POST">
+                                        <form action="/admin/bugreports/{{ $bug->Id }}#bug_{{ $bug->Id == 1 ? 1 : ($bug->Id - 1) }}" method="POST">
                                             @csrf
                                             @method('PATCH')
                                             <input name="IsSolved" value="2" type="text" hidden>
@@ -52,7 +52,7 @@
                                         </form>
                                     </div>
                                     <div class="col-1">
-                                        <form action="/admin/bugreports/{{ $bug->Id }}" method="POST">
+                                        <form action="/admin/bugreports/{{ $bug->Id }}#bug_{{ $bug->Id == 1 ? 1 : ($bug->Id - 1) }}" method="POST">
                                             @csrf
                                             @method('PATCH')
                                             <input name="IsSolved" value="0" type="text" hidden>
@@ -60,7 +60,7 @@
                                         </form>
                                     </div>
                                     <div class="col-1">
-                                        <form action="/admin/bugreports/{{ $bug->Id }}" method="POST">
+                                        <form action="/admin/bugreports/{{ $bug->Id }}#bug_{{ $bug->Id == 1 ? 1 : ($bug->Id - 1) }}" method="POST">
                                             @csrf
                                             @method('PATCH')
                                             <input name="IsSolved" value="1" type="text" hidden>
