@@ -21,7 +21,7 @@
 
             <hr class="border border-light border-2 opacity-50">
 
-            <p class="fs-4">A játékosoknak figyelniük kell a királyságuk gazdasági helyzetét is, mivel a hadsereg finanszírozása és a fejlesztések fontosak a győzelem eléréséhez. A játékosoknak ügyelniük kell az erőforrások hatékony felhasználására, hogy növeljék a gazdasági növekedést és biztosítsák a királyságuk stabil működését.</p>
+            <p class="fs-4">A játékosoknak figyelniük kell a királyságuk gazdasági helyzetét is, mivel a hadsereg finanszírozása, valamint a kereskedelem és a fejlesztések fontosak a győzelem eléréséhez. A játékosoknak ügyelniük kell az erőforrások hatékony felhasználására, hogy növeljék a gazdasági növekedést és biztosítsák a királyságuk stabil működését.</p>
 
             <hr class="border border-light border-2 opacity-50">
 
