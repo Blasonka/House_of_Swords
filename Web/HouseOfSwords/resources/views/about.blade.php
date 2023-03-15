@@ -9,7 +9,7 @@
 
     <div class="row bg-text bg-dark mt-3">
         <div class="col-12">
-            <p class="fs-4">House of Swords egy középkori témájú stratégiai játék, amelyben a játékosoknak vezetniük kell egy kitalált középkori királyságot. A játék célja, hogy megszerezzék a lehető legtöbb területet és hatalmat a királyságban.</p>
+            <p class="fs-4"><b>House of Swords</b> egy középkori témájú stratégiai játék, amelyben a játékosoknak vezetniük kell egy kitalált középkori királyságot. A játék célja, hogy megszerezzék a lehető legtöbb területet és hatalmat a királyságban.</p>
 
             <hr class="border border-light border-2 opacity-50">
 
@@ -33,7 +33,7 @@
 
             <hr class="border border-light border-2 opacity-50">
 
-            <p class="fs-4">A House of Swords kiváló lehetőséget nyújt a középkori stratégiai játékok kedvelőinek, hogy élvezhessék a stratégiai tervezést, a hadviselést és az interaktív játékot. A játékmenet izgalmas és változatos, a grafika pedig egyedi és stílusos, amely lehetővé teszi a játékosok számára, hogy a középkori világban érezzék magukat.</p>
+            <p class="fs-4">A <b>House of Swords</b> kiváló lehetőséget nyújt a középkori stratégiai játékok kedvelőinek, hogy élvezhessék a stratégiai tervezést, a hadviselést és az interaktív játékot. A játékmenet izgalmas és változatos, a grafika pedig egyedi és stílusos, amely lehetővé teszi a játékosok számára, hogy a középkori világban érezzék magukat.</p>
         </div>
     </div>
 @endsection
