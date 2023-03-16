@@ -55,11 +55,6 @@ class PageController extends Controller
     public function saveImage(Request $request, $UID)
     {
         try {
-            // Validate the uploaded file
-            // $request->validate([
-            //     'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            // ]);
-
             $request->validate([
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
@@ -81,13 +76,17 @@ class PageController extends Controller
                     'ProfileImageUrl' => $fileName
                 ]);
             }
+
+            // Clear the cache to always display the current image
             Cache::flush();
+
+            // Redirect the user back to the form
             return redirect()->back()->with('status', 'Profilkép sikeresen frissítve');;
         } catch (Exception $err) {
             return redirect()->back()->with('error', $err->getMessage());
         }
 
-        // Redirect the user back to the form
+
     }
 
     function profilUpdate(UserPatchRequest $request, $UID)
