@@ -212,8 +212,7 @@ class BarrackController extends Controller
                 "AttackerTownID" => $request->AttackerTownID,
                 "DefenderTownID" => $request->DefenderTownID,
                 "SiegeTime" => $request->SiegeTime,
-                "LootPercentage" => $request->LootPercentage,
-                "AttackerWon" => $request->AttackerWon
+                "LootPercentage" => $request->LootPercentage
             ]);
 
             foreach ($request->Units as $unit) {
