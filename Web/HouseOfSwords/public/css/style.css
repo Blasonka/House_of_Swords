@@ -38,11 +38,6 @@ main{
     filter: blur(3px) grayscale(100%); */
 }
 
-.navbar_icons {
-    max-width: 1.5rem;
-    float:left;
-}
-
 #navbar_logo {
     max-width: 3rem;
 }
@@ -94,7 +89,7 @@ main{
 
 /*Navbar*/
 
-.my-nav-item {
+.my-nav-item, .my-nav-item-icons {
     margin: auto;
     color: white;
     font-size: 20px;
@@ -108,6 +103,7 @@ main{
     border-bottom: solid 1px #a6876e;
     transform: scaleX(0);
     transition: transform 300ms ease-in-out;
+    font-size: 20px;
 }
 
 .my-nav-item:hover:after {
@@ -138,6 +134,16 @@ main{
     width: 100%;
     overflow: hidden;
     z-index: 10;
+}
+
+.navbar-icons {
+    max-width: 1.5rem;
+    float:left;
+}
+
+.navbar-icons:hover {
+    /*CSS filter generator to convert from black to target hex color: https://codepen.io/sosuke/pen/Pjoqqp*/
+    filter: brightness(0) saturate(100%) invert(63%) sepia(23%) saturate(482%) hue-rotate(345deg) brightness(84%) contrast(84%);    
 }
 
 /*Navbar vége*/

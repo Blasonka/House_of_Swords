@@ -11,14 +11,32 @@
                         <th scope="col" width="8%">Idő</th>
                         <th scope="col" width="20%">Email</th>
                         <th scope="col" width="30%">Hiba</th>
-                        <th scope="col" width="15%">Hiba státusza</th>
-                        <th scope="col" width="12%">Státusz változtatása</th>
+                        <th scope="col" width="18%">Hiba státusza</th>
+                        <th scope="col" width="10%">Státusz változtatása</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($bugs as $bug)
-                        <tr scope="row">
-                            <td>
+                    @php
+                        $firstUntouched = -1;
+                        $firstCompleted = -1;
+
+                        foreach ($bugs as $row_id => $bug)
+                        {
+                            if ($bug->IsSolved == 1 && $firstUntouched == -1)
+                            {
+                                $firstUntouched = $row_id - 2;
+                            }
+                            else if ($bug->IsSolved == 2 && $firstCompleted == -1)
+                            {
+                                $firstCompleted = $row_id - 2;
+                            }
+                        }
+                    @endphp
+
+                    @foreach ($bugs as $row_id => $bug)
+
+                        <tr id="row_{{ $row_id}}" scope="row">
+                            <td id="bug_{{ $bug->Id }}">
                                 {{ $bug->Id }}
                             </td>
                             <td>
@@ -44,7 +62,7 @@
                             <td class="status">
                                 <div class="row mx-auto">
                                     <div class="col-1">
-                                        <form action="/admin/bugreports/{{ $bug->Id }}" method="POST">
+                                        <form action="/admin/bugreports/{{ $bug->Id }}#row_{{ $firstCompleted }}" method="POST">
                                             @csrf
                                             @method('PATCH')
                                             <input name="IsSolved" value="2" type="text" hidden>
@@ -60,7 +78,7 @@
                                         </form>
                                     </div>
                                     <div class="col-1">
-                                        <form action="/admin/bugreports/{{ $bug->Id }}" method="POST">
+                                        <form action="/admin/bugreports/{{ $bug->Id }}#row_{{ $firstUntouched }}" method="POST">
                                             @csrf
                                             @method('PATCH')
                                             <input name="IsSolved" value="1" type="text" hidden>

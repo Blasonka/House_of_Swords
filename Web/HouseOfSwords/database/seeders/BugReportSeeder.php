@@ -21,5 +21,15 @@ class BugReportSeeder extends Seeder
             'EmailAddress' => 'blasek.balazs@gmail.com',
             'IsSolved' => 2
         ]);
+
+        // TESZT BUGREPORTOK
+        // for ($i = 2; $i <= 100; $i++) {
+        //     DB::table('bugreports')->updateOrInsert([ 'Id' => $i],
+        //     [
+        //         'Text' => 'A felhasználók által jelentett hibák itt fognak megjelenni.',
+        //         'EmailAddress' => 'tesztjozsef@gmail.com',
+        //         'IsSolved' => 1
+        //     ]);
+        // }
     }
 }
