@@ -6,6 +6,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,14 @@ Route::get('/', [PageController::class, 'index'])->name('index');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/download', [PageController::class, 'download'])->name('download');
 Route::get('/bugreport',[PageController::class, 'bugReport'])->name('bugReport');
+
+Route::get('/downloadWindows', function () {
+    return response()->download(storage_path('/app/public/download/windows.txt'));
+});
+
+Route::get('/downloadAndroid', function () {
+    return response()->download(storage_path('/app/public/download/android.txt'));
+});
 
 Route::prefix('/cards')->group(function () {
     Route::get('/developers', function() {
