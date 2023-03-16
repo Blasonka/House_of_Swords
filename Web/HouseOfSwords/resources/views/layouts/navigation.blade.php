@@ -67,7 +67,7 @@
                             <li class="nav-item align-self-center">
                                 @csrf
                                 <a class="my-nav-link" href="{{ route('logout') }}">
-                                    <img class="navbar_icons" src="/img/exit.png" alt="">
+                                    <img class="navbar-icons" src="/img/exit.png" alt="">
                                 </a>
                             </li>
                         @endauth

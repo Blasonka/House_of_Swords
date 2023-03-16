@@ -38,9 +38,14 @@ main{
     filter: blur(3px) grayscale(100%); */
 }
 
-.navbar_icons {
+.navbar-icons {
     max-width: 1.5rem;
     float:left;
+}
+
+.navbar-icons:hover {
+    /*CSS filter generator to convert from black to target hex color: https://codepen.io/sosuke/pen/Pjoqqp*/
+    filter:  brightness(0) saturate(100%) invert(63%) sepia(23%) saturate(482%) hue-rotate(345deg) brightness(84%) contrast(84%);
 }
 
 #navbar_logo {
