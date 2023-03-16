@@ -64,7 +64,7 @@
                                 <a class="my-nav-link" href="{{ route('user.profil') }}">{{Auth::user()->Username}}</a>
                             </li>
 
-                            <li class="nav-item align-self-center">
+                            <li class="my-nav-item-icons align-self-center">
                                 @csrf
                                 <a class="my-nav-link" href="{{ route('logout') }}">
                                     <img class="navbar-icons" src="/img/exit.png" alt="">
