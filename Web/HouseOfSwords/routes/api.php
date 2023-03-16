@@ -143,6 +143,7 @@ Route::prefix('actions')->group(function () {
         Route::get('{Town_ID}/showtrainedunits', [BarrackController::class, 'showTrainedUnits']);
         Route::post('starttraining',[BarrackController::class, 'startTraining']);
         Route::post('finishtraining',[BarrackController::class, 'finishTraining']);
+        Route::post('startsiege',[BarrackController::class, 'startSiege']);
     });
     // CHURCH ACTIONS
     Route::prefix('church')->group(function () {

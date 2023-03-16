@@ -5,6 +5,7 @@ namespace App\Http\Controllers\BuildingControllers;
 use App\Http\Controllers\Controller;
 use App\Models\Building;
 use App\Models\Buildings\Barrack;
+use App\Models\SiegeSystem\Siege;
 use App\Models\SiegeSystem\TrainedUnit;
 use App\Models\Town;
 use App\Models\Unit;
@@ -192,6 +193,32 @@ class BarrackController extends Controller
             $barrack->TrainedUnitID = 0;
             $barrack->TrainedAmount = 0;
             $barrack->save();
+
+            return response()->json($barrack, 200);
+        } catch (Exception $err) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An unknown server error has occured.',
+                'details' => $err->getMessage()
+            ], 500);
+        }
+    }
+
+    public function startSiege(Request $request){
+        try {
+            $barrack = Building::find($request->BuildingID);
+
+            if ($barrack->BuildingType != "Barrack") {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'The requested building is not of type Barrack.'
+                ], 400);
+            }
+
+            $siege = Siege::create([
+//**
+            ]);
+
 
             return response()->json($barrack, 200);
         } catch (Exception $err) {
