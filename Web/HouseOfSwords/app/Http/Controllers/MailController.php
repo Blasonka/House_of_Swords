@@ -63,7 +63,8 @@ class MailController extends Controller
         };
 
         try {
-            Bugreport::create(["Text" => $request->Text, 'EmailAddress' => $data->email, 'Date' => date('Y-m-d')]);
+            Bugreport::create(["Text" => $request->Text, 'EmailAddress' => $data->email, 'Date' => now()]);
+            error_log(now());
             Mail::to('info@houseofswords.hu')->send(new BugReportEmail($data));
             return redirect('/bugreport')->with('status', 'Jelentés sikeresen elküldve!');
         } catch (Exception $err) {
