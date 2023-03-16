@@ -11,8 +11,8 @@
                         <th scope="col" width="8%">Idő</th>
                         <th scope="col" width="20%">Email</th>
                         <th scope="col" width="30%">Hiba</th>
-                        <th scope="col" width="15%">Hiba státusza</th>
-                        <th scope="col" width="12%">Státusz változtatása</th>
+                        <th scope="col" width="18%">Hiba státusza</th>
+                        <th scope="col" width="10%">Státusz változtatása</th>
                     </tr>
                 </thead>
                 <tbody>
