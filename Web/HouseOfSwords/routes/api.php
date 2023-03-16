@@ -144,6 +144,7 @@ Route::prefix('actions')->group(function () {
         Route::post('starttraining',[BarrackController::class, 'startTraining']);
         Route::post('finishtraining',[BarrackController::class, 'finishTraining']);
         Route::post('startsiege',[BarrackController::class, 'startSiege']);
+        Route::post('finishsiege',[BarrackController::class, 'FinishSiege']);
     });
     // CHURCH ACTIONS
     Route::prefix('church')->group(function () {

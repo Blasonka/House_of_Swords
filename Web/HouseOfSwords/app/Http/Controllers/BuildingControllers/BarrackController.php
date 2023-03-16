@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Building;
 use App\Models\Buildings\Barrack;
 use App\Models\SiegeSystem\Siege;
+use App\Models\SiegeSystem\SiegingUnits;
 use App\Models\SiegeSystem\TrainedUnit;
 use App\Models\Town;
 use App\Models\Unit;
@@ -204,23 +205,92 @@ class BarrackController extends Controller
         }
     }
 
-    public function startSiege(Request $request){
+    public function startSiege(Request $request)
+    {
         try {
-            $barrack = Building::find($request->BuildingID);
+            $siege = Siege::create([
+                "AttackerTownID" => $request->AttackerTownID,
+                "DefenderTownID" => $request->DefenderTownID,
+                "SiegeTime" => $request->SiegeTime,
+                "LootPercentage" => $request->LootPercentage,
+                "AttackerWon" => $request->AttackerWon
+            ]);
 
-            if ($barrack->BuildingType != "Barrack") {
+            foreach ($request->Units as $unit) {
+                SiegingUnits::create([
+                    "SiegeID" => $siege->SiegeID,
+                    "UnitID" => $unit['UnitID'],
+                    "UnitAmount" => $unit['UnitAmount']
+                ]);
+            }
+
+            return response()->json($siege, 200);
+        } catch (Exception $err) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An unknown server error has occured.',
+                'details' => $err->getMessage()
+            ], 500);
+        }
+    }
+
+    public function FinishSiege(Request $request)
+    {
+        try {
+            $siege = Siege::find($request->SiegeID);
+
+            if ($siege->SiegeTime > date('Y-m-d H:i:s') || $siege->AttackerWon != null) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'The requested building is not of type Barrack.'
+                    'message' => 'This siege cannot end, it has already ended or it is still going on.'
                 ], 400);
             }
 
-            $siege = Siege::create([
-//**
-            ]);
+            $attacForce = 0;
+            foreach ($siege->attackerUnits as $unit) {
+                $attacForce += $unit['UnitAmount'] * $unit->unitType->AttackValue;
+            }
+
+            $defensiveForce = 0;
+            foreach ($siege->defender->trainedUnits as $unit) {
+                $defensiveForce += $unit['UnitAmount'] * $unit->unitType->DefenseValue;
+            }
+
+            if ($attacForce > $defensiveForce) {
+                $siege->AttackerWon = true;
+                // attackers loot
+                $siege->attacker->Wood += $siege->defender->Wood * ($siege->LootPercentage * 0.01);
+                $siege->attacker->Stone += $siege->defender->Stone * ($siege->LootPercentage * 0.01);
+                $siege->attacker->Metal += $siege->defender->Metal * ($siege->LootPercentage * 0.01);
+                $siege->attacker->Gold += $siege->defender->Gold * ($siege->LootPercentage * 0.01);
+                // defenders lost
+                $siege->defender->Wood = $siege->defender->Wood * (1 - ($siege->LootPercentage * 0.01));
+                $siege->defender->Stone = $siege->defender->Stone * (1 - ($siege->LootPercentage * 0.01));
+                $siege->defender->Metal = $siege->defender->Metal * (1 - ($siege->LootPercentage * 0.01));
+                $siege->defender->Gold = $siege->defender->Gold * (1 - ($siege->LootPercentage * 0.01));
+            } else {
+                $siege->AttackerWon = false;
+                // defenders loot
+                $siege->defender->Wood += $siege->attacker->Wood * ($siege->LootPercentage * 0.01);
+                $siege->defender->Stone += $siege->attacker->Stone * ($siege->LootPercentage * 0.01);
+                $siege->defender->Metal += $siege->attacker->Metal * ($siege->LootPercentage * 0.01);
+                $siege->defender->Gold += $siege->attacker->Gold * ($siege->LootPercentage * 0.01);
+                // attackers lost
+                $siege->attacker->Wood = $siege->attacker->Wood * (1 - ($siege->LootPercentage * 0.01));
+                $siege->attacker->Stone = $siege->attacker->Stone * (1 - ($siege->LootPercentage * 0.01));
+                $siege->attacker->Metal = $siege->attacker->Metal * (1 - ($siege->LootPercentage * 0.01));
+                $siege->attacker->Gold = $siege->attacker->Gold * (1 - ($siege->LootPercentage * 0.01));
+            }
+
+            $siege->save();
+            $siege->attacker->save();
+            $siege->defender->save();
+            return response()->json([
+                'siege' => $siege
+            ], 200);
 
 
-            return response()->json($barrack, 200);
+            return response()->json($siege, 200);
         } catch (Exception $err) {
             return response()->json([
                 'success' => false,
