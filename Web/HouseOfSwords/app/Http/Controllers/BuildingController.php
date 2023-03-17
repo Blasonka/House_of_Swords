@@ -90,6 +90,16 @@ class BuildingController extends Controller
         }
     }
 
+    public function showCurrentScience($BuildingID)
+    {
+        try {
+            return Building::find($BuildingID)->currentScience;
+        }
+        catch (Exception $e) {
+            return response()->json(['message'=>'Database error.'],500);
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *

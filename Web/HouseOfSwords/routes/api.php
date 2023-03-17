@@ -102,6 +102,8 @@ Route::apiResource('buildings', BuildingController::class);
 Route::get('/towns/{Town_ID}/buildings', [BuildingController::class, 'showSpecial']);
 Route::get('/buildings/{Building_ID}/levelstats', [BuildingController::class, 'showLevelStats']);
 
+Route::get('/buildings/{Building_ID}/currentScience', [BuildingController::class, 'showCurrentScience']);
+
 
 // STATS
 Route::apiResource('stats/units', UnitController::class);
