@@ -214,13 +214,20 @@ class BarrackController extends Controller
                 "SiegeTime" => $request->SiegeTime,
                 "LootPercentage" => $request->LootPercentage
             ]);
+            $units = json_decode($request->Units);
 
-            foreach ($request->Units as $unit) {
+            foreach ($units as $unit) {
                 SiegingUnits::create([
                     "SiegeID" => $siege->SiegeID,
-                    "UnitID" => $unit['UnitID'],
-                    "UnitAmount" => $unit['UnitAmount']
+                    "UnitID" => $unit->UnitID,
+                    "UnitAmount" => $unit->UnitAmount
                 ]);
+                $trainedUnits = TrainedUnit::where([
+                    ['TownID', '=', $request->AttackerTownID],
+                    ['UnitID', '=', $unit->UnitID]
+                ])->get()[0];
+                $trainedUnits->UnitAmount -= $unit->UnitAmount;
+                $trainedUnits->save();
             }
 
             return response()->json($siege, 200);
