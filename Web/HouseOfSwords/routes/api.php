@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TownController;
 use App\Http\Controllers\FriendlistController;
 use App\Http\Controllers\BuildingController;
+use App\Http\Controllers\BuildingControllers\BarrackController;
 use App\Http\Controllers\BuildingControllers\ChurchController;
 use App\Models\Bugreport;
 use App\Models\Town;
@@ -16,8 +17,12 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\BuildingControllers\InfirmaryController;
 use App\Http\Middleware\GameSessionAuthentication;
 use App\Http\Controllers\BuildingControllers\WarehouseController;
+use App\Http\Controllers\SiegeController;
 use App\Models\Building;
+use App\Models\Buildings\Barrack;
 use App\Models\Buildings\Infirmary;
+use App\Models\SiegeSystem\TrainedUnit;
+use App\Models\Unit;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +81,15 @@ Route::get('/test', function(){
     // return Town::find(1)->initiatedSieges[0]->attackerUnits[0]->unitType;
     #endregion
     #endregion
+    $trainedunits = Town::find(1)->trainedUnits()
+    ->join('units', 'trained_units.UnitID', '=', 'units.UnitID')
+    ->select('UnitAmount','units.*')->get();
+
+    return $trainedunits;
+    // $town = Town::find(1);
+    return response()->json([
+        'units'=>$trainedunits
+    ], 200);
 
     return Building::all();
 
@@ -106,16 +120,34 @@ Route::get('/buildings/{Building_ID}/currentScience', [BuildingController::class
 
 
 // STATS
-Route::apiResource('stats/units', UnitController::class);
-Route::apiResource('stats/church', ChurchController::class);
-Route::apiResource('stats/infirmary', InfirmaryController::class);
-Route::apiResource('stats/research', ResearchController::class);
-Route::apiResource('stats/warehouse', WarehouseController::class);
+Route::prefix('stats')->group(function () {
+    Route::apiResource('units', UnitController::class);
+    Route::prefix('sieges')->group(function () {
+        Route::get('initiated/{id}', [SiegeController::class, 'showInitiatedSieges']);
+        Route::get('incoming/{id}',[SiegeController::class, 'showincomingSieges']);
+    });
+
+    //Buildings
+    Route::apiResource('church', ChurchController::class);
+    Route::apiResource('infirmary', InfirmaryController::class);
+    Route::apiResource('research', ResearchController::class);
+    Route::apiResource('warehouse', WarehouseController::class);
+    Route::apiResource('barrack', BarrackController::class);
+
+});
 
 Route::get('stats/research/researchedUnits/{researchBuildingId}', [ResearchController::class, 'getResearchedUnits']);
 
 // BUILDING ACTIONS
 Route::prefix('actions')->group(function () {
+    // BARRACK ACTIONS
+    Route::prefix('barrack')->group(function () {
+        Route::get('{Town_ID}/showtrainedunits', [BarrackController::class, 'showTrainedUnits']);
+        Route::post('starttraining',[BarrackController::class, 'startTraining']);
+        Route::post('finishtraining',[BarrackController::class, 'finishTraining']);
+        Route::post('startsiege',[BarrackController::class, 'startSiege']);
+        Route::post('finishsiege',[BarrackController::class, 'FinishSiege']);
+    });
     // CHURCH ACTIONS
     Route::prefix('church')->group(function () {
         Route::post('startMass', [ChurchController::class, 'startMass']);
