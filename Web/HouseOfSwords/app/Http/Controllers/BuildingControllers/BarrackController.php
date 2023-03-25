@@ -265,27 +265,27 @@ class BarrackController extends Controller
             if ($attacForce > $defensiveForce) {
                 $siege->AttackerWon = true;
                 // attackers loot
-                $siege->attacker->Wood += $siege->defender->Wood * ($siege->LootPercentage * 0.01);
-                $siege->attacker->Stone += $siege->defender->Stone * ($siege->LootPercentage * 0.01);
-                $siege->attacker->Metal += $siege->defender->Metal * ($siege->LootPercentage * 0.01);
-                $siege->attacker->Gold += $siege->defender->Gold * ($siege->LootPercentage * 0.01);
+                $siege->attacker->Wood += round($siege->defender->Wood * ($siege->LootPercentage * 0.01),0);
+                $siege->attacker->Stone += round($siege->defender->Stone * ($siege->LootPercentage * 0.01),0);
+                $siege->attacker->Metal += round($siege->defender->Metal * ($siege->LootPercentage * 0.01),0);
+                $siege->attacker->Gold += round($siege->defender->Gold * ($siege->LootPercentage * 0.01),0);
                 // defenders lost
-                $siege->defender->Wood = $siege->defender->Wood * (1 - ($siege->LootPercentage * 0.01));
-                $siege->defender->Stone = $siege->defender->Stone * (1 - ($siege->LootPercentage * 0.01));
-                $siege->defender->Metal = $siege->defender->Metal * (1 - ($siege->LootPercentage * 0.01));
-                $siege->defender->Gold = $siege->defender->Gold * (1 - ($siege->LootPercentage * 0.01));
+                $siege->defender->Wood = round($siege->defender->Wood * (1 - ($siege->LootPercentage * 0.01)),0);
+                $siege->defender->Stone = round($siege->defender->Stone * (1 - ($siege->LootPercentage * 0.01)),0);
+                $siege->defender->Metal = round($siege->defender->Metal * (1 - ($siege->LootPercentage * 0.01)),0);
+                $siege->defender->Gold = round($siege->defender->Gold * (1 - ($siege->LootPercentage * 0.01)),0);
             } else {
                 $siege->AttackerWon = false;
                 // defenders loot
-                $siege->defender->Wood += $siege->attacker->Wood * ($siege->LootPercentage * 0.01);
-                $siege->defender->Stone += $siege->attacker->Stone * ($siege->LootPercentage * 0.01);
-                $siege->defender->Metal += $siege->attacker->Metal * ($siege->LootPercentage * 0.01);
-                $siege->defender->Gold += $siege->attacker->Gold * ($siege->LootPercentage * 0.01);
+                $siege->defender->Wood += round($siege->attacker->Wood * ($siege->LootPercentage * 0.01),0);
+                $siege->defender->Stone += round($siege->attacker->Stone * ($siege->LootPercentage * 0.01),0);
+                $siege->defender->Metal += round($siege->attacker->Metal * ($siege->LootPercentage * 0.01),0);
+                $siege->defender->Gold += round($siege->attacker->Gold * ($siege->LootPercentage * 0.01),0);
                 // attackers lost
-                $siege->attacker->Wood = $siege->attacker->Wood * (1 - ($siege->LootPercentage * 0.01));
-                $siege->attacker->Stone = $siege->attacker->Stone * (1 - ($siege->LootPercentage * 0.01));
-                $siege->attacker->Metal = $siege->attacker->Metal * (1 - ($siege->LootPercentage * 0.01));
-                $siege->attacker->Gold = $siege->attacker->Gold * (1 - ($siege->LootPercentage * 0.01));
+                $siege->attacker->Wood = round($siege->attacker->Wood * (1 - ($siege->LootPercentage * 0.01)),0);
+                $siege->attacker->Stone = round($siege->attacker->Stone * (1 - ($siege->LootPercentage * 0.01)),0);
+                $siege->attacker->Metal = round($siege->attacker->Metal * (1 - ($siege->LootPercentage * 0.01)),0);
+                $siege->attacker->Gold = round($siege->attacker->Gold * (1 - ($siege->LootPercentage * 0.01)),0);
             }
 
             $siege->save();
