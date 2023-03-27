@@ -291,9 +291,7 @@ class BarrackController extends Controller
             $siege->save();
             $siege->attacker->save();
             $siege->defender->save();
-            return response()->json([
-                'siege' => $siege
-            ], 200);
+            return response()->json( $siege, 200);
 
 
             return response()->json($siege, 200);
