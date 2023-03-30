@@ -16,7 +16,12 @@ class Friendlist extends Model
 
     protected $fillable = [
         'RelationID',
-        'FriendID',
         'Users_UID',
+        'FriendID',
     ];
+
+    // kapcsolatok
+    public function User(){
+        return $this->hasOne(User::class, 'UID', 'FriendID');
+    }
 }

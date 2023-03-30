@@ -155,6 +155,11 @@ Route::prefix('actions')->group(function () {
         Route::post('startMass', [ChurchController::class, 'startMass']);
     });
 
+    // DIPLOMACY ACTIONS
+    Route::prefix('diplomacy')->group(function () {
+        Route::get('showFriends/{id}', [DiplomacyController::class, 'showFriends']);
+    });
+
     // RESEARCH ACTIONS
     Route::prefix('research')->group(function () {
         Route::post('collectScience', [ResearchController::class, 'collectScience']);
