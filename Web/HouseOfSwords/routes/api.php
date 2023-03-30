@@ -9,6 +9,7 @@ use App\Http\Controllers\FriendlistController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\BuildingControllers\BarrackController;
 use App\Http\Controllers\BuildingControllers\ChurchController;
+use App\Http\Controllers\BuildingControllers\DiplomacyController;
 use App\Models\Bugreport;
 use App\Models\Town;
 use App\Models\User;
@@ -133,6 +134,7 @@ Route::prefix('stats')->group(function () {
     Route::apiResource('research', ResearchController::class);
     Route::apiResource('warehouse', WarehouseController::class);
     Route::apiResource('barrack', BarrackController::class);
+    Route::apiResource('diplomacy', DiplomacyController::class);
 
 });
 
