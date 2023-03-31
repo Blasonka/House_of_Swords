@@ -157,7 +157,8 @@ Route::prefix('actions')->group(function () {
 
     // DIPLOMACY ACTIONS
     Route::prefix('diplomacy')->group(function () {
-        Route::get('showFriends/{id}', [DiplomacyController::class, 'showFriends']);
+        Route::get('showFriends/{UID}', [DiplomacyController::class, 'showFriends']);
+        Route::get('showFriendRequests/{UID}', [DiplomacyController::class, 'showFriendRequests']);
     });
 
     // RESEARCH ACTIONS

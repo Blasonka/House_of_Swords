@@ -33,21 +33,38 @@ class DiplomacyController extends Controller
         return Diplomacy::find($id);
     }
 
-    public function showFriends($id){
+    public function showFriends($UID){
         try {
-            $b=User::find($id)->yourFriendRequests;
-            $friend = [];
-            foreach ($b as $value) {
-                $c=Friendlist::where([
-                    ['FriendID','like',$id],
-                    ['Users_UID','like',$value->UID]
-                    ])->get();
-                if(count($c)>0){
-                    array_push($friend, $c[0]);
-                }
+            $friendsList = [];
+            $friends=Friendlist::where([['isConfirmed','=',true],['FriendID','=',$UID]])->get();
+            if(count($friends)>0){
+                foreach ($friends as $friend) {array_push($friendsList, $friend->User);}
             }
-            return $friend; //csak a kölcsönös kapcsolatok
-            // return User::find($id)->friendRequestForYou;
+
+            $friends = Friendlist::where([['isConfirmed','=',true],['Users_UID','=',$UID]])->get();
+            if(count($friends)>0){
+                foreach ($friends as $friend) {array_push($friendsList, $friend->FriendUser);}
+            }
+
+            return response()->json($friendsList,200); //csak a kölcsönös kapcsolatok
+        } catch (Exception $err) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An unknown server error has occured.',
+                'details' => $err->getMessage()
+            ], 500);
+        }
+    }
+
+    public function showFriendRequests($UID){
+        try {
+            $friendRequestsList = [];
+            $requests=Friendlist::where([['isConfirmed','=',true],['FriendID','=',$UID]])->get();
+            if(count($requests)>0){
+                foreach ($requests as $request) {array_push($friendRequestsList, $request->User);}
+            }
+
+            return response()->json($friendRequestsList,200); //csak a viszonzatlan kapcsolatok
         } catch (Exception $err) {
             return response()->json([
                 'success' => false,

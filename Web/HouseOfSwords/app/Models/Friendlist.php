@@ -21,7 +21,10 @@ class Friendlist extends Model
     ];
 
     // kapcsolatok
-    public function User(){
+    public function FriendUser(){
         return $this->hasOne(User::class, 'UID', 'FriendID');
+    }
+    public function User(){
+        return $this->hasOne(User::class, 'UID', 'Users_UID');
     }
 }
