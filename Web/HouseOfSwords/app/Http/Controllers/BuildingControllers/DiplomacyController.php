@@ -35,7 +35,19 @@ class DiplomacyController extends Controller
 
     public function showFriends($id){
         try {
-            return User::find($id)->friends;
+            $b=User::find($id)->yourFriendRequests;
+            $friend = [];
+            foreach ($b as $value) {
+                $c=Friendlist::where([
+                    ['FriendID','like',$id],
+                    ['Users_UID','like',$value->UID]
+                    ])->get();
+                if(count($c)>0){
+                    array_push($friend, $c[0]);
+                }
+            }
+            return $friend; //csak a kölcsönös kapcsolatok
+            // return User::find($id)->friendRequestForYou;
         } catch (Exception $err) {
             return response()->json([
                 'success' => false,

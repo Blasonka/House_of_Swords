@@ -33,7 +33,13 @@ class User extends Authenticatable
         return $this->hasMany(Town::class, 'Users_UID', 'UID');
     }
 
-    public function friends(){
+    //visszaadja ha a Users_UID = user.UID
+    public function yourFriendRequests(){
+        return $this->belongsToMany(User::class, 'friendlist', 'Users_UID', 'FriendID');
+    }
+
+    //visszaadja ha a FriendID = user.UID
+    public function friendRequestForYou(){
         return $this->belongsToMany(User::class, 'friendlist', 'FriendID', 'Users_UID');
     }
 
