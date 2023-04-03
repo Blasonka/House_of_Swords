@@ -36,15 +36,23 @@ class DiplomacyController extends Controller
     public function showFriends($UID){
         try {
             $friendsList = [];
-            $friends=Friendlist::where([['isConfirmed','=',true],['FriendID','=',$UID]])->get();
-            if(count($friends)>0){
-                foreach ($friends as $friend) {array_push($friendsList, $friend->User);}
-            }
 
             $friends = Friendlist::where([['isConfirmed','=',true],['Users_UID','=',$UID]])->get();
             if(count($friends)>0){
-                foreach ($friends as $friend) {array_push($friendsList, $friend->FriendUser);}
+                foreach ($friends as $friend) {
+                    $friend->FriendUser->RelationID=$friend->RelationID;
+                    array_push($friendsList, $friend->FriendUser);
+                }
             }
+
+            $friends=Friendlist::where([['isConfirmed','=',true],['FriendID','=',$UID]])->get();
+            if(count($friends)>0){
+                foreach ($friends as $friend) {
+                    $friend->User->RelationID=$friend->RelationID;
+                    array_push($friendsList, $friend->User);
+                }
+            }
+
 
             return response()->json($friendsList,200); //csak a kölcsönös kapcsolatok
         } catch (Exception $err) {
@@ -59,9 +67,12 @@ class DiplomacyController extends Controller
     public function showFriendRequests($UID){
         try {
             $friendRequestsList = [];
-            $requests=Friendlist::where([['isConfirmed','=',true],['FriendID','=',$UID]])->get();
+            $requests=Friendlist::where([['isConfirmed','=',false],['FriendID','=',$UID]])->get();
             if(count($requests)>0){
-                foreach ($requests as $request) {array_push($friendRequestsList, $request->User);}
+                foreach ($requests as $request) {
+                    $request->User->RelationID=$request->RelationID;
+                    array_push($friendRequestsList, $request->User);
+                }
             }
 
             return response()->json($friendRequestsList,200); //csak a viszonzatlan kapcsolatok

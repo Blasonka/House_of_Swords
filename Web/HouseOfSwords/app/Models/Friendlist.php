@@ -18,6 +18,7 @@ class Friendlist extends Model
         'RelationID',
         'Users_UID',
         'FriendID',
+        'isConfirmed'
     ];
 
     // kapcsolatok
