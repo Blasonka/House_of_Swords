@@ -26,6 +26,11 @@ return new class extends Migration
             $table->foreignId('FriendID')
                 ->constrained('users', 'UID')
                 ->onDelete('cascade');
+
+            $table->foreignId('isConfirmed')
+                ->default(0)
+                ->constrained('users', 'UID')
+                ->onDelete('cascade');
         });
     }
 

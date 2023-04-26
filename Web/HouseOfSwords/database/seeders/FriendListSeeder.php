@@ -17,20 +17,24 @@ class FriendListSeeder extends Seeder
     {
         DB::table('friendlist')->updateOrInsert([
             'Users_UID' => 1,
-            'FriendID' => 2
+            'FriendID' => 2,
+            'isConfirmed' => 1
         ],
         [
             'Users_UID' => 1,
-            'FriendID' => 2
+            'FriendID' => 2,
+            'isConfirmed' => 1
         ]);
 
         DB::table('friendlist')->updateOrInsert([
-            'Users_UID' => 2,
-            'FriendID' => 1
+            'Users_UID' => 3,
+            'FriendID' => 1,
+            'isConfirmed' => 0
         ],
         [
-            'Users_UID' => 2,
-            'FriendID' => 1
+            'Users_UID' => 3,
+            'FriendID' => 1,
+            'isConfirmed' => 0
         ]);
     }
 }
