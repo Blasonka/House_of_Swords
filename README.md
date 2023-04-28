@@ -3,5 +3,5 @@ Vizsgaremekes project
 
 Csapattagok:
 Blasek Balázs
-Venter Alex 
 Luksa Laura
+Venter Alex 

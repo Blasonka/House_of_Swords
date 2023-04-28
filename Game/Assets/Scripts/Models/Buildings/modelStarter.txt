@@ -1,0 +1,78 @@
+using System;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Xy
+{
+
+    #region ÉPÜLET VÁLTOZÓK
+    public int BuildingID;
+    public int Towns_TownID;
+    public string BuildingType;
+    public int BuildingLvl;
+    #endregion
+
+    #region PARAMÉTEREK
+    //...
+    #endregion
+
+    #region AZ ÉPÜLET SZINTJÉTŐL FÜGGŐ VÁLTOZÓK
+    public xyLevelVariables levelVariables;
+    public struct xyLevelVariables
+    {
+        public int Lvl;
+        //...
+    }
+
+    public async void updateLevelVariables(int newLevel)
+    {
+        xyLevelVariables? fetchedVariables = await APIHelper.fetchXyStats(newLevel);
+        
+        if (fetchedVariables == null)
+        {
+            Debug.Log("Xy updateLevelVariables failed");
+        }
+
+        levelVariables = fetchedVariables.Value;
+
+        updateUI();
+    }
+    #endregion
+
+    #region SZÁMÍTOTT MEZŐK
+    //...
+    #endregion
+
+    #region KONSTRUKTOR
+    public Xy(Building building)
+    {
+        Initialize(building);
+        updateLevelVariables(BuildingLvl);
+    }
+
+    private void Initialize(Building building)
+    {
+        BuildingID = building.BuildingID;
+        Towns_TownID = building.Towns_TownID;
+        BuildingType = building.BuildingType;
+        BuildingLvl = building.BuildingLvl;
+
+        //...
+
+        updateLevelVariables(BuildingLvl);
+    }
+    #endregion
+
+    #region AKCIÓK
+    //...
+    #endregion
+
+    #region UI FRISSÍTÉS
+    public void updateUI()
+    {
+        //...
+    }
+    #endregion
+}
