@@ -28,11 +28,11 @@ Route::get('/download', [PageController::class, 'download'])->name('download');
 Route::get('/bugreport',[PageController::class, 'bugReport'])->name('bugReport');
 
 Route::get('/downloadWindows', function () {
-    return response()->download(storage_path('/app/public/download/House_of_Swords_v0.03.rar'));
+    return response()->download(storage_path('app\public\download\House_of_Swords_v0.03.rar'));
 });
 
 Route::get('/downloadAndroid', function () {
-    return response()->download(storage_path('/app/public/download/android.txt'));
+    return response()->download(storage_path('app\public\download\android.txt'));
 });
 
 Route::prefix('/cards')->group(function () {
