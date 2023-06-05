@@ -32,7 +32,7 @@ Route::get('/downloadWindows', function () {
 });
 
 Route::get('/downloadAndroid', function () {
-    return response()->download(storage_path('/app/public/download/House of Swords v0.04 Android.rar'));
+    return response()->download(storage_path('/app/public/download/House of Swords v0.04 Android.apk'));
 });
 
 Route::prefix('/cards')->group(function () {
